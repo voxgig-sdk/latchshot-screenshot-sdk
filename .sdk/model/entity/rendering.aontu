@@ -1,0 +1,155 @@
+# Entity: rendering
+
+main: kit: entity: rendering: {
+
+  alias: field: {}
+
+  name: "rendering"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "block_ad"
+                orig: "block_ad"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "block_chat"
+                orig: "block_chat"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "block_tracker"
+                orig: "block_tracker"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "dark_mode"
+                orig: "dark_mode"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: "png"
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "full_page"
+                orig: "full_page"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: 900
+                kind: "query"
+                name: "height"
+                orig: "height"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "hide_cookie_banner"
+                orig: "hide_cookie_banner"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "hide_popup"
+                orig: "hide_popup"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: 85
+                kind: "query"
+                name: "quality"
+                orig: "quality"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "scroll_page"
+                orig: "scroll_page"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: "https://example.com"
+                kind: "query"
+                name: "url"
+                orig: "url"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: 1440
+                kind: "query"
+                name: "width"
+                orig: "width"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/screenshot"
+          parts: [
+            "v1"
+            "screenshot"
+          ]
+          select: {
+            exist: [
+              "block_ad"
+              "block_chat"
+              "block_tracker"
+              "dark_mode"
+              "format"
+              "full_page"
+              "height"
+              "hide_cookie_banner"
+              "hide_popup"
+              "quality"
+              "scroll_page"
+              "url"
+              "width"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

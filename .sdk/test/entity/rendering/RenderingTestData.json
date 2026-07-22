@@ -1,0 +1,20 @@
+{
+  "existing": {
+    "rendering": {
+      "RENDERING00": {
+        "id": "RENDERING00"
+      },
+      "RENDERING01": {
+        "id": "RENDERING01"
+      },
+      "RENDERING02": {
+        "id": "RENDERING02"
+      }
+    }
+  },
+  "new": {
+    "rendering": {
+      "rendering_ref01": {}
+    }
+  }
+}

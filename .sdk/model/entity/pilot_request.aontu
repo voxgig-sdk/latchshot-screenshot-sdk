@@ -1,0 +1,108 @@
+# Entity: pilot_request
+
+main: kit: entity: pilot_request: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "acceptance_sample"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "call_site"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "current_contract"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "expected_render"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "language"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "notice"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "provider"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "reply_consent"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repository_authority"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repository_url"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "request"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "required_behavior"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "safety_acknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "start_boundary_acknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+  ]
+
+  name: "pilot_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/pilot-requests"
+          parts: [
+            "api"
+            "pilot-requests"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

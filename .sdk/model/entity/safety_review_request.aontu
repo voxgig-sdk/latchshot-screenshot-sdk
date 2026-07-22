@@ -1,0 +1,108 @@
+# Entity: safety_review_request
+
+main: kit: entity: safety_review_request: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "current_control"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "desired_outcome"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "language"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "notice"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "primary_concern"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "reply_consent"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repository_authority"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repository_url"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "request"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "route_path"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "runtime"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "safety_acknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "start_boundary_acknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "test_evidence"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "safety_review_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/safety-review-requests"
+          parts: [
+            "api"
+            "safety-review-requests"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

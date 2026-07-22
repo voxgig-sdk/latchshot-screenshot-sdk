@@ -1,0 +1,18 @@
+# BasicRenderFlow
+
+main: kit: flow: BasicRenderFlow:
+{
+  entity: "render",
+  kind: "basic",
+  name: "BasicRenderFlow",
+  step: [
+    {
+      input: {
+        ref: "render_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicRenderFlow"
+}

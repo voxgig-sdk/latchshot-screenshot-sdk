@@ -1,0 +1,81 @@
+{
+  "existing": {
+    "safety_review_request": {
+      "SAFETY_REVIEW_REQUEST00": {
+        "current_control": "s96",
+        "desired_outcome": "s97",
+        "email": "s98",
+        "language": "s99",
+        "notice": "s9a",
+        "primary_concern": "s9b",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "s9e",
+        "request": {},
+        "route_path": "sa0",
+        "runtime": "sa1",
+        "safety_acknowledged": true,
+        "start_boundary_acknowledged": false,
+        "test_evidence": "sa4",
+        "id": "SAFETY_REVIEW_REQUEST00"
+      },
+      "SAFETY_REVIEW_REQUEST01": {
+        "current_control": "s12c",
+        "desired_outcome": "s12d",
+        "email": "s12e",
+        "language": "s12f",
+        "notice": "s130",
+        "primary_concern": "s131",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "s134",
+        "request": {},
+        "route_path": "s136",
+        "runtime": "s137",
+        "safety_acknowledged": true,
+        "start_boundary_acknowledged": false,
+        "test_evidence": "s13a",
+        "id": "SAFETY_REVIEW_REQUEST01"
+      },
+      "SAFETY_REVIEW_REQUEST02": {
+        "current_control": "s1c2",
+        "desired_outcome": "s1c3",
+        "email": "s1c4",
+        "language": "s1c5",
+        "notice": "s1c6",
+        "primary_concern": "s1c7",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "s1ca",
+        "request": {},
+        "route_path": "s1cc",
+        "runtime": "s1cd",
+        "safety_acknowledged": true,
+        "start_boundary_acknowledged": false,
+        "test_evidence": "s1d0",
+        "id": "SAFETY_REVIEW_REQUEST02"
+      }
+    }
+  },
+  "new": {
+    "safety_review_request": {
+      "safety_review_request_ref01": {
+        "current_control": "s258",
+        "desired_outcome": "s259",
+        "email": "s25a",
+        "language": "s25b",
+        "notice": "s25c",
+        "primary_concern": "s25d",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "s260",
+        "request": {},
+        "route_path": "s262",
+        "runtime": "s263",
+        "safety_acknowledged": true,
+        "start_boundary_acknowledged": false,
+        "test_evidence": "s266"
+      }
+    }
+  }
+}

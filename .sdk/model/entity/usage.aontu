@@ -1,0 +1,53 @@
+# Entity: usage
+
+main: kit: entity: usage: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "customer"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "link"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "upgrade_request"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "usage"
+      req: true
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "usage"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/v1/usage"
+          parts: [
+            "v1"
+            "usage"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.usage`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,31 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "Render public HTTP and HTTPS web pages as PNG or JPEG screenshots and PDF documents. Targets are checked against private and special-use networks before rendering. Create one recurring Free-plan key per email, then send that key as an HTTPS Bearer token. Only successful renders consume monthly quota; automatic overages are disabled."
+      license: {
+        identifier: "LicenseRef-Proprietary"
+        name: "Proprietary"
+      }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "bearerAuth"
+        type: "http"
+      }
+      servers: [
+        {
+          url: "https://latchshot.fly.dev"
+        }
+      ]
+      summary: "Render public HTTP and HTTPS web pages as PNG or JPEG screenshots and PDF documents."
+      title: "Latchshot API"
+      version: "0.1.6"
+      website: "https://latchshot.fly.dev/docs.md"
+    }
+  }
+}
+

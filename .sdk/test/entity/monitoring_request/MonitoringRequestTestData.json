@@ -1,0 +1,65 @@
+{
+  "existing": {
+    "monitoring_request": {
+      "MONITORING_REQUEST00": {
+        "change_context": "s6e",
+        "email": "s6f",
+        "monitoring_goal": "s70",
+        "notice": "s71",
+        "page_count": "s72",
+        "page_url": "s73",
+        "public_page_authority": true,
+        "reply_consent": false,
+        "request": {},
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true,
+        "id": "MONITORING_REQUEST00"
+      },
+      "MONITORING_REQUEST01": {
+        "change_context": "sdc",
+        "email": "sdd",
+        "monitoring_goal": "sde",
+        "notice": "sdf",
+        "page_count": "se0",
+        "page_url": "se1",
+        "public_page_authority": true,
+        "reply_consent": false,
+        "request": {},
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true,
+        "id": "MONITORING_REQUEST01"
+      },
+      "MONITORING_REQUEST02": {
+        "change_context": "s14a",
+        "email": "s14b",
+        "monitoring_goal": "s14c",
+        "notice": "s14d",
+        "page_count": "s14e",
+        "page_url": "s14f",
+        "public_page_authority": true,
+        "reply_consent": false,
+        "request": {},
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true,
+        "id": "MONITORING_REQUEST02"
+      }
+    }
+  },
+  "new": {
+    "monitoring_request": {
+      "monitoring_request_ref01": {
+        "change_context": "s1b8",
+        "email": "s1b9",
+        "monitoring_goal": "s1ba",
+        "notice": "s1bb",
+        "page_count": "s1bc",
+        "page_url": "s1bd",
+        "public_page_authority": true,
+        "reply_consent": false,
+        "request": {},
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true
+      }
+    }
+  }
+}

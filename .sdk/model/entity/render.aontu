@@ -1,0 +1,138 @@
+# Entity: render
+
+main: kit: entity: render: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "block_ad"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "block_chat"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "block_tracker"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "dark_mode"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "delay"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "format"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "full_page"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "height"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "hide_cookie_banner"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "hide_popup"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "kind"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "landscape"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "paper"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "quality"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "reduced_motion"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "scale"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "scroll_page"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "timeout"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "url"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "wait_until"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "width"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "render"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/v1/render"
+          parts: [
+            "v1"
+            "render"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

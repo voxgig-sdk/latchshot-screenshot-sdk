@@ -1,0 +1,47 @@
+# Entity: health
+
+main: kit: entity: health: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "ok"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "render"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "service"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "health"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/healthz"
+          parts: [
+            "healthz"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

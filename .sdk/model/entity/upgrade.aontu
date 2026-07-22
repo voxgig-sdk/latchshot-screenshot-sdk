@@ -1,0 +1,58 @@
+# Entity: upgrade
+
+main: kit: entity: upgrade: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "consent"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "note"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "notice"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "request"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "requested_plan"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "upgrade"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/v1/upgrade-requests"
+          parts: [
+            "v1"
+            "upgrade-requests"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

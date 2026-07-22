@@ -1,0 +1,81 @@
+{
+  "existing": {
+    "pilot_request": {
+      "PILOT_REQUEST00": {
+        "acceptance_sample": "s96",
+        "call_site": "s97",
+        "current_contract": "s98",
+        "email": "s99",
+        "expected_render": "s9a",
+        "language": "s9b",
+        "notice": "s9c",
+        "provider": "s9d",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "sa0",
+        "request": {},
+        "required_behavior": "sa2",
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true,
+        "id": "PILOT_REQUEST00"
+      },
+      "PILOT_REQUEST01": {
+        "acceptance_sample": "s12c",
+        "call_site": "s12d",
+        "current_contract": "s12e",
+        "email": "s12f",
+        "expected_render": "s130",
+        "language": "s131",
+        "notice": "s132",
+        "provider": "s133",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "s136",
+        "request": {},
+        "required_behavior": "s138",
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true,
+        "id": "PILOT_REQUEST01"
+      },
+      "PILOT_REQUEST02": {
+        "acceptance_sample": "s1c2",
+        "call_site": "s1c3",
+        "current_contract": "s1c4",
+        "email": "s1c5",
+        "expected_render": "s1c6",
+        "language": "s1c7",
+        "notice": "s1c8",
+        "provider": "s1c9",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "s1cc",
+        "request": {},
+        "required_behavior": "s1ce",
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true,
+        "id": "PILOT_REQUEST02"
+      }
+    }
+  },
+  "new": {
+    "pilot_request": {
+      "pilot_request_ref01": {
+        "acceptance_sample": "s258",
+        "call_site": "s259",
+        "current_contract": "s25a",
+        "email": "s25b",
+        "expected_render": "s25c",
+        "language": "s25d",
+        "notice": "s25e",
+        "provider": "s25f",
+        "reply_consent": true,
+        "repository_authority": false,
+        "repository_url": "s262",
+        "request": {},
+        "required_behavior": "s264",
+        "safety_acknowledged": false,
+        "start_boundary_acknowledged": true
+      }
+    }
+  }
+}

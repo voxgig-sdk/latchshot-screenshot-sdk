@@ -1,0 +1,88 @@
+# Entity: monitoring_request
+
+main: kit: entity: monitoring_request: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "change_context"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "monitoring_goal"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "notice"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "page_count"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "page_url"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "public_page_authority"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "reply_consent"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "request"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "safety_acknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "start_boundary_acknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+  ]
+
+  name: "monitoring_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/monitoring-requests"
+          parts: [
+            "api"
+            "monitoring-requests"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

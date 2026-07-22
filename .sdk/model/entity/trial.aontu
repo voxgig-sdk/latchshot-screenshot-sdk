@@ -1,0 +1,58 @@
+# Entity: trial
+
+main: kit: entity: trial: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "consent"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "email"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "expected_render"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "use_case"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "trial"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/trials"
+          parts: [
+            "api"
+            "trials"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.trial`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

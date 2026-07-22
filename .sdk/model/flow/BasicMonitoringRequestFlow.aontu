@@ -1,0 +1,18 @@
+# BasicMonitoringRequestFlow
+
+main: kit: flow: BasicMonitoringRequestFlow:
+{
+  entity: "monitoring_request",
+  kind: "basic",
+  name: "BasicMonitoringRequestFlow",
+  step: [
+    {
+      input: {
+        ref: "monitoring_request_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicMonitoringRequestFlow"
+}

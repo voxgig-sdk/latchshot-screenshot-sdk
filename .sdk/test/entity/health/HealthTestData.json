@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "health": {
+      "HEALTH00": {
+        "ok": true,
+        "render": {},
+        "service": "s20",
+        "id": "HEALTH00"
+      },
+      "HEALTH01": {
+        "ok": true,
+        "render": {},
+        "service": "s3e",
+        "id": "HEALTH01"
+      },
+      "HEALTH02": {
+        "ok": true,
+        "render": {},
+        "service": "s5c",
+        "id": "HEALTH02"
+      }
+    }
+  },
+  "new": {
+    "health": {
+      "health_ref01": {
+        "ok": true,
+        "render": {},
+        "service": "s7a"
+      }
+    }
+  }
+}

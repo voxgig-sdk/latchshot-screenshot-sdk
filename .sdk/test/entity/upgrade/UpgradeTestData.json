@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "upgrade": {
+      "UPGRADE00": {
+        "consent": true,
+        "note": "s33",
+        "notice": "s34",
+        "request": {},
+        "requested_plan": "s36",
+        "id": "UPGRADE00"
+      },
+      "UPGRADE01": {
+        "consent": true,
+        "note": "s65",
+        "notice": "s66",
+        "request": {},
+        "requested_plan": "s68",
+        "id": "UPGRADE01"
+      },
+      "UPGRADE02": {
+        "consent": true,
+        "note": "s97",
+        "notice": "s98",
+        "request": {},
+        "requested_plan": "s9a",
+        "id": "UPGRADE02"
+      }
+    }
+  },
+  "new": {
+    "upgrade": {
+      "upgrade_ref01": {
+        "consent": true,
+        "note": "sc9",
+        "notice": "sca",
+        "request": {},
+        "requested_plan": "scc"
+      }
+    }
+  }
+}
