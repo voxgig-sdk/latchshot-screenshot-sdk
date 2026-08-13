@@ -6,12 +6,17 @@ main: kit: entity: safety_review_request: {
 
   fields: [
     {
-      name: "current_control"
+      name: "createdAt"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "desired_outcome"
+      name: "currentControls"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "desiredOutcome"
       req: true
       type: "`$STRING`"
     }
@@ -21,42 +26,37 @@ main: kit: entity: safety_review_request: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
       name: "language"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "notice"
+      name: "primaryConcern"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "primary_concern"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "reply_consent"
+      name: "replyConsent"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "repository_authority"
+      name: "repositoryAuthority"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "repository_url"
+      name: "repositoryUrl"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "request"
-      req: true
-      type: "`$OBJECT`"
-    }
-    {
-      name: "route_path"
+      name: "routePath"
       req: true
       type: "`$STRING`"
     }
@@ -66,21 +66,36 @@ main: kit: entity: safety_review_request: {
       type: "`$STRING`"
     }
     {
-      name: "safety_acknowledged"
+      name: "safetyAcknowledged"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "start_boundary_acknowledged"
+      name: "startBoundaryAcknowledged"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "test_evidence"
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "testEvidence"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updatedAt"
       req: true
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "safety_review_request"
   op: {
@@ -96,7 +111,7 @@ main: kit: entity: safety_review_request: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.request`"
           }
         }
       ]

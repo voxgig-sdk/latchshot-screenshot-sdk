@@ -131,9 +131,9 @@ fmt.Println(health.GetName()) // "health"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ok` | `bool` | Yes |  |
-| `render` | `map[string]any` | Yes |  |
-| `service` | `string` | Yes |  |
+| `active` | `int` | Yes |  |
+| `concurrency` | `int` | Yes |  |
+| `pending` | `int` | Yes |  |
 
 ### Operations
 
@@ -184,17 +184,19 @@ fmt.Println(monitoringRequest.GetName()) // "monitoring_request"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `change_context` | `string` | No |  |
+| `changeContext` | `string` | No |  |
+| `createdAt` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
-| `monitoring_goal` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `page_count` | `string` | Yes |  |
-| `page_url` | `string` | Yes |  |
-| `public_page_authority` | `bool` | Yes |  |
-| `reply_consent` | `bool` | Yes |  |
-| `request` | `map[string]any` | Yes |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
+| `id` | `int` | Yes |  |
+| `monitoringGoal` | `string` | Yes |  |
+| `pageCount` | `string` | Yes |  |
+| `pageUrl` | `string` | Yes |  |
+| `publicPageAuthority` | `bool` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -204,16 +206,18 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.MonitoringRequest(nil).Create(map[string]any{
+    "createdAt": "example_createdAt",
     "email": "example_email",
-    "monitoring_goal": "example_monitoring_goal",
-    "notice": "example_notice",
-    "page_count": "example_page_count",
-    "page_url": "example_page_url",
-    "public_page_authority": true,
-    "reply_consent": true,
-    "request": map[string]any{},
-    "safety_acknowledged": true,
-    "start_boundary_acknowledged": true,
+    "id": 1,
+    "monitoringGoal": "example_monitoringGoal",
+    "pageCount": "example_pageCount",
+    "pageUrl": "example_pageUrl",
+    "publicPageAuthority": true,
+    "replyConsent": true,
+    "safetyAcknowledged": true,
+    "startBoundaryAcknowledged": true,
+    "status": "example_status",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -256,21 +260,45 @@ fmt.Println(pilotRequest.GetName()) // "pilot_request"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `acceptance_sample` | `string` | No |  |
-| `call_site` | `string` | No |  |
-| `current_contract` | `string` | No |  |
+| `acceptanceSample` | `string` | No |  |
+| `callSite` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentContract` | `string` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
+| `id` | `int` | Yes |  |
 | `language` | `string` | No |  |
-| `notice` | `string` | Yes |  |
 | `provider` | `string` | No |  |
-| `reply_consent` | `bool` | Yes |  |
-| `repository_authority` | `bool` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `map[string]any` | Yes |  |
-| `required_behavior` | `string` | No |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `repositoryAuthority` | `bool` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `requiredBehavior` | `string` | No |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `acceptanceSample` | - |
+| `callSite` | Yes |
+| `createdAt` | - |
+| `currentContract` | - |
+| `email` | - |
+| `expectedRenders` | - |
+| `id` | - |
+| `language` | - |
+| `provider` | - |
+| `replyConsent` | - |
+| `repositoryAuthority` | - |
+| `repositoryUrl` | - |
+| `requiredBehavior` | - |
+| `safetyAcknowledged` | - |
+| `startBoundaryAcknowledged` | - |
+| `status` | - |
+| `updatedAt` | - |
 
 ### Operations
 
@@ -280,14 +308,17 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.PilotRequest(nil).Create(map[string]any{
+    "callSite": "example_callSite",
+    "createdAt": "example_createdAt",
     "email": "example_email",
-    "notice": "example_notice",
-    "reply_consent": true,
-    "repository_authority": true,
-    "repository_url": "example_repository_url",
-    "request": map[string]any{},
-    "safety_acknowledged": true,
-    "start_boundary_acknowledged": true,
+    "id": 1,
+    "replyConsent": true,
+    "repositoryAuthority": true,
+    "repositoryUrl": "example_repositoryUrl",
+    "safetyAcknowledged": true,
+    "startBoundaryAcknowledged": true,
+    "status": "example_status",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -330,26 +361,26 @@ fmt.Println(render.GetName()) // "render"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `block_ad` | `bool` | No |  |
-| `block_chat` | `bool` | No |  |
-| `block_tracker` | `bool` | No |  |
-| `dark_mode` | `bool` | No |  |
+| `blockAds` | `bool` | No |  |
+| `blockChats` | `bool` | No |  |
+| `blockTrackers` | `bool` | No |  |
+| `darkMode` | `bool` | No |  |
 | `delay` | `int` | No |  |
 | `format` | `string` | No |  |
-| `full_page` | `bool` | No |  |
+| `fullPage` | `bool` | No |  |
 | `height` | `int` | No |  |
-| `hide_cookie_banner` | `bool` | No |  |
-| `hide_popup` | `bool` | No |  |
+| `hideCookieBanners` | `bool` | No |  |
+| `hidePopups` | `bool` | No |  |
 | `kind` | `string` | No |  |
 | `landscape` | `bool` | No |  |
 | `paper` | `string` | No |  |
 | `quality` | `int` | No |  |
-| `reduced_motion` | `bool` | No |  |
+| `reducedMotion` | `bool` | No |  |
 | `scale` | `int` | No |  |
-| `scroll_page` | `bool` | No |  |
+| `scrollPage` | `bool` | No |  |
 | `timeout` | `int` | No |  |
 | `url` | `string` | Yes |  |
-| `wait_until` | `string` | No |  |
+| `waitUntil` | `string` | No |  |
 | `width` | `int` | No |  |
 
 ### Operations
@@ -448,21 +479,23 @@ fmt.Println(safetyReviewRequest.GetName()) // "safety_review_request"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_control` | `string` | Yes |  |
-| `desired_outcome` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentControls` | `string` | Yes |  |
+| `desiredOutcome` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
+| `id` | `int` | Yes |  |
 | `language` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `primary_concern` | `string` | Yes |  |
-| `reply_consent` | `bool` | Yes |  |
-| `repository_authority` | `bool` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `map[string]any` | Yes |  |
-| `route_path` | `string` | Yes |  |
+| `primaryConcern` | `string` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `repositoryAuthority` | `bool` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `routePath` | `string` | Yes |  |
 | `runtime` | `string` | Yes |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
-| `test_evidence` | `string` | Yes |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `string` | Yes |  |
+| `testEvidence` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -472,21 +505,23 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.SafetyReviewRequest(nil).Create(map[string]any{
-    "current_control": "example_current_control",
-    "desired_outcome": "example_desired_outcome",
+    "createdAt": "example_createdAt",
+    "currentControls": "example_currentControls",
+    "desiredOutcome": "example_desiredOutcome",
     "email": "example_email",
+    "id": 1,
     "language": "example_language",
-    "notice": "example_notice",
-    "primary_concern": "example_primary_concern",
-    "reply_consent": true,
-    "repository_authority": true,
-    "repository_url": "example_repository_url",
-    "request": map[string]any{},
-    "route_path": "example_route_path",
+    "primaryConcern": "example_primaryConcern",
+    "replyConsent": true,
+    "repositoryAuthority": true,
+    "repositoryUrl": "example_repositoryUrl",
+    "routePath": "example_routePath",
     "runtime": "example_runtime",
-    "safety_acknowledged": true,
-    "start_boundary_acknowledged": true,
-    "test_evidence": "example_test_evidence",
+    "safetyAcknowledged": true,
+    "startBoundaryAcknowledged": true,
+    "status": "example_status",
+    "testEvidence": "example_testEvidence",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -531,9 +566,9 @@ fmt.Println(trial.GetName()) // "trial"
 | --- | --- | --- | --- |
 | `consent` | `bool` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
 | `name` | `string` | No |  |
-| `use_case` | `string` | No |  |
+| `useCase` | `string` | No |  |
 
 ### Operations
 
@@ -587,10 +622,13 @@ fmt.Println(upgrade.GetName()) // "upgrade"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `consent` | `bool` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentPlan` | `string` | Yes |  |
+| `id` | `int` | Yes |  |
 | `note` | `string` | No |  |
-| `notice` | `string` | Yes |  |
-| `request` | `map[string]any` | Yes |  |
-| `requested_plan` | `string` | Yes |  |
+| `requestedPlan` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -601,9 +639,12 @@ Create a new entity with the given data.
 ```go
 result, err := client.Upgrade(nil).Create(map[string]any{
     "consent": true,
-    "notice": "example_notice",
-    "request": map[string]any{},
-    "requested_plan": "example_requested_plan",
+    "createdAt": "example_createdAt",
+    "currentPlan": "example_currentPlan",
+    "id": 1,
+    "requestedPlan": "example_requestedPlan",
+    "status": "example_status",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -647,8 +688,8 @@ fmt.Println(usage.GetName()) // "usage"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `customer` | `map[string]any` | Yes |  |
-| `link` | `map[string]any` | Yes |  |
-| `upgrade_request` | `any` | Yes |  |
+| `links` | `map[string]any` | Yes |  |
+| `upgradeRequest` | `any` | Yes |  |
 | `usage` | `map[string]any` | Yes |  |
 
 ### Operations

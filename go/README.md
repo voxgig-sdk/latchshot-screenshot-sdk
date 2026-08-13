@@ -272,9 +272,9 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"ok"` |  |
-| `"render"` |  |
-| `"service"` |  |
+| `"active"` |  |
+| `"concurrency"` |  |
+| `"pending"` |  |
 
 Operations: Load.
 
@@ -284,17 +284,19 @@ API path: `/healthz`
 
 | Field | Description |
 | --- | --- |
-| `"change_context"` |  |
+| `"changeContext"` |  |
+| `"createdAt"` |  |
 | `"email"` |  |
-| `"monitoring_goal"` |  |
-| `"notice"` |  |
-| `"page_count"` |  |
-| `"page_url"` |  |
-| `"public_page_authority"` |  |
-| `"reply_consent"` |  |
-| `"request"` |  |
-| `"safety_acknowledged"` |  |
-| `"start_boundary_acknowledged"` |  |
+| `"id"` |  |
+| `"monitoringGoal"` |  |
+| `"pageCount"` |  |
+| `"pageUrl"` |  |
+| `"publicPageAuthority"` |  |
+| `"replyConsent"` |  |
+| `"safetyAcknowledged"` |  |
+| `"startBoundaryAcknowledged"` |  |
+| `"status"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create.
 
@@ -304,21 +306,23 @@ API path: `/api/monitoring-requests`
 
 | Field | Description |
 | --- | --- |
-| `"acceptance_sample"` |  |
-| `"call_site"` |  |
-| `"current_contract"` |  |
+| `"acceptanceSample"` |  |
+| `"callSite"` |  |
+| `"createdAt"` |  |
+| `"currentContract"` |  |
 | `"email"` |  |
-| `"expected_render"` |  |
+| `"expectedRenders"` |  |
+| `"id"` |  |
 | `"language"` |  |
-| `"notice"` |  |
 | `"provider"` |  |
-| `"reply_consent"` |  |
-| `"repository_authority"` |  |
-| `"repository_url"` |  |
-| `"request"` |  |
-| `"required_behavior"` |  |
-| `"safety_acknowledged"` |  |
-| `"start_boundary_acknowledged"` |  |
+| `"replyConsent"` |  |
+| `"repositoryAuthority"` |  |
+| `"repositoryUrl"` |  |
+| `"requiredBehavior"` |  |
+| `"safetyAcknowledged"` |  |
+| `"startBoundaryAcknowledged"` |  |
+| `"status"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create.
 
@@ -328,26 +332,26 @@ API path: `/api/pilot-requests`
 
 | Field | Description |
 | --- | --- |
-| `"block_ad"` |  |
-| `"block_chat"` |  |
-| `"block_tracker"` |  |
-| `"dark_mode"` |  |
+| `"blockAds"` |  |
+| `"blockChats"` |  |
+| `"blockTrackers"` |  |
+| `"darkMode"` |  |
 | `"delay"` |  |
 | `"format"` |  |
-| `"full_page"` |  |
+| `"fullPage"` |  |
 | `"height"` |  |
-| `"hide_cookie_banner"` |  |
-| `"hide_popup"` |  |
+| `"hideCookieBanners"` |  |
+| `"hidePopups"` |  |
 | `"kind"` |  |
 | `"landscape"` |  |
 | `"paper"` |  |
 | `"quality"` |  |
-| `"reduced_motion"` |  |
+| `"reducedMotion"` |  |
 | `"scale"` |  |
-| `"scroll_page"` |  |
+| `"scrollPage"` |  |
 | `"timeout"` |  |
 | `"url"` |  |
-| `"wait_until"` |  |
+| `"waitUntil"` |  |
 | `"width"` |  |
 
 Operations: Create.
@@ -367,21 +371,23 @@ API path: `/v1/screenshot`
 
 | Field | Description |
 | --- | --- |
-| `"current_control"` |  |
-| `"desired_outcome"` |  |
+| `"createdAt"` |  |
+| `"currentControls"` |  |
+| `"desiredOutcome"` |  |
 | `"email"` |  |
+| `"id"` |  |
 | `"language"` |  |
-| `"notice"` |  |
-| `"primary_concern"` |  |
-| `"reply_consent"` |  |
-| `"repository_authority"` |  |
-| `"repository_url"` |  |
-| `"request"` |  |
-| `"route_path"` |  |
+| `"primaryConcern"` |  |
+| `"replyConsent"` |  |
+| `"repositoryAuthority"` |  |
+| `"repositoryUrl"` |  |
+| `"routePath"` |  |
 | `"runtime"` |  |
-| `"safety_acknowledged"` |  |
-| `"start_boundary_acknowledged"` |  |
-| `"test_evidence"` |  |
+| `"safetyAcknowledged"` |  |
+| `"startBoundaryAcknowledged"` |  |
+| `"status"` |  |
+| `"testEvidence"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create.
 
@@ -393,9 +399,9 @@ API path: `/api/safety-review-requests`
 | --- | --- |
 | `"consent"` |  |
 | `"email"` |  |
-| `"expected_render"` |  |
+| `"expectedRenders"` |  |
 | `"name"` |  |
-| `"use_case"` |  |
+| `"useCase"` |  |
 
 Operations: Create.
 
@@ -406,10 +412,13 @@ API path: `/api/trials`
 | Field | Description |
 | --- | --- |
 | `"consent"` |  |
+| `"createdAt"` |  |
+| `"currentPlan"` |  |
+| `"id"` |  |
 | `"note"` |  |
-| `"notice"` |  |
-| `"request"` |  |
-| `"requested_plan"` |  |
+| `"requestedPlan"` |  |
+| `"status"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create.
 
@@ -420,8 +429,8 @@ API path: `/v1/upgrade-requests`
 | Field | Description |
 | --- | --- |
 | `"customer"` |  |
-| `"link"` |  |
-| `"upgrade_request"` |  |
+| `"links"` |  |
+| `"upgradeRequest"` |  |
 | `"usage"` |  |
 
 Operations: Load.
@@ -447,9 +456,9 @@ Create an instance: `health := client.Health(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ok` | `bool` |  |
-| `render` | `map[string]any` |  |
-| `service` | `string` |  |
+| `active` | `int` |  |
+| `concurrency` | `int` |  |
+| `pending` | `int` |  |
 
 #### Example: Load
 
@@ -476,32 +485,36 @@ Create an instance: `monitoringRequest := client.MonitoringRequest(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `change_context` | `string` |  |
+| `changeContext` | `string` |  |
+| `createdAt` | `string` |  |
 | `email` | `string` |  |
-| `monitoring_goal` | `string` |  |
-| `notice` | `string` |  |
-| `page_count` | `string` |  |
-| `page_url` | `string` |  |
-| `public_page_authority` | `bool` |  |
-| `reply_consent` | `bool` |  |
-| `request` | `map[string]any` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
+| `id` | `int` |  |
+| `monitoringGoal` | `string` |  |
+| `pageCount` | `string` |  |
+| `pageUrl` | `string` |  |
+| `publicPageAuthority` | `bool` |  |
+| `replyConsent` | `bool` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.MonitoringRequest(nil).Create(map[string]any{
+    "createdAt": "example_createdAt",
     "email": "example_email",
-    "monitoring_goal": "example_monitoring_goal",
-    "notice": "example_notice",
-    "page_count": "example_page_count",
-    "page_url": "example_page_url",
-    "public_page_authority": true,
-    "reply_consent": true,
-    "request": map[string]any{},
-    "safety_acknowledged": true,
-    "start_boundary_acknowledged": true,
+    "id": 1,
+    "monitoringGoal": "example_monitoringGoal",
+    "pageCount": "example_pageCount",
+    "pageUrl": "example_pageUrl",
+    "publicPageAuthority": true,
+    "replyConsent": true,
+    "safetyAcknowledged": true,
+    "startBoundaryAcknowledged": true,
+    "status": "example_status",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -524,34 +537,39 @@ Create an instance: `pilotRequest := client.PilotRequest(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `acceptance_sample` | `string` |  |
-| `call_site` | `string` |  |
-| `current_contract` | `string` |  |
+| `acceptanceSample` | `string` |  |
+| `callSite` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentContract` | `string` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
+| `id` | `int` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
 | `provider` | `string` |  |
-| `reply_consent` | `bool` |  |
-| `repository_authority` | `bool` |  |
-| `repository_url` | `string` |  |
-| `request` | `map[string]any` |  |
-| `required_behavior` | `string` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
+| `replyConsent` | `bool` |  |
+| `repositoryAuthority` | `bool` |  |
+| `repositoryUrl` | `string` |  |
+| `requiredBehavior` | `string` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.PilotRequest(nil).Create(map[string]any{
+    "callSite": "example_callSite",
+    "createdAt": "example_createdAt",
     "email": "example_email",
-    "notice": "example_notice",
-    "reply_consent": true,
-    "repository_authority": true,
-    "repository_url": "example_repository_url",
-    "request": map[string]any{},
-    "safety_acknowledged": true,
-    "start_boundary_acknowledged": true,
+    "id": 1,
+    "replyConsent": true,
+    "repositoryAuthority": true,
+    "repositoryUrl": "example_repositoryUrl",
+    "safetyAcknowledged": true,
+    "startBoundaryAcknowledged": true,
+    "status": "example_status",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -574,26 +592,26 @@ Create an instance: `render := client.Render(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `block_ad` | `bool` |  |
-| `block_chat` | `bool` |  |
-| `block_tracker` | `bool` |  |
-| `dark_mode` | `bool` |  |
+| `blockAds` | `bool` |  |
+| `blockChats` | `bool` |  |
+| `blockTrackers` | `bool` |  |
+| `darkMode` | `bool` |  |
 | `delay` | `int` |  |
 | `format` | `string` |  |
-| `full_page` | `bool` |  |
+| `fullPage` | `bool` |  |
 | `height` | `int` |  |
-| `hide_cookie_banner` | `bool` |  |
-| `hide_popup` | `bool` |  |
+| `hideCookieBanners` | `bool` |  |
+| `hidePopups` | `bool` |  |
 | `kind` | `string` |  |
 | `landscape` | `bool` |  |
 | `paper` | `string` |  |
 | `quality` | `int` |  |
-| `reduced_motion` | `bool` |  |
+| `reducedMotion` | `bool` |  |
 | `scale` | `int` |  |
-| `scroll_page` | `bool` |  |
+| `scrollPage` | `bool` |  |
 | `timeout` | `int` |  |
 | `url` | `string` |  |
-| `wait_until` | `string` |  |
+| `waitUntil` | `string` |  |
 | `width` | `int` |  |
 
 #### Example: Create
@@ -644,41 +662,45 @@ Create an instance: `safetyReviewRequest := client.SafetyReviewRequest(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_control` | `string` |  |
-| `desired_outcome` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentControls` | `string` |  |
+| `desiredOutcome` | `string` |  |
 | `email` | `string` |  |
+| `id` | `int` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
-| `primary_concern` | `string` |  |
-| `reply_consent` | `bool` |  |
-| `repository_authority` | `bool` |  |
-| `repository_url` | `string` |  |
-| `request` | `map[string]any` |  |
-| `route_path` | `string` |  |
+| `primaryConcern` | `string` |  |
+| `replyConsent` | `bool` |  |
+| `repositoryAuthority` | `bool` |  |
+| `repositoryUrl` | `string` |  |
+| `routePath` | `string` |  |
 | `runtime` | `string` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
-| `test_evidence` | `string` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `string` |  |
+| `testEvidence` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.SafetyReviewRequest(nil).Create(map[string]any{
-    "current_control": "example_current_control",
-    "desired_outcome": "example_desired_outcome",
+    "createdAt": "example_createdAt",
+    "currentControls": "example_currentControls",
+    "desiredOutcome": "example_desiredOutcome",
     "email": "example_email",
+    "id": 1,
     "language": "example_language",
-    "notice": "example_notice",
-    "primary_concern": "example_primary_concern",
-    "reply_consent": true,
-    "repository_authority": true,
-    "repository_url": "example_repository_url",
-    "request": map[string]any{},
-    "route_path": "example_route_path",
+    "primaryConcern": "example_primaryConcern",
+    "replyConsent": true,
+    "repositoryAuthority": true,
+    "repositoryUrl": "example_repositoryUrl",
+    "routePath": "example_routePath",
     "runtime": "example_runtime",
-    "safety_acknowledged": true,
-    "start_boundary_acknowledged": true,
-    "test_evidence": "example_test_evidence",
+    "safetyAcknowledged": true,
+    "startBoundaryAcknowledged": true,
+    "status": "example_status",
+    "testEvidence": "example_testEvidence",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -703,9 +725,9 @@ Create an instance: `trial := client.Trial(nil)`
 | --- | --- | --- |
 | `consent` | `bool` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
 | `name` | `string` |  |
-| `use_case` | `string` |  |
+| `useCase` | `string` |  |
 
 #### Example: Create
 
@@ -735,19 +757,25 @@ Create an instance: `upgrade := client.Upgrade(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `consent` | `bool` |  |
+| `createdAt` | `string` |  |
+| `currentPlan` | `string` |  |
+| `id` | `int` |  |
 | `note` | `string` |  |
-| `notice` | `string` |  |
-| `request` | `map[string]any` |  |
-| `requested_plan` | `string` |  |
+| `requestedPlan` | `string` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Upgrade(nil).Create(map[string]any{
     "consent": true,
-    "notice": "example_notice",
-    "request": map[string]any{},
-    "requested_plan": "example_requested_plan",
+    "createdAt": "example_createdAt",
+    "currentPlan": "example_currentPlan",
+    "id": 1,
+    "requestedPlan": "example_requestedPlan",
+    "status": "example_status",
+    "updatedAt": "example_updatedAt",
 }, nil)
 if err != nil {
     panic(err)
@@ -771,8 +799,8 @@ Create an instance: `usage := client.Usage(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `customer` | `map[string]any` |  |
-| `link` | `map[string]any` |  |
-| `upgrade_request` | `any` |  |
+| `links` | `map[string]any` |  |
+| `upgradeRequest` | `any` |  |
 | `usage` | `map[string]any` |  |
 
 #### Example: Load

@@ -26,7 +26,7 @@ class UpgradeEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set LATCHSHOTSCREENSHOT_TEST_UPGRADE_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -37,8 +37,9 @@ class UpgradeEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.upgrade"), "upgrade_ref01"))
 
     upgrade_ref01_data_result = upgrade_ref01_ent.create(upgrade_ref01_data, nil)
-    upgrade_ref01_data = Helpers.to_map(upgrade_ref01_data_result)
+    upgrade_ref01_data = Helpers.to_map(upgrade_ref01_data_result.respond_to?(:data_get) ? upgrade_ref01_data_result.data_get : upgrade_ref01_data_result)
     assert !upgrade_ref01_data.nil?
+    assert !upgrade_ref01_data["id"].nil?
 
   end
 end
@@ -69,39 +70,39 @@ def upgrade_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["LATCHSHOTSCREENSHOT_TEST_UPGRADE_ENTID"]
+  entid_env_raw = ENV["LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "LATCHSHOTSCREENSHOT_TEST_UPGRADE_ENTID" => idmap,
-    "LATCHSHOTSCREENSHOT_TEST_LIVE" => "FALSE",
-    "LATCHSHOTSCREENSHOT_TEST_EXPLAIN" => "FALSE",
-    "LATCHSHOTSCREENSHOT_APIKEY" => "NONE",
+    "LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID" => idmap,
+    "LATCHSHOT_SCREENSHOT_TEST_LIVE" => "FALSE",
+    "LATCHSHOT_SCREENSHOT_TEST_EXPLAIN" => "FALSE",
+    "LATCHSHOT_SCREENSHOT_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["LATCHSHOTSCREENSHOT_TEST_UPGRADE_ENTID"])
+    env["LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["LATCHSHOTSCREENSHOT_TEST_LIVE"] == "TRUE"
+  if env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LATCHSHOTSCREENSHOT_APIKEY"],
+        "apikey" => env["LATCHSHOT_SCREENSHOT_APIKEY"],
       },
       extra || {},
     ])
     client = LatchshotScreenshotSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["LATCHSHOTSCREENSHOT_TEST_LIVE"] == "TRUE"
+  live = env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["LATCHSHOTSCREENSHOT_TEST_EXPLAIN"] == "TRUE",
+    explain: env["LATCHSHOT_SCREENSHOT_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

@@ -6,126 +6,134 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Health {
-  ok: boolean
-  render: Record<string, any>
-  service: string
+  active: number
+  concurrency: number
+  pending: number
 }
 
 export interface HealthLoadMatch {
-  ok?: boolean
-  render?: Record<string, any>
-  service?: string
+  active?: number
+  concurrency?: number
+  pending?: number
 }
 
 export interface MonitoringRequest {
-  change_context?: string
+  changeContext?: string
+  createdAt: string
   email: string
-  monitoring_goal: string
-  notice: string
-  page_count: string
-  page_url: string
-  public_page_authority: boolean
-  reply_consent: boolean
-  request: Record<string, any>
-  safety_acknowledged: boolean
-  start_boundary_acknowledged: boolean
+  id: number
+  monitoringGoal: string
+  pageCount: string
+  pageUrl: string
+  publicPageAuthority: boolean
+  replyConsent: boolean
+  safetyAcknowledged: boolean
+  startBoundaryAcknowledged: boolean
+  status: string
+  updatedAt: string
 }
 
 export interface MonitoringRequestCreateData {
-  change_context?: string
+  changeContext?: string
+  createdAt: string
   email: string
-  monitoring_goal: string
-  notice: string
-  page_count: string
-  page_url: string
-  public_page_authority: boolean
-  reply_consent: boolean
-  request: Record<string, any>
-  safety_acknowledged: boolean
-  start_boundary_acknowledged: boolean
+  id: number
+  monitoringGoal: string
+  pageCount: string
+  pageUrl: string
+  publicPageAuthority: boolean
+  replyConsent: boolean
+  safetyAcknowledged: boolean
+  startBoundaryAcknowledged: boolean
+  status: string
+  updatedAt: string
 }
 
 export interface PilotRequest {
-  acceptance_sample?: string
-  call_site?: string
-  current_contract?: string
+  acceptanceSample?: string
+  callSite: string
+  createdAt: string
+  currentContract?: string
   email: string
-  expected_render?: string
+  expectedRenders?: string
+  id: number
   language?: string
-  notice: string
   provider?: string
-  reply_consent: boolean
-  repository_authority: boolean
-  repository_url: string
-  request: Record<string, any>
-  required_behavior?: string
-  safety_acknowledged: boolean
-  start_boundary_acknowledged: boolean
+  replyConsent: boolean
+  repositoryAuthority: boolean
+  repositoryUrl: string
+  requiredBehavior?: string
+  safetyAcknowledged: boolean
+  startBoundaryAcknowledged: boolean
+  status: string
+  updatedAt: string
 }
 
 export interface PilotRequestCreateData {
-  acceptance_sample?: string
-  call_site?: string
-  current_contract?: string
+  acceptanceSample?: string
+  callSite: string
+  createdAt: string
+  currentContract?: string
   email: string
-  expected_render?: string
+  expectedRenders?: string
+  id: number
   language?: string
-  notice: string
   provider?: string
-  reply_consent: boolean
-  repository_authority: boolean
-  repository_url: string
-  request: Record<string, any>
-  required_behavior?: string
-  safety_acknowledged: boolean
-  start_boundary_acknowledged: boolean
+  replyConsent: boolean
+  repositoryAuthority: boolean
+  repositoryUrl: string
+  requiredBehavior?: string
+  safetyAcknowledged: boolean
+  startBoundaryAcknowledged: boolean
+  status: string
+  updatedAt: string
 }
 
 export interface Render {
-  block_ad?: boolean
-  block_chat?: boolean
-  block_tracker?: boolean
-  dark_mode?: boolean
+  blockAds?: boolean
+  blockChats?: boolean
+  blockTrackers?: boolean
+  darkMode?: boolean
   delay?: number
   format?: string
-  full_page?: boolean
+  fullPage?: boolean
   height?: number
-  hide_cookie_banner?: boolean
-  hide_popup?: boolean
+  hideCookieBanners?: boolean
+  hidePopups?: boolean
   kind?: string
   landscape?: boolean
   paper?: string
   quality?: number
-  reduced_motion?: boolean
+  reducedMotion?: boolean
   scale?: number
-  scroll_page?: boolean
+  scrollPage?: boolean
   timeout?: number
   url: string
-  wait_until?: string
+  waitUntil?: string
   width?: number
 }
 
 export interface RenderCreateData {
-  block_ad?: boolean
-  block_chat?: boolean
-  block_tracker?: boolean
-  dark_mode?: boolean
+  blockAds?: boolean
+  blockChats?: boolean
+  blockTrackers?: boolean
+  darkMode?: boolean
   delay?: number
   format?: string
-  full_page?: boolean
+  fullPage?: boolean
   height?: number
-  hide_cookie_banner?: boolean
-  hide_popup?: boolean
+  hideCookieBanners?: boolean
+  hidePopups?: boolean
   kind?: string
   landscape?: boolean
   paper?: string
   quality?: number
-  reduced_motion?: boolean
+  reducedMotion?: boolean
   scale?: number
-  scroll_page?: boolean
+  scrollPage?: boolean
   timeout?: number
   url: string
-  wait_until?: string
+  waitUntil?: string
   width?: number
 }
 
@@ -136,84 +144,94 @@ export interface RenderingLoadMatch {
 }
 
 export interface SafetyReviewRequest {
-  current_control: string
-  desired_outcome: string
+  createdAt: string
+  currentControls: string
+  desiredOutcome: string
   email: string
+  id: number
   language: string
-  notice: string
-  primary_concern: string
-  reply_consent: boolean
-  repository_authority: boolean
-  repository_url: string
-  request: Record<string, any>
-  route_path: string
+  primaryConcern: string
+  replyConsent: boolean
+  repositoryAuthority: boolean
+  repositoryUrl: string
+  routePath: string
   runtime: string
-  safety_acknowledged: boolean
-  start_boundary_acknowledged: boolean
-  test_evidence: string
+  safetyAcknowledged: boolean
+  startBoundaryAcknowledged: boolean
+  status: string
+  testEvidence: string
+  updatedAt: string
 }
 
 export interface SafetyReviewRequestCreateData {
-  current_control: string
-  desired_outcome: string
+  createdAt: string
+  currentControls: string
+  desiredOutcome: string
   email: string
+  id: number
   language: string
-  notice: string
-  primary_concern: string
-  reply_consent: boolean
-  repository_authority: boolean
-  repository_url: string
-  request: Record<string, any>
-  route_path: string
+  primaryConcern: string
+  replyConsent: boolean
+  repositoryAuthority: boolean
+  repositoryUrl: string
+  routePath: string
   runtime: string
-  safety_acknowledged: boolean
-  start_boundary_acknowledged: boolean
-  test_evidence: string
+  safetyAcknowledged: boolean
+  startBoundaryAcknowledged: boolean
+  status: string
+  testEvidence: string
+  updatedAt: string
 }
 
 export interface Trial {
   consent?: boolean
   email: string
-  expected_render?: string
+  expectedRenders?: string
   name?: string
-  use_case?: string
+  useCase?: string
 }
 
 export interface TrialCreateData {
   consent?: boolean
   email: string
-  expected_render?: string
+  expectedRenders?: string
   name?: string
-  use_case?: string
+  useCase?: string
 }
 
 export interface Upgrade {
   consent: boolean
+  createdAt: string
+  currentPlan: string
+  id: number
   note?: string
-  notice: string
-  request: Record<string, any>
-  requested_plan: string
+  requestedPlan: string
+  status: string
+  updatedAt: string
 }
 
 export interface UpgradeCreateData {
   consent: boolean
+  createdAt: string
+  currentPlan: string
+  id: number
   note?: string
-  notice: string
-  request: Record<string, any>
-  requested_plan: string
+  requestedPlan: string
+  status: string
+  updatedAt: string
 }
 
 export interface Usage {
   customer: Record<string, any>
-  link: Record<string, any>
-  upgrade_request: any
+  links: Record<string, any>
+  upgradeRequest: any
   usage: Record<string, any>
 }
 
 export interface UsageLoadMatch {
   customer?: Record<string, any>
-  link?: Record<string, any>
-  upgrade_request?: any
+  links?: Record<string, any>
+  upgradeRequest?: any
   usage?: Record<string, any>
 }
 

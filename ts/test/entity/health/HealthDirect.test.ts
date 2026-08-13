@@ -19,11 +19,15 @@ import {
 describe('HealthDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LATCHSHOTSCREENSHOT_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LATCHSHOTSCREENSHOT_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LATCHSHOT_SCREENSHOT_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LATCHSHOT_SCREENSHOT_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new LatchshotScreenshotSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -72,19 +76,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'LATCHSHOTSCREENSHOT_TEST_HEALTH_ENTID': {},
-    'LATCHSHOTSCREENSHOT_TEST_LIVE': 'FALSE',
-    'LATCHSHOTSCREENSHOT_APIKEY': 'NONE',
+    'LATCHSHOT_SCREENSHOT_TEST_HEALTH_ENTID': {},
+    'LATCHSHOT_SCREENSHOT_TEST_LIVE': 'FALSE',
+    'LATCHSHOT_SCREENSHOT_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.LATCHSHOTSCREENSHOT_TEST_LIVE
+  const live = 'TRUE' === env.LATCHSHOT_SCREENSHOT_TEST_LIVE
 
   if (live) {
     const client = new LatchshotScreenshotSDK({
-      apikey: env.LATCHSHOTSCREENSHOT_APIKEY,
+      apikey: env.LATCHSHOT_SCREENSHOT_APIKEY,
     })
 
-    let idmap: any = env['LATCHSHOTSCREENSHOT_TEST_HEALTH_ENTID']
+    let idmap: any = env['LATCHSHOT_SCREENSHOT_TEST_HEALTH_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

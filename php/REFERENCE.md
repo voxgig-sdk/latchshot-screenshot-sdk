@@ -125,9 +125,9 @@ $health = $client->Health();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ok` | `bool` | Yes |  |
-| `render` | `array` | Yes |  |
-| `service` | `string` | Yes |  |
+| `active` | `int` | Yes |  |
+| `concurrency` | `int` | Yes |  |
+| `pending` | `int` | Yes |  |
 
 ### Operations
 
@@ -179,17 +179,19 @@ $monitoring_request = $client->MonitoringRequest();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `change_context` | `string` | No |  |
+| `changeContext` | `string` | No |  |
+| `createdAt` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
-| `monitoring_goal` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `page_count` | `string` | Yes |  |
-| `page_url` | `string` | Yes |  |
-| `public_page_authority` | `bool` | Yes |  |
-| `reply_consent` | `bool` | Yes |  |
-| `request` | `array` | Yes |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
+| `id` | `int` | Yes |  |
+| `monitoringGoal` | `string` | Yes |  |
+| `pageCount` | `string` | Yes |  |
+| `pageUrl` | `string` | Yes |  |
+| `publicPageAuthority` | `bool` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -199,16 +201,18 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->MonitoringRequest()->create([
+  "createdAt" => null, // string
   "email" => null, // string
-  "monitoring_goal" => null, // string
-  "notice" => null, // string
-  "page_count" => null, // string
-  "page_url" => null, // string
-  "public_page_authority" => null, // bool
-  "reply_consent" => null, // bool
-  "request" => null, // array
-  "safety_acknowledged" => null, // bool
-  "start_boundary_acknowledged" => null, // bool
+  "id" => null, // int
+  "monitoringGoal" => null, // string
+  "pageCount" => null, // string
+  "pageUrl" => null, // string
+  "publicPageAuthority" => null, // bool
+  "replyConsent" => null, // bool
+  "safetyAcknowledged" => null, // bool
+  "startBoundaryAcknowledged" => null, // bool
+  "status" => null, // string
+  "updatedAt" => null, // string
 ]);
 ```
 
@@ -252,21 +256,45 @@ $pilot_request = $client->PilotRequest();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `acceptance_sample` | `string` | No |  |
-| `call_site` | `string` | No |  |
-| `current_contract` | `string` | No |  |
+| `acceptanceSample` | `string` | No |  |
+| `callSite` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentContract` | `string` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
+| `id` | `int` | Yes |  |
 | `language` | `string` | No |  |
-| `notice` | `string` | Yes |  |
 | `provider` | `string` | No |  |
-| `reply_consent` | `bool` | Yes |  |
-| `repository_authority` | `bool` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `array` | Yes |  |
-| `required_behavior` | `string` | No |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `repositoryAuthority` | `bool` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `requiredBehavior` | `string` | No |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `acceptanceSample` | - |
+| `callSite` | Yes |
+| `createdAt` | - |
+| `currentContract` | - |
+| `email` | - |
+| `expectedRenders` | - |
+| `id` | - |
+| `language` | - |
+| `provider` | - |
+| `replyConsent` | - |
+| `repositoryAuthority` | - |
+| `repositoryUrl` | - |
+| `requiredBehavior` | - |
+| `safetyAcknowledged` | - |
+| `startBoundaryAcknowledged` | - |
+| `status` | - |
+| `updatedAt` | - |
 
 ### Operations
 
@@ -276,14 +304,17 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->PilotRequest()->create([
+  "callSite" => null, // string
+  "createdAt" => null, // string
   "email" => null, // string
-  "notice" => null, // string
-  "reply_consent" => null, // bool
-  "repository_authority" => null, // bool
-  "repository_url" => null, // string
-  "request" => null, // array
-  "safety_acknowledged" => null, // bool
-  "start_boundary_acknowledged" => null, // bool
+  "id" => null, // int
+  "replyConsent" => null, // bool
+  "repositoryAuthority" => null, // bool
+  "repositoryUrl" => null, // string
+  "safetyAcknowledged" => null, // bool
+  "startBoundaryAcknowledged" => null, // bool
+  "status" => null, // string
+  "updatedAt" => null, // string
 ]);
 ```
 
@@ -327,26 +358,26 @@ $render = $client->Render();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `block_ad` | `bool` | No |  |
-| `block_chat` | `bool` | No |  |
-| `block_tracker` | `bool` | No |  |
-| `dark_mode` | `bool` | No |  |
+| `blockAds` | `bool` | No |  |
+| `blockChats` | `bool` | No |  |
+| `blockTrackers` | `bool` | No |  |
+| `darkMode` | `bool` | No |  |
 | `delay` | `int` | No |  |
 | `format` | `string` | No |  |
-| `full_page` | `bool` | No |  |
+| `fullPage` | `bool` | No |  |
 | `height` | `int` | No |  |
-| `hide_cookie_banner` | `bool` | No |  |
-| `hide_popup` | `bool` | No |  |
+| `hideCookieBanners` | `bool` | No |  |
+| `hidePopups` | `bool` | No |  |
 | `kind` | `string` | No |  |
 | `landscape` | `bool` | No |  |
 | `paper` | `string` | No |  |
 | `quality` | `int` | No |  |
-| `reduced_motion` | `bool` | No |  |
+| `reducedMotion` | `bool` | No |  |
 | `scale` | `int` | No |  |
-| `scroll_page` | `bool` | No |  |
+| `scrollPage` | `bool` | No |  |
 | `timeout` | `int` | No |  |
 | `url` | `string` | Yes |  |
-| `wait_until` | `string` | No |  |
+| `waitUntil` | `string` | No |  |
 | `width` | `int` | No |  |
 
 ### Operations
@@ -447,21 +478,23 @@ $safety_review_request = $client->SafetyReviewRequest();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_control` | `string` | Yes |  |
-| `desired_outcome` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentControls` | `string` | Yes |  |
+| `desiredOutcome` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
+| `id` | `int` | Yes |  |
 | `language` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `primary_concern` | `string` | Yes |  |
-| `reply_consent` | `bool` | Yes |  |
-| `repository_authority` | `bool` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `array` | Yes |  |
-| `route_path` | `string` | Yes |  |
+| `primaryConcern` | `string` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `repositoryAuthority` | `bool` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `routePath` | `string` | Yes |  |
 | `runtime` | `string` | Yes |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
-| `test_evidence` | `string` | Yes |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `string` | Yes |  |
+| `testEvidence` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -471,21 +504,23 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->SafetyReviewRequest()->create([
-  "current_control" => null, // string
-  "desired_outcome" => null, // string
+  "createdAt" => null, // string
+  "currentControls" => null, // string
+  "desiredOutcome" => null, // string
   "email" => null, // string
+  "id" => null, // int
   "language" => null, // string
-  "notice" => null, // string
-  "primary_concern" => null, // string
-  "reply_consent" => null, // bool
-  "repository_authority" => null, // bool
-  "repository_url" => null, // string
-  "request" => null, // array
-  "route_path" => null, // string
+  "primaryConcern" => null, // string
+  "replyConsent" => null, // bool
+  "repositoryAuthority" => null, // bool
+  "repositoryUrl" => null, // string
+  "routePath" => null, // string
   "runtime" => null, // string
-  "safety_acknowledged" => null, // bool
-  "start_boundary_acknowledged" => null, // bool
-  "test_evidence" => null, // string
+  "safetyAcknowledged" => null, // bool
+  "startBoundaryAcknowledged" => null, // bool
+  "status" => null, // string
+  "testEvidence" => null, // string
+  "updatedAt" => null, // string
 ]);
 ```
 
@@ -531,9 +566,9 @@ $trial = $client->Trial();
 | --- | --- | --- | --- |
 | `consent` | `bool` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
 | `name` | `string` | No |  |
-| `use_case` | `string` | No |  |
+| `useCase` | `string` | No |  |
 
 ### Operations
 
@@ -588,10 +623,13 @@ $upgrade = $client->Upgrade();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `consent` | `bool` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentPlan` | `string` | Yes |  |
+| `id` | `int` | Yes |  |
 | `note` | `string` | No |  |
-| `notice` | `string` | Yes |  |
-| `request` | `array` | Yes |  |
-| `requested_plan` | `string` | Yes |  |
+| `requestedPlan` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -602,9 +640,12 @@ Create a new entity with the given data. Throws on error.
 ```php
 $result = $client->Upgrade()->create([
   "consent" => null, // bool
-  "notice" => null, // string
-  "request" => null, // array
-  "requested_plan" => null, // string
+  "createdAt" => null, // string
+  "currentPlan" => null, // string
+  "id" => null, // int
+  "requestedPlan" => null, // string
+  "status" => null, // string
+  "updatedAt" => null, // string
 ]);
 ```
 
@@ -649,8 +690,8 @@ $usage = $client->Usage();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `customer` | `array` | Yes |  |
-| `link` | `array` | Yes |  |
-| `upgrade_request` | `mixed` | Yes |  |
+| `links` | `array` | Yes |  |
+| `upgradeRequest` | `mixed` | Yes |  |
 | `usage` | `array` | Yes |  |
 
 ### Operations

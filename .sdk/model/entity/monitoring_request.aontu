@@ -6,8 +6,13 @@ main: kit: entity: monitoring_request: {
 
   fields: [
     {
-      name: "change_context"
+      name: "changeContext"
       req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "createdAt"
+      req: true
       type: "`$STRING`"
     }
     {
@@ -16,51 +21,61 @@ main: kit: entity: monitoring_request: {
       type: "`$STRING`"
     }
     {
-      name: "monitoring_goal"
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "monitoringGoal"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "notice"
+      name: "pageCount"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "page_count"
+      name: "pageUrl"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "page_url"
+      name: "publicPageAuthority"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "replyConsent"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "safetyAcknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "startBoundaryAcknowledged"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "status"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "public_page_authority"
+      name: "updatedAt"
       req: true
-      type: "`$BOOLEAN`"
-    }
-    {
-      name: "reply_consent"
-      req: true
-      type: "`$BOOLEAN`"
-    }
-    {
-      name: "request"
-      req: true
-      type: "`$OBJECT`"
-    }
-    {
-      name: "safety_acknowledged"
-      req: true
-      type: "`$BOOLEAN`"
-    }
-    {
-      name: "start_boundary_acknowledged"
-      req: true
-      type: "`$BOOLEAN`"
+      type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "monitoring_request"
   op: {
@@ -76,7 +91,7 @@ main: kit: entity: monitoring_request: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.request`"
           }
         }
       ]

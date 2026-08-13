@@ -43,8 +43,8 @@ class LatchshotScreenshotTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('LATCHSHOTSCREENSHOT_TEST_LIVE');
-        $override = self::getenv('LATCHSHOTSCREENSHOT_TEST_OVERRIDE');
+        $live = self::getenv('LATCHSHOT_SCREENSHOT_TEST_LIVE');
+        $override = self::getenv('LATCHSHOT_SCREENSHOT_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class LatchshotScreenshotTestRunner
             }
         }
 
-        $explain = self::getenv('LATCHSHOTSCREENSHOT_TEST_EXPLAIN');
+        $explain = self::getenv('LATCHSHOT_SCREENSHOT_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['LATCHSHOTSCREENSHOT_TEST_EXPLAIN'] = $explain;
+            $m['LATCHSHOT_SCREENSHOT_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

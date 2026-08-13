@@ -16,7 +16,7 @@ main: kit: entity: trial: {
       type: "`$STRING`"
     }
     {
-      name: "expected_render"
+      name: "expectedRenders"
       req: false
       type: "`$STRING`"
     }
@@ -26,7 +26,7 @@ main: kit: entity: trial: {
       type: "`$STRING`"
     }
     {
-      name: "use_case"
+      name: "useCase"
       req: false
       type: "`$STRING`"
     }

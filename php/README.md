@@ -37,7 +37,7 @@ $client = new LatchshotScreenshotSDK([
 
 ```php
 try {
-    // load() returns the bare Health record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Health record (throws on error).
     $health = $client->Health()->load();
     print_r($health);
 } catch (\Throwable $err) {
@@ -125,7 +125,8 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = LatchshotScreenshotSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $health = $client->Health()->load();
 print_r($health);
 ```
@@ -235,7 +236,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -257,9 +258,9 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `ok` |  |
-| `render` |  |
-| `service` |  |
+| `active` |  |
+| `concurrency` |  |
+| `pending` |  |
 
 Operations: Load.
 
@@ -269,17 +270,19 @@ API path: `/healthz`
 
 | Field | Description |
 | --- | --- |
-| `change_context` |  |
+| `changeContext` |  |
+| `createdAt` |  |
 | `email` |  |
-| `monitoring_goal` |  |
-| `notice` |  |
-| `page_count` |  |
-| `page_url` |  |
-| `public_page_authority` |  |
-| `reply_consent` |  |
-| `request` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `id` |  |
+| `monitoringGoal` |  |
+| `pageCount` |  |
+| `pageUrl` |  |
+| `publicPageAuthority` |  |
+| `replyConsent` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -289,21 +292,23 @@ API path: `/api/monitoring-requests`
 
 | Field | Description |
 | --- | --- |
-| `acceptance_sample` |  |
-| `call_site` |  |
-| `current_contract` |  |
+| `acceptanceSample` |  |
+| `callSite` |  |
+| `createdAt` |  |
+| `currentContract` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
 | `provider` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `required_behavior` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `requiredBehavior` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -313,26 +318,26 @@ API path: `/api/pilot-requests`
 
 | Field | Description |
 | --- | --- |
-| `block_ad` |  |
-| `block_chat` |  |
-| `block_tracker` |  |
-| `dark_mode` |  |
+| `blockAds` |  |
+| `blockChats` |  |
+| `blockTrackers` |  |
+| `darkMode` |  |
 | `delay` |  |
 | `format` |  |
-| `full_page` |  |
+| `fullPage` |  |
 | `height` |  |
-| `hide_cookie_banner` |  |
-| `hide_popup` |  |
+| `hideCookieBanners` |  |
+| `hidePopups` |  |
 | `kind` |  |
 | `landscape` |  |
 | `paper` |  |
 | `quality` |  |
-| `reduced_motion` |  |
+| `reducedMotion` |  |
 | `scale` |  |
-| `scroll_page` |  |
+| `scrollPage` |  |
 | `timeout` |  |
 | `url` |  |
-| `wait_until` |  |
+| `waitUntil` |  |
 | `width` |  |
 
 Operations: Create.
@@ -352,21 +357,23 @@ API path: `/v1/screenshot`
 
 | Field | Description |
 | --- | --- |
-| `current_control` |  |
-| `desired_outcome` |  |
+| `createdAt` |  |
+| `currentControls` |  |
+| `desiredOutcome` |  |
 | `email` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
-| `primary_concern` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `route_path` |  |
+| `primaryConcern` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `routePath` |  |
 | `runtime` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
-| `test_evidence` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `testEvidence` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -378,9 +385,9 @@ API path: `/api/safety-review-requests`
 | --- | --- |
 | `consent` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
 | `name` |  |
-| `use_case` |  |
+| `useCase` |  |
 
 Operations: Create.
 
@@ -391,10 +398,13 @@ API path: `/api/trials`
 | Field | Description |
 | --- | --- |
 | `consent` |  |
+| `createdAt` |  |
+| `currentPlan` |  |
+| `id` |  |
 | `note` |  |
-| `notice` |  |
-| `request` |  |
-| `requested_plan` |  |
+| `requestedPlan` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -405,8 +415,8 @@ API path: `/v1/upgrade-requests`
 | Field | Description |
 | --- | --- |
 | `customer` |  |
-| `link` |  |
-| `upgrade_request` |  |
+| `links` |  |
+| `upgradeRequest` |  |
 | `usage` |  |
 
 Operations: Load.
@@ -432,14 +442,14 @@ Create an instance: `$health = $client->Health();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ok` | `bool` |  |
-| `render` | `array` |  |
-| `service` | `string` |  |
+| `active` | `int` |  |
+| `concurrency` | `int` |  |
+| `pending` | `int` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Health record (throws on error).
+// load() returns the ENTITY — call data_get() for the Health record (throws on error).
 $health = $client->Health()->load();
 ```
 
@@ -458,32 +468,36 @@ Create an instance: `$monitoring_request = $client->MonitoringRequest();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `change_context` | `string` |  |
+| `changeContext` | `string` |  |
+| `createdAt` | `string` |  |
 | `email` | `string` |  |
-| `monitoring_goal` | `string` |  |
-| `notice` | `string` |  |
-| `page_count` | `string` |  |
-| `page_url` | `string` |  |
-| `public_page_authority` | `bool` |  |
-| `reply_consent` | `bool` |  |
-| `request` | `array` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
+| `id` | `int` |  |
+| `monitoringGoal` | `string` |  |
+| `pageCount` | `string` |  |
+| `pageUrl` | `string` |  |
+| `publicPageAuthority` | `bool` |  |
+| `replyConsent` | `bool` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```php
 $monitoring_request = $client->MonitoringRequest()->create([
+    "createdAt" => null, // string
     "email" => null, // string
-    "monitoring_goal" => null, // string
-    "notice" => null, // string
-    "page_count" => null, // string
-    "page_url" => null, // string
-    "public_page_authority" => null, // bool
-    "reply_consent" => null, // bool
-    "request" => null, // array
-    "safety_acknowledged" => null, // bool
-    "start_boundary_acknowledged" => null, // bool
+    "id" => null, // int
+    "monitoringGoal" => null, // string
+    "pageCount" => null, // string
+    "pageUrl" => null, // string
+    "publicPageAuthority" => null, // bool
+    "replyConsent" => null, // bool
+    "safetyAcknowledged" => null, // bool
+    "startBoundaryAcknowledged" => null, // bool
+    "status" => null, // string
+    "updatedAt" => null, // string
 ]);
 ```
 
@@ -502,34 +516,39 @@ Create an instance: `$pilot_request = $client->PilotRequest();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `acceptance_sample` | `string` |  |
-| `call_site` | `string` |  |
-| `current_contract` | `string` |  |
+| `acceptanceSample` | `string` |  |
+| `callSite` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentContract` | `string` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
+| `id` | `int` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
 | `provider` | `string` |  |
-| `reply_consent` | `bool` |  |
-| `repository_authority` | `bool` |  |
-| `repository_url` | `string` |  |
-| `request` | `array` |  |
-| `required_behavior` | `string` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
+| `replyConsent` | `bool` |  |
+| `repositoryAuthority` | `bool` |  |
+| `repositoryUrl` | `string` |  |
+| `requiredBehavior` | `string` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```php
 $pilot_request = $client->PilotRequest()->create([
+    "callSite" => null, // string
+    "createdAt" => null, // string
     "email" => null, // string
-    "notice" => null, // string
-    "reply_consent" => null, // bool
-    "repository_authority" => null, // bool
-    "repository_url" => null, // string
-    "request" => null, // array
-    "safety_acknowledged" => null, // bool
-    "start_boundary_acknowledged" => null, // bool
+    "id" => null, // int
+    "replyConsent" => null, // bool
+    "repositoryAuthority" => null, // bool
+    "repositoryUrl" => null, // string
+    "safetyAcknowledged" => null, // bool
+    "startBoundaryAcknowledged" => null, // bool
+    "status" => null, // string
+    "updatedAt" => null, // string
 ]);
 ```
 
@@ -548,26 +567,26 @@ Create an instance: `$render = $client->Render();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `block_ad` | `bool` |  |
-| `block_chat` | `bool` |  |
-| `block_tracker` | `bool` |  |
-| `dark_mode` | `bool` |  |
+| `blockAds` | `bool` |  |
+| `blockChats` | `bool` |  |
+| `blockTrackers` | `bool` |  |
+| `darkMode` | `bool` |  |
 | `delay` | `int` |  |
 | `format` | `string` |  |
-| `full_page` | `bool` |  |
+| `fullPage` | `bool` |  |
 | `height` | `int` |  |
-| `hide_cookie_banner` | `bool` |  |
-| `hide_popup` | `bool` |  |
+| `hideCookieBanners` | `bool` |  |
+| `hidePopups` | `bool` |  |
 | `kind` | `string` |  |
 | `landscape` | `bool` |  |
 | `paper` | `string` |  |
 | `quality` | `int` |  |
-| `reduced_motion` | `bool` |  |
+| `reducedMotion` | `bool` |  |
 | `scale` | `int` |  |
-| `scroll_page` | `bool` |  |
+| `scrollPage` | `bool` |  |
 | `timeout` | `int` |  |
 | `url` | `string` |  |
-| `wait_until` | `string` |  |
+| `waitUntil` | `string` |  |
 | `width` | `int` |  |
 
 #### Example: Create
@@ -592,7 +611,7 @@ Create an instance: `$rendering = $client->Rendering();`
 #### Example: Load
 
 ```php
-// load() returns the bare Rendering record (throws on error).
+// load() returns the ENTITY — call data_get() for the Rendering record (throws on error).
 $rendering = $client->Rendering()->load();
 ```
 
@@ -611,41 +630,45 @@ Create an instance: `$safety_review_request = $client->SafetyReviewRequest();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_control` | `string` |  |
-| `desired_outcome` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentControls` | `string` |  |
+| `desiredOutcome` | `string` |  |
 | `email` | `string` |  |
+| `id` | `int` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
-| `primary_concern` | `string` |  |
-| `reply_consent` | `bool` |  |
-| `repository_authority` | `bool` |  |
-| `repository_url` | `string` |  |
-| `request` | `array` |  |
-| `route_path` | `string` |  |
+| `primaryConcern` | `string` |  |
+| `replyConsent` | `bool` |  |
+| `repositoryAuthority` | `bool` |  |
+| `repositoryUrl` | `string` |  |
+| `routePath` | `string` |  |
 | `runtime` | `string` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
-| `test_evidence` | `string` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `string` |  |
+| `testEvidence` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```php
 $safety_review_request = $client->SafetyReviewRequest()->create([
-    "current_control" => null, // string
-    "desired_outcome" => null, // string
+    "createdAt" => null, // string
+    "currentControls" => null, // string
+    "desiredOutcome" => null, // string
     "email" => null, // string
+    "id" => null, // int
     "language" => null, // string
-    "notice" => null, // string
-    "primary_concern" => null, // string
-    "reply_consent" => null, // bool
-    "repository_authority" => null, // bool
-    "repository_url" => null, // string
-    "request" => null, // array
-    "route_path" => null, // string
+    "primaryConcern" => null, // string
+    "replyConsent" => null, // bool
+    "repositoryAuthority" => null, // bool
+    "repositoryUrl" => null, // string
+    "routePath" => null, // string
     "runtime" => null, // string
-    "safety_acknowledged" => null, // bool
-    "start_boundary_acknowledged" => null, // bool
-    "test_evidence" => null, // string
+    "safetyAcknowledged" => null, // bool
+    "startBoundaryAcknowledged" => null, // bool
+    "status" => null, // string
+    "testEvidence" => null, // string
+    "updatedAt" => null, // string
 ]);
 ```
 
@@ -666,9 +689,9 @@ Create an instance: `$trial = $client->Trial();`
 | --- | --- | --- |
 | `consent` | `bool` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
 | `name` | `string` |  |
-| `use_case` | `string` |  |
+| `useCase` | `string` |  |
 
 #### Example: Create
 
@@ -694,19 +717,25 @@ Create an instance: `$upgrade = $client->Upgrade();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `consent` | `bool` |  |
+| `createdAt` | `string` |  |
+| `currentPlan` | `string` |  |
+| `id` | `int` |  |
 | `note` | `string` |  |
-| `notice` | `string` |  |
-| `request` | `array` |  |
-| `requested_plan` | `string` |  |
+| `requestedPlan` | `string` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```php
 $upgrade = $client->Upgrade()->create([
     "consent" => null, // bool
-    "notice" => null, // string
-    "request" => null, // array
-    "requested_plan" => null, // string
+    "createdAt" => null, // string
+    "currentPlan" => null, // string
+    "id" => null, // int
+    "requestedPlan" => null, // string
+    "status" => null, // string
+    "updatedAt" => null, // string
 ]);
 ```
 
@@ -726,14 +755,14 @@ Create an instance: `$usage = $client->Usage();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `customer` | `array` |  |
-| `link` | `array` |  |
-| `upgrade_request` | `mixed` |  |
+| `links` | `array` |  |
+| `upgradeRequest` | `mixed` |  |
 | `usage` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Usage record (throws on error).
+// load() returns the ENTITY — call data_get() for the Usage record (throws on error).
 $usage = $client->Usage()->load();
 ```
 

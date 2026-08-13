@@ -4,25 +4,25 @@
       "TRIAL00": {
         "consent": true,
         "email": "s33",
-        "expected_render": "s34",
+        "expectedRenders": "s34",
         "name": "s35",
-        "use_case": "s36",
+        "useCase": "s36",
         "id": "TRIAL00"
       },
       "TRIAL01": {
         "consent": true,
         "email": "s65",
-        "expected_render": "s66",
+        "expectedRenders": "s66",
         "name": "s67",
-        "use_case": "s68",
+        "useCase": "s68",
         "id": "TRIAL01"
       },
       "TRIAL02": {
         "consent": true,
         "email": "s97",
-        "expected_render": "s98",
+        "expectedRenders": "s98",
         "name": "s99",
-        "use_case": "s9a",
+        "useCase": "s9a",
         "id": "TRIAL02"
       }
     }
@@ -32,9 +32,9 @@
       "trial_ref01": {
         "consent": true,
         "email": "sc9",
-        "expected_render": "sca",
+        "expectedRenders": "sca",
         "name": "scb",
-        "use_case": "scc"
+        "useCase": "scc"
       }
     }
   }

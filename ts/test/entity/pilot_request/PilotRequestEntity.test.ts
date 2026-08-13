@@ -26,8 +26,8 @@ import {
 describe('PilotRequestEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LATCHSHOTSCREENSHOT_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LATCHSHOTSCREENSHOT_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LATCHSHOT_SCREENSHOT_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LATCHSHOT_SCREENSHOT_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = LatchshotScreenshotSDK.test()
@@ -62,8 +62,8 @@ describe('PilotRequestEntity', async () => {
     const pilot_request_ref01_ent = client.PilotRequest()
     let pilot_request_ref01_data = setup.data.new.pilot_request['pilot_request_ref01']
 
-    pilot_request_ref01_data = await pilot_request_ref01_ent.create(pilot_request_ref01_data)
-    assert(null != pilot_request_ref01_data)
+    pilot_request_ref01_data = (await pilot_request_ref01_ent.create(pilot_request_ref01_data)).data()
+    assert(null != pilot_request_ref01_data.id)
 
 
   })

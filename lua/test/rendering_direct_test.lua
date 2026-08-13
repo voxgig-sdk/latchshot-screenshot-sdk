@@ -66,16 +66,16 @@ function rendering_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["LATCHSHOTSCREENSHOT_TEST_RENDERING_ENTID"] = {},
-    ["LATCHSHOTSCREENSHOT_TEST_LIVE"] = "FALSE",
-    ["LATCHSHOTSCREENSHOT_APIKEY"] = "NONE",
+    ["LATCHSHOT_SCREENSHOT_TEST_RENDERING_ENTID"] = {},
+    ["LATCHSHOT_SCREENSHOT_TEST_LIVE"] = "FALSE",
+    ["LATCHSHOT_SCREENSHOT_APIKEY"] = "NONE",
   })
 
-  local live = env["LATCHSHOTSCREENSHOT_TEST_LIVE"] == "TRUE"
+  local live = env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["LATCHSHOTSCREENSHOT_APIKEY"],
+      apikey = env["LATCHSHOT_SCREENSHOT_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

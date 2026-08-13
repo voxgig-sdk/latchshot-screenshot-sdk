@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'LatchshotScreenshot',
   }
 
 
@@ -84,23 +84,23 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "ok",
+          "name": "active",
           "req": true,
-          "type": "`$BOOLEAN`",
+          "type": "`$INTEGER`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "render",
+          "name": "concurrency",
           "req": true,
-          "type": "`$OBJECT`",
+          "type": "`$INTEGER`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "service",
+          "name": "pending",
           "req": true,
-          "type": "`$STRING`",
+          "type": "`$INTEGER`",
           "index$": 2
         }
       ],
@@ -113,6 +113,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/healthz",
               "parts": [
@@ -121,7 +122,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.render`"
               },
               "index$": 0
             }
@@ -137,80 +138,94 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "change_context",
+          "name": "changeContext",
           "req": false,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "email",
+          "name": "createdAt",
           "req": true,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "monitoring_goal",
+          "name": "email",
           "req": true,
           "type": "`$STRING`",
           "index$": 2
         },
         {
           "active": true,
-          "name": "notice",
+          "name": "id",
           "req": true,
-          "type": "`$STRING`",
+          "type": "`$INTEGER`",
           "index$": 3
         },
         {
           "active": true,
-          "name": "page_count",
+          "name": "monitoringGoal",
           "req": true,
           "type": "`$STRING`",
           "index$": 4
         },
         {
           "active": true,
-          "name": "page_url",
+          "name": "pageCount",
           "req": true,
           "type": "`$STRING`",
           "index$": 5
         },
         {
           "active": true,
-          "name": "public_page_authority",
+          "name": "pageUrl",
           "req": true,
-          "type": "`$BOOLEAN`",
+          "type": "`$STRING`",
           "index$": 6
         },
         {
           "active": true,
-          "name": "reply_consent",
+          "name": "publicPageAuthority",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 7
         },
         {
           "active": true,
-          "name": "request",
+          "name": "replyConsent",
           "req": true,
-          "type": "`$OBJECT`",
+          "type": "`$BOOLEAN`",
           "index$": 8
         },
         {
           "active": true,
-          "name": "safety_acknowledged",
+          "name": "safetyAcknowledged",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 9
         },
         {
           "active": true,
-          "name": "start_boundary_acknowledged",
+          "name": "startBoundaryAcknowledged",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 10
+        },
+        {
+          "active": true,
+          "name": "status",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 11
+        },
+        {
+          "active": true,
+          "name": "updatedAt",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 12
         }
       ],
       "name": "monitoring_request",
@@ -222,6 +237,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/api/monitoring-requests",
               "parts": [
@@ -231,7 +247,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.request`"
               },
               "index$": 0
             }
@@ -247,108 +263,128 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "acceptance_sample",
+          "name": "acceptanceSample",
           "req": false,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "call_site",
-          "req": false,
+          "name": "callSite",
+          "op": {
+            "create": {
+              "req": false,
+              "type": "`$STRING`"
+            }
+          },
+          "req": true,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "current_contract",
-          "req": false,
+          "name": "createdAt",
+          "req": true,
           "type": "`$STRING`",
           "index$": 2
+        },
+        {
+          "active": true,
+          "name": "currentContract",
+          "req": false,
+          "type": "`$STRING`",
+          "index$": 3
         },
         {
           "active": true,
           "name": "email",
           "req": true,
           "type": "`$STRING`",
-          "index$": 3
-        },
-        {
-          "active": true,
-          "name": "expected_render",
-          "req": false,
-          "type": "`$STRING`",
           "index$": 4
         },
         {
           "active": true,
-          "name": "language",
+          "name": "expectedRenders",
           "req": false,
           "type": "`$STRING`",
           "index$": 5
         },
         {
           "active": true,
-          "name": "notice",
+          "name": "id",
           "req": true,
-          "type": "`$STRING`",
+          "type": "`$INTEGER`",
           "index$": 6
         },
         {
           "active": true,
-          "name": "provider",
+          "name": "language",
           "req": false,
           "type": "`$STRING`",
           "index$": 7
         },
         {
           "active": true,
-          "name": "reply_consent",
-          "req": true,
-          "type": "`$BOOLEAN`",
+          "name": "provider",
+          "req": false,
+          "type": "`$STRING`",
           "index$": 8
         },
         {
           "active": true,
-          "name": "repository_authority",
+          "name": "replyConsent",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 9
         },
         {
           "active": true,
-          "name": "repository_url",
+          "name": "repositoryAuthority",
           "req": true,
-          "type": "`$STRING`",
+          "type": "`$BOOLEAN`",
           "index$": 10
         },
         {
           "active": true,
-          "name": "request",
+          "name": "repositoryUrl",
           "req": true,
-          "type": "`$OBJECT`",
+          "type": "`$STRING`",
           "index$": 11
         },
         {
           "active": true,
-          "name": "required_behavior",
+          "name": "requiredBehavior",
           "req": false,
           "type": "`$STRING`",
           "index$": 12
         },
         {
           "active": true,
-          "name": "safety_acknowledged",
+          "name": "safetyAcknowledged",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 13
         },
         {
           "active": true,
-          "name": "start_boundary_acknowledged",
+          "name": "startBoundaryAcknowledged",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 14
+        },
+        {
+          "active": true,
+          "name": "status",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 15
+        },
+        {
+          "active": true,
+          "name": "updatedAt",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 16
         }
       ],
       "name": "pilot_request",
@@ -360,6 +396,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/api/pilot-requests",
               "parts": [
@@ -369,7 +406,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.request`"
               },
               "index$": 0
             }
@@ -385,28 +422,28 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "block_ad",
+          "name": "blockAds",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "block_chat",
+          "name": "blockChats",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "block_tracker",
+          "name": "blockTrackers",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 2
         },
         {
           "active": true,
-          "name": "dark_mode",
+          "name": "darkMode",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 3
@@ -427,7 +464,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "full_page",
+          "name": "fullPage",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 6
@@ -441,14 +478,14 @@ class Config {
         },
         {
           "active": true,
-          "name": "hide_cookie_banner",
+          "name": "hideCookieBanners",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 8
         },
         {
           "active": true,
-          "name": "hide_popup",
+          "name": "hidePopups",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 9
@@ -483,7 +520,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "reduced_motion",
+          "name": "reducedMotion",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 14
@@ -497,7 +534,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "scroll_page",
+          "name": "scrollPage",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 16
@@ -518,7 +555,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "wait_until",
+          "name": "waitUntil",
           "req": false,
           "type": "`$STRING`",
           "index$": 19
@@ -540,6 +577,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/render",
               "parts": [
@@ -692,6 +730,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/screenshot",
               "parts": [
@@ -733,77 +772,77 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "current_control",
+          "name": "createdAt",
           "req": true,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "desired_outcome",
+          "name": "currentControls",
           "req": true,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "email",
+          "name": "desiredOutcome",
           "req": true,
           "type": "`$STRING`",
           "index$": 2
         },
         {
           "active": true,
-          "name": "language",
+          "name": "email",
           "req": true,
           "type": "`$STRING`",
           "index$": 3
         },
         {
           "active": true,
-          "name": "notice",
+          "name": "id",
           "req": true,
-          "type": "`$STRING`",
+          "type": "`$INTEGER`",
           "index$": 4
         },
         {
           "active": true,
-          "name": "primary_concern",
+          "name": "language",
           "req": true,
           "type": "`$STRING`",
           "index$": 5
         },
         {
           "active": true,
-          "name": "reply_consent",
+          "name": "primaryConcern",
           "req": true,
-          "type": "`$BOOLEAN`",
+          "type": "`$STRING`",
           "index$": 6
         },
         {
           "active": true,
-          "name": "repository_authority",
+          "name": "replyConsent",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 7
         },
         {
           "active": true,
-          "name": "repository_url",
+          "name": "repositoryAuthority",
           "req": true,
-          "type": "`$STRING`",
+          "type": "`$BOOLEAN`",
           "index$": 8
         },
         {
           "active": true,
-          "name": "request",
+          "name": "repositoryUrl",
           "req": true,
-          "type": "`$OBJECT`",
+          "type": "`$STRING`",
           "index$": 9
         },
         {
           "active": true,
-          "name": "route_path",
+          "name": "routePath",
           "req": true,
           "type": "`$STRING`",
           "index$": 10
@@ -817,24 +856,38 @@ class Config {
         },
         {
           "active": true,
-          "name": "safety_acknowledged",
+          "name": "safetyAcknowledged",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 12
         },
         {
           "active": true,
-          "name": "start_boundary_acknowledged",
+          "name": "startBoundaryAcknowledged",
           "req": true,
           "type": "`$BOOLEAN`",
           "index$": 13
         },
         {
           "active": true,
-          "name": "test_evidence",
+          "name": "status",
           "req": true,
           "type": "`$STRING`",
           "index$": 14
+        },
+        {
+          "active": true,
+          "name": "testEvidence",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 15
+        },
+        {
+          "active": true,
+          "name": "updatedAt",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 16
         }
       ],
       "name": "safety_review_request",
@@ -846,6 +899,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/api/safety-review-requests",
               "parts": [
@@ -855,7 +909,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.request`"
               },
               "index$": 0
             }
@@ -885,7 +939,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "expected_render",
+          "name": "expectedRenders",
           "req": false,
           "type": "`$STRING`",
           "index$": 2
@@ -899,7 +953,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "use_case",
+          "name": "useCase",
           "req": false,
           "type": "`$STRING`",
           "index$": 4
@@ -914,6 +968,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/api/trials",
               "parts": [
@@ -946,31 +1001,52 @@ class Config {
         },
         {
           "active": true,
-          "name": "note",
-          "req": false,
+          "name": "createdAt",
+          "req": true,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "notice",
+          "name": "currentPlan",
           "req": true,
           "type": "`$STRING`",
           "index$": 2
         },
         {
           "active": true,
-          "name": "request",
+          "name": "id",
           "req": true,
-          "type": "`$OBJECT`",
+          "type": "`$INTEGER`",
           "index$": 3
         },
         {
           "active": true,
-          "name": "requested_plan",
-          "req": true,
+          "name": "note",
+          "req": false,
           "type": "`$STRING`",
           "index$": 4
+        },
+        {
+          "active": true,
+          "name": "requestedPlan",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 5
+        },
+        {
+          "active": true,
+          "name": "status",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 6
+        },
+        {
+          "active": true,
+          "name": "updatedAt",
+          "req": true,
+          "type": "`$STRING`",
+          "index$": 7
         }
       ],
       "name": "upgrade",
@@ -982,6 +1058,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/upgrade-requests",
               "parts": [
@@ -991,7 +1068,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.request`"
               },
               "index$": 0
             }
@@ -1014,14 +1091,14 @@ class Config {
         },
         {
           "active": true,
-          "name": "link",
+          "name": "links",
           "req": true,
           "type": "`$OBJECT`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "upgrade_request",
+          "name": "upgradeRequest",
           "req": true,
           "type": "`$ANY`",
           "index$": 2
@@ -1043,6 +1120,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/usage",
               "parts": [

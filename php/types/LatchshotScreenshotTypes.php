@@ -15,140 +15,148 @@ declare(strict_types=1);
 /** Health entity data model. */
 class Health
 {
-    public bool $ok;
-    public array $render;
-    public string $service;
+    public int $active;
+    public int $concurrency;
+    public int $pending;
 }
 
 /** Request payload for Health#load. */
 class HealthLoadMatch
 {
-    public ?bool $ok = null;
-    public ?array $render = null;
-    public ?string $service = null;
+    public ?int $active = null;
+    public ?int $concurrency = null;
+    public ?int $pending = null;
 }
 
 /** MonitoringRequest entity data model. */
 class MonitoringRequest
 {
-    public ?string $change_context = null;
+    public ?string $changeContext = null;
+    public string $createdAt;
     public string $email;
-    public string $monitoring_goal;
-    public string $notice;
-    public string $page_count;
-    public string $page_url;
-    public bool $public_page_authority;
-    public bool $reply_consent;
-    public array $request;
-    public bool $safety_acknowledged;
-    public bool $start_boundary_acknowledged;
+    public int $id;
+    public string $monitoringGoal;
+    public string $pageCount;
+    public string $pageUrl;
+    public bool $publicPageAuthority;
+    public bool $replyConsent;
+    public bool $safetyAcknowledged;
+    public bool $startBoundaryAcknowledged;
+    public string $status;
+    public string $updatedAt;
 }
 
 /** Request payload for MonitoringRequest#create. */
 class MonitoringRequestCreateData
 {
-    public ?string $change_context = null;
+    public ?string $changeContext = null;
+    public string $createdAt;
     public string $email;
-    public string $monitoring_goal;
-    public string $notice;
-    public string $page_count;
-    public string $page_url;
-    public bool $public_page_authority;
-    public bool $reply_consent;
-    public array $request;
-    public bool $safety_acknowledged;
-    public bool $start_boundary_acknowledged;
+    public int $id;
+    public string $monitoringGoal;
+    public string $pageCount;
+    public string $pageUrl;
+    public bool $publicPageAuthority;
+    public bool $replyConsent;
+    public bool $safetyAcknowledged;
+    public bool $startBoundaryAcknowledged;
+    public string $status;
+    public string $updatedAt;
 }
 
 /** PilotRequest entity data model. */
 class PilotRequest
 {
-    public ?string $acceptance_sample = null;
-    public ?string $call_site = null;
-    public ?string $current_contract = null;
+    public ?string $acceptanceSample = null;
+    public string $callSite;
+    public string $createdAt;
+    public ?string $currentContract = null;
     public string $email;
-    public ?string $expected_render = null;
+    public ?string $expectedRenders = null;
+    public int $id;
     public ?string $language = null;
-    public string $notice;
     public ?string $provider = null;
-    public bool $reply_consent;
-    public bool $repository_authority;
-    public string $repository_url;
-    public array $request;
-    public ?string $required_behavior = null;
-    public bool $safety_acknowledged;
-    public bool $start_boundary_acknowledged;
+    public bool $replyConsent;
+    public bool $repositoryAuthority;
+    public string $repositoryUrl;
+    public ?string $requiredBehavior = null;
+    public bool $safetyAcknowledged;
+    public bool $startBoundaryAcknowledged;
+    public string $status;
+    public string $updatedAt;
 }
 
 /** Request payload for PilotRequest#create. */
 class PilotRequestCreateData
 {
-    public ?string $acceptance_sample = null;
-    public ?string $call_site = null;
-    public ?string $current_contract = null;
+    public ?string $acceptanceSample = null;
+    public string $callSite;
+    public string $createdAt;
+    public ?string $currentContract = null;
     public string $email;
-    public ?string $expected_render = null;
+    public ?string $expectedRenders = null;
+    public int $id;
     public ?string $language = null;
-    public string $notice;
     public ?string $provider = null;
-    public bool $reply_consent;
-    public bool $repository_authority;
-    public string $repository_url;
-    public array $request;
-    public ?string $required_behavior = null;
-    public bool $safety_acknowledged;
-    public bool $start_boundary_acknowledged;
+    public bool $replyConsent;
+    public bool $repositoryAuthority;
+    public string $repositoryUrl;
+    public ?string $requiredBehavior = null;
+    public bool $safetyAcknowledged;
+    public bool $startBoundaryAcknowledged;
+    public string $status;
+    public string $updatedAt;
 }
 
 /** Render entity data model. */
 class Render
 {
-    public ?bool $block_ad = null;
-    public ?bool $block_chat = null;
-    public ?bool $block_tracker = null;
-    public ?bool $dark_mode = null;
+    public ?bool $blockAds = null;
+    public ?bool $blockChats = null;
+    public ?bool $blockTrackers = null;
+    public ?bool $darkMode = null;
     public ?int $delay = null;
     public ?string $format = null;
-    public ?bool $full_page = null;
+    public ?bool $fullPage = null;
     public ?int $height = null;
-    public ?bool $hide_cookie_banner = null;
-    public ?bool $hide_popup = null;
+    public ?bool $hideCookieBanners = null;
+    public ?bool $hidePopups = null;
     public ?string $kind = null;
     public ?bool $landscape = null;
     public ?string $paper = null;
     public ?int $quality = null;
-    public ?bool $reduced_motion = null;
+    public ?bool $reducedMotion = null;
     public ?int $scale = null;
-    public ?bool $scroll_page = null;
+    public ?bool $scrollPage = null;
     public ?int $timeout = null;
     public string $url;
-    public ?string $wait_until = null;
+    public ?string $waitUntil = null;
     public ?int $width = null;
 }
 
 /** Request payload for Render#create. */
 class RenderCreateData
 {
-    public ?bool $block_ad = null;
-    public ?bool $block_chat = null;
-    public ?bool $block_tracker = null;
-    public ?bool $dark_mode = null;
+    public ?bool $blockAds = null;
+    public ?bool $blockChats = null;
+    public ?bool $blockTrackers = null;
+    public ?bool $darkMode = null;
     public ?int $delay = null;
     public ?string $format = null;
-    public ?bool $full_page = null;
+    public ?bool $fullPage = null;
     public ?int $height = null;
-    public ?bool $hide_cookie_banner = null;
-    public ?bool $hide_popup = null;
+    public ?bool $hideCookieBanners = null;
+    public ?bool $hidePopups = null;
     public ?string $kind = null;
     public ?bool $landscape = null;
     public ?string $paper = null;
     public ?int $quality = null;
-    public ?bool $reduced_motion = null;
+    public ?bool $reducedMotion = null;
     public ?int $scale = null;
-    public ?bool $scroll_page = null;
+    public ?bool $scrollPage = null;
     public ?int $timeout = null;
     public string $url;
-    public ?string $wait_until = null;
+    public ?string $waitUntil = null;
     public ?int $width = null;
 }
 
@@ -165,41 +173,45 @@ class RenderingLoadMatch
 /** SafetyReviewRequest entity data model. */
 class SafetyReviewRequest
 {
-    public string $current_control;
-    public string $desired_outcome;
+    public string $createdAt;
+    public string $currentControls;
+    public string $desiredOutcome;
     public string $email;
+    public int $id;
     public string $language;
-    public string $notice;
-    public string $primary_concern;
-    public bool $reply_consent;
-    public bool $repository_authority;
-    public string $repository_url;
-    public array $request;
-    public string $route_path;
+    public string $primaryConcern;
+    public bool $replyConsent;
+    public bool $repositoryAuthority;
+    public string $repositoryUrl;
+    public string $routePath;
     public string $runtime;
-    public bool $safety_acknowledged;
-    public bool $start_boundary_acknowledged;
-    public string $test_evidence;
+    public bool $safetyAcknowledged;
+    public bool $startBoundaryAcknowledged;
+    public string $status;
+    public string $testEvidence;
+    public string $updatedAt;
 }
 
 /** Request payload for SafetyReviewRequest#create. */
 class SafetyReviewRequestCreateData
 {
-    public string $current_control;
-    public string $desired_outcome;
+    public string $createdAt;
+    public string $currentControls;
+    public string $desiredOutcome;
     public string $email;
+    public int $id;
     public string $language;
-    public string $notice;
-    public string $primary_concern;
-    public bool $reply_consent;
-    public bool $repository_authority;
-    public string $repository_url;
-    public array $request;
-    public string $route_path;
+    public string $primaryConcern;
+    public bool $replyConsent;
+    public bool $repositoryAuthority;
+    public string $repositoryUrl;
+    public string $routePath;
     public string $runtime;
-    public bool $safety_acknowledged;
-    public bool $start_boundary_acknowledged;
-    public string $test_evidence;
+    public bool $safetyAcknowledged;
+    public bool $startBoundaryAcknowledged;
+    public string $status;
+    public string $testEvidence;
+    public string $updatedAt;
 }
 
 /** Trial entity data model. */
@@ -207,9 +219,9 @@ class Trial
 {
     public ?bool $consent = null;
     public string $email;
-    public ?string $expected_render = null;
+    public ?string $expectedRenders = null;
     public ?string $name = null;
-    public ?string $use_case = null;
+    public ?string $useCase = null;
 }
 
 /** Request payload for Trial#create. */
@@ -217,37 +229,43 @@ class TrialCreateData
 {
     public ?bool $consent = null;
     public string $email;
-    public ?string $expected_render = null;
+    public ?string $expectedRenders = null;
     public ?string $name = null;
-    public ?string $use_case = null;
+    public ?string $useCase = null;
 }
 
 /** Upgrade entity data model. */
 class Upgrade
 {
     public bool $consent;
+    public string $createdAt;
+    public string $currentPlan;
+    public int $id;
     public ?string $note = null;
-    public string $notice;
-    public array $request;
-    public string $requested_plan;
+    public string $requestedPlan;
+    public string $status;
+    public string $updatedAt;
 }
 
 /** Request payload for Upgrade#create. */
 class UpgradeCreateData
 {
     public bool $consent;
+    public string $createdAt;
+    public string $currentPlan;
+    public int $id;
     public ?string $note = null;
-    public string $notice;
-    public array $request;
-    public string $requested_plan;
+    public string $requestedPlan;
+    public string $status;
+    public string $updatedAt;
 }
 
 /** Usage entity data model. */
 class Usage
 {
     public array $customer;
-    public array $link;
-    public mixed $upgrade_request;
+    public array $links;
+    public mixed $upgradeRequest;
     public array $usage;
 }
 
@@ -255,8 +273,8 @@ class Usage
 class UsageLoadMatch
 {
     public ?array $customer = null;
-    public ?array $link = null;
-    public mixed $upgrade_request = null;
+    public ?array $links = null;
+    public mixed $upgradeRequest = null;
     public ?array $usage = null;
 }
 

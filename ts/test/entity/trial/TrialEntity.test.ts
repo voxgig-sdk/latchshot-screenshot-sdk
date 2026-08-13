@@ -26,8 +26,8 @@ import {
 describe('TrialEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LATCHSHOTSCREENSHOT_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LATCHSHOTSCREENSHOT_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LATCHSHOT_SCREENSHOT_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LATCHSHOT_SCREENSHOT_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = LatchshotScreenshotSDK.test()
@@ -62,7 +62,7 @@ describe('TrialEntity', async () => {
     const trial_ref01_ent = client.Trial()
     let trial_ref01_data = setup.data.new.trial['trial_ref01']
 
-    trial_ref01_data = await trial_ref01_ent.create(trial_ref01_data)
+    trial_ref01_data = (await trial_ref01_ent.create(trial_ref01_data)).data()
     assert(null != trial_ref01_data)
 
 

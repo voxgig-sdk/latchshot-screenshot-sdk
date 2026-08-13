@@ -23,8 +23,8 @@ module LatchshotScreenshotTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("LATCHSHOTSCREENSHOT_TEST_LIVE")
-    override = getenv("LATCHSHOTSCREENSHOT_TEST_OVERRIDE")
+    live = getenv("LATCHSHOT_SCREENSHOT_TEST_LIVE")
+    override = getenv("LATCHSHOT_SCREENSHOT_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module LatchshotScreenshotTestRunner
       end
     end
 
-    explain = getenv("LATCHSHOTSCREENSHOT_TEST_EXPLAIN")
-    m["LATCHSHOTSCREENSHOT_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("LATCHSHOT_SCREENSHOT_TEST_EXPLAIN")
+    m["LATCHSHOT_SCREENSHOT_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

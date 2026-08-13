@@ -6,22 +6,22 @@ main: kit: entity: render: {
 
   fields: [
     {
-      name: "block_ad"
+      name: "blockAds"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "block_chat"
+      name: "blockChats"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "block_tracker"
+      name: "blockTrackers"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "dark_mode"
+      name: "darkMode"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -36,7 +36,7 @@ main: kit: entity: render: {
       type: "`$STRING`"
     }
     {
-      name: "full_page"
+      name: "fullPage"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -46,12 +46,12 @@ main: kit: entity: render: {
       type: "`$INTEGER`"
     }
     {
-      name: "hide_cookie_banner"
+      name: "hideCookieBanners"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "hide_popup"
+      name: "hidePopups"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -76,7 +76,7 @@ main: kit: entity: render: {
       type: "`$INTEGER`"
     }
     {
-      name: "reduced_motion"
+      name: "reducedMotion"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -86,7 +86,7 @@ main: kit: entity: render: {
       type: "`$INTEGER`"
     }
     {
-      name: "scroll_page"
+      name: "scrollPage"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -101,7 +101,7 @@ main: kit: entity: render: {
       type: "`$STRING`"
     }
     {
-      name: "wait_until"
+      name: "waitUntil"
       req: false
       type: "`$STRING`"
     }

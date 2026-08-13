@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from latchshotscreenshot_sdk.utility.voxgig_struct import voxgig_struct as vs
 from latchshotscreenshot_sdk import LatchshotScreenshotSDK
-from core import helpers
+from latchshotscreenshot_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -36,7 +36,7 @@ class TestTrialEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID JSON to run live")
+                        "set LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID JSON to run live")
         client = setup["client"]
 
         # CREATE
@@ -44,7 +44,7 @@ class TestTrialEntity:
         trial_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.trial"), "trial_ref01"))
 
-        trial_ref01_data = helpers.to_map(trial_ref01_ent.create(trial_ref01_data, None))
+        trial_ref01_data = helpers.to_map(runner.entity_data(trial_ref01_ent.create(trial_ref01_data, None)))
         assert trial_ref01_data is not None
 
 
@@ -78,37 +78,37 @@ def _trial_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID")
+        "LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID": idmap,
-        "LATCHSHOTSCREENSHOT_TEST_LIVE": "FALSE",
-        "LATCHSHOTSCREENSHOT_TEST_EXPLAIN": "FALSE",
-        "LATCHSHOTSCREENSHOT_APIKEY": "NONE",
+        "LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID": idmap,
+        "LATCHSHOT_SCREENSHOT_TEST_LIVE": "FALSE",
+        "LATCHSHOT_SCREENSHOT_TEST_EXPLAIN": "FALSE",
+        "LATCHSHOT_SCREENSHOT_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID"))
+        env.get("LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("LATCHSHOTSCREENSHOT_TEST_LIVE") == "TRUE":
+    if env.get("LATCHSHOT_SCREENSHOT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LATCHSHOTSCREENSHOT_APIKEY"),
+                "apikey": env.get("LATCHSHOT_SCREENSHOT_APIKEY"),
             },
             extra or {},
         ])
         client = LatchshotScreenshotSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("LATCHSHOTSCREENSHOT_TEST_LIVE") == "TRUE"
+    _live = env.get("LATCHSHOT_SCREENSHOT_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("LATCHSHOTSCREENSHOT_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("LATCHSHOT_SCREENSHOT_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

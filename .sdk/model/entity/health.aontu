@@ -6,19 +6,19 @@ main: kit: entity: health: {
 
   fields: [
     {
-      name: "ok"
+      name: "active"
       req: true
-      type: "`$BOOLEAN`"
+      type: "`$INTEGER`"
     }
     {
-      name: "render"
+      name: "concurrency"
       req: true
-      type: "`$OBJECT`"
+      type: "`$INTEGER`"
     }
     {
-      name: "service"
+      name: "pending"
       req: true
-      type: "`$STRING`"
+      type: "`$INTEGER`"
     }
   ]
 
@@ -35,7 +35,7 @@ main: kit: entity: health: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.render`"
           }
         }
       ]

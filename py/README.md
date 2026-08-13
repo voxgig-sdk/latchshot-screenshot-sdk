@@ -41,7 +41,7 @@ client = LatchshotScreenshotSDK({
 
 ### 3. Load a health
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -125,7 +125,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = LatchshotScreenshotSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 health = client.Health().load()
 # health contains the mock response record
 ```
@@ -232,7 +233,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -254,9 +255,9 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `ok` |  |
-| `render` |  |
-| `service` |  |
+| `active` |  |
+| `concurrency` |  |
+| `pending` |  |
 
 Operations: Load.
 
@@ -266,17 +267,19 @@ API path: `/healthz`
 
 | Field | Description |
 | --- | --- |
-| `change_context` |  |
+| `changeContext` |  |
+| `createdAt` |  |
 | `email` |  |
-| `monitoring_goal` |  |
-| `notice` |  |
-| `page_count` |  |
-| `page_url` |  |
-| `public_page_authority` |  |
-| `reply_consent` |  |
-| `request` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `id` |  |
+| `monitoringGoal` |  |
+| `pageCount` |  |
+| `pageUrl` |  |
+| `publicPageAuthority` |  |
+| `replyConsent` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -286,21 +289,23 @@ API path: `/api/monitoring-requests`
 
 | Field | Description |
 | --- | --- |
-| `acceptance_sample` |  |
-| `call_site` |  |
-| `current_contract` |  |
+| `acceptanceSample` |  |
+| `callSite` |  |
+| `createdAt` |  |
+| `currentContract` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
 | `provider` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `required_behavior` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `requiredBehavior` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -310,26 +315,26 @@ API path: `/api/pilot-requests`
 
 | Field | Description |
 | --- | --- |
-| `block_ad` |  |
-| `block_chat` |  |
-| `block_tracker` |  |
-| `dark_mode` |  |
+| `blockAds` |  |
+| `blockChats` |  |
+| `blockTrackers` |  |
+| `darkMode` |  |
 | `delay` |  |
 | `format` |  |
-| `full_page` |  |
+| `fullPage` |  |
 | `height` |  |
-| `hide_cookie_banner` |  |
-| `hide_popup` |  |
+| `hideCookieBanners` |  |
+| `hidePopups` |  |
 | `kind` |  |
 | `landscape` |  |
 | `paper` |  |
 | `quality` |  |
-| `reduced_motion` |  |
+| `reducedMotion` |  |
 | `scale` |  |
-| `scroll_page` |  |
+| `scrollPage` |  |
 | `timeout` |  |
 | `url` |  |
-| `wait_until` |  |
+| `waitUntil` |  |
 | `width` |  |
 
 Operations: Create.
@@ -349,21 +354,23 @@ API path: `/v1/screenshot`
 
 | Field | Description |
 | --- | --- |
-| `current_control` |  |
-| `desired_outcome` |  |
+| `createdAt` |  |
+| `currentControls` |  |
+| `desiredOutcome` |  |
 | `email` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
-| `primary_concern` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `route_path` |  |
+| `primaryConcern` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `routePath` |  |
 | `runtime` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
-| `test_evidence` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `testEvidence` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -375,9 +382,9 @@ API path: `/api/safety-review-requests`
 | --- | --- |
 | `consent` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
 | `name` |  |
-| `use_case` |  |
+| `useCase` |  |
 
 Operations: Create.
 
@@ -388,10 +395,13 @@ API path: `/api/trials`
 | Field | Description |
 | --- | --- |
 | `consent` |  |
+| `createdAt` |  |
+| `currentPlan` |  |
+| `id` |  |
 | `note` |  |
-| `notice` |  |
-| `request` |  |
-| `requested_plan` |  |
+| `requestedPlan` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -402,8 +412,8 @@ API path: `/v1/upgrade-requests`
 | Field | Description |
 | --- | --- |
 | `customer` |  |
-| `link` |  |
-| `upgrade_request` |  |
+| `links` |  |
+| `upgradeRequest` |  |
 | `usage` |  |
 
 Operations: Load.
@@ -429,9 +439,9 @@ Create an instance: `health = client.Health()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ok` | `bool` |  |
-| `render` | `dict` |  |
-| `service` | `str` |  |
+| `active` | `int` |  |
+| `concurrency` | `int` |  |
+| `pending` | `int` |  |
 
 #### Example: Load
 
@@ -454,32 +464,36 @@ Create an instance: `monitoring_request = client.MonitoringRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `change_context` | `str` |  |
+| `changeContext` | `str` |  |
+| `createdAt` | `str` |  |
 | `email` | `str` |  |
-| `monitoring_goal` | `str` |  |
-| `notice` | `str` |  |
-| `page_count` | `str` |  |
-| `page_url` | `str` |  |
-| `public_page_authority` | `bool` |  |
-| `reply_consent` | `bool` |  |
-| `request` | `dict` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
+| `id` | `int` |  |
+| `monitoringGoal` | `str` |  |
+| `pageCount` | `str` |  |
+| `pageUrl` | `str` |  |
+| `publicPageAuthority` | `bool` |  |
+| `replyConsent` | `bool` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `str` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Create
 
 ```python
 monitoring_request = client.MonitoringRequest().create({
+    "createdAt": "example_createdAt",  # str
     "email": "example_email",  # str
-    "monitoring_goal": "example_monitoring_goal",  # str
-    "notice": "example_notice",  # str
-    "page_count": "example_page_count",  # str
-    "page_url": "example_page_url",  # str
-    "public_page_authority": True,  # bool
-    "reply_consent": True,  # bool
-    "request": {},  # dict
-    "safety_acknowledged": True,  # bool
-    "start_boundary_acknowledged": True,  # bool
+    "id": 1,  # int
+    "monitoringGoal": "example_monitoringGoal",  # str
+    "pageCount": "example_pageCount",  # str
+    "pageUrl": "example_pageUrl",  # str
+    "publicPageAuthority": True,  # bool
+    "replyConsent": True,  # bool
+    "safetyAcknowledged": True,  # bool
+    "startBoundaryAcknowledged": True,  # bool
+    "status": "example_status",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -498,34 +512,39 @@ Create an instance: `pilot_request = client.PilotRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `acceptance_sample` | `str` |  |
-| `call_site` | `str` |  |
-| `current_contract` | `str` |  |
+| `acceptanceSample` | `str` |  |
+| `callSite` | `str` |  |
+| `createdAt` | `str` |  |
+| `currentContract` | `str` |  |
 | `email` | `str` |  |
-| `expected_render` | `str` |  |
+| `expectedRenders` | `str` |  |
+| `id` | `int` |  |
 | `language` | `str` |  |
-| `notice` | `str` |  |
 | `provider` | `str` |  |
-| `reply_consent` | `bool` |  |
-| `repository_authority` | `bool` |  |
-| `repository_url` | `str` |  |
-| `request` | `dict` |  |
-| `required_behavior` | `str` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
+| `replyConsent` | `bool` |  |
+| `repositoryAuthority` | `bool` |  |
+| `repositoryUrl` | `str` |  |
+| `requiredBehavior` | `str` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `str` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Create
 
 ```python
 pilot_request = client.PilotRequest().create({
+    "callSite": "example_callSite",  # str
+    "createdAt": "example_createdAt",  # str
     "email": "example_email",  # str
-    "notice": "example_notice",  # str
-    "reply_consent": True,  # bool
-    "repository_authority": True,  # bool
-    "repository_url": "example_repository_url",  # str
-    "request": {},  # dict
-    "safety_acknowledged": True,  # bool
-    "start_boundary_acknowledged": True,  # bool
+    "id": 1,  # int
+    "replyConsent": True,  # bool
+    "repositoryAuthority": True,  # bool
+    "repositoryUrl": "example_repositoryUrl",  # str
+    "safetyAcknowledged": True,  # bool
+    "startBoundaryAcknowledged": True,  # bool
+    "status": "example_status",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -544,26 +563,26 @@ Create an instance: `render = client.Render()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `block_ad` | `bool` |  |
-| `block_chat` | `bool` |  |
-| `block_tracker` | `bool` |  |
-| `dark_mode` | `bool` |  |
+| `blockAds` | `bool` |  |
+| `blockChats` | `bool` |  |
+| `blockTrackers` | `bool` |  |
+| `darkMode` | `bool` |  |
 | `delay` | `int` |  |
 | `format` | `str` |  |
-| `full_page` | `bool` |  |
+| `fullPage` | `bool` |  |
 | `height` | `int` |  |
-| `hide_cookie_banner` | `bool` |  |
-| `hide_popup` | `bool` |  |
+| `hideCookieBanners` | `bool` |  |
+| `hidePopups` | `bool` |  |
 | `kind` | `str` |  |
 | `landscape` | `bool` |  |
 | `paper` | `str` |  |
 | `quality` | `int` |  |
-| `reduced_motion` | `bool` |  |
+| `reducedMotion` | `bool` |  |
 | `scale` | `int` |  |
-| `scroll_page` | `bool` |  |
+| `scrollPage` | `bool` |  |
 | `timeout` | `int` |  |
 | `url` | `str` |  |
-| `wait_until` | `str` |  |
+| `waitUntil` | `str` |  |
 | `width` | `int` |  |
 
 #### Example: Create
@@ -606,41 +625,45 @@ Create an instance: `safety_review_request = client.SafetyReviewRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_control` | `str` |  |
-| `desired_outcome` | `str` |  |
+| `createdAt` | `str` |  |
+| `currentControls` | `str` |  |
+| `desiredOutcome` | `str` |  |
 | `email` | `str` |  |
+| `id` | `int` |  |
 | `language` | `str` |  |
-| `notice` | `str` |  |
-| `primary_concern` | `str` |  |
-| `reply_consent` | `bool` |  |
-| `repository_authority` | `bool` |  |
-| `repository_url` | `str` |  |
-| `request` | `dict` |  |
-| `route_path` | `str` |  |
+| `primaryConcern` | `str` |  |
+| `replyConsent` | `bool` |  |
+| `repositoryAuthority` | `bool` |  |
+| `repositoryUrl` | `str` |  |
+| `routePath` | `str` |  |
 | `runtime` | `str` |  |
-| `safety_acknowledged` | `bool` |  |
-| `start_boundary_acknowledged` | `bool` |  |
-| `test_evidence` | `str` |  |
+| `safetyAcknowledged` | `bool` |  |
+| `startBoundaryAcknowledged` | `bool` |  |
+| `status` | `str` |  |
+| `testEvidence` | `str` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Create
 
 ```python
 safety_review_request = client.SafetyReviewRequest().create({
-    "current_control": "example_current_control",  # str
-    "desired_outcome": "example_desired_outcome",  # str
+    "createdAt": "example_createdAt",  # str
+    "currentControls": "example_currentControls",  # str
+    "desiredOutcome": "example_desiredOutcome",  # str
     "email": "example_email",  # str
+    "id": 1,  # int
     "language": "example_language",  # str
-    "notice": "example_notice",  # str
-    "primary_concern": "example_primary_concern",  # str
-    "reply_consent": True,  # bool
-    "repository_authority": True,  # bool
-    "repository_url": "example_repository_url",  # str
-    "request": {},  # dict
-    "route_path": "example_route_path",  # str
+    "primaryConcern": "example_primaryConcern",  # str
+    "replyConsent": True,  # bool
+    "repositoryAuthority": True,  # bool
+    "repositoryUrl": "example_repositoryUrl",  # str
+    "routePath": "example_routePath",  # str
     "runtime": "example_runtime",  # str
-    "safety_acknowledged": True,  # bool
-    "start_boundary_acknowledged": True,  # bool
-    "test_evidence": "example_test_evidence",  # str
+    "safetyAcknowledged": True,  # bool
+    "startBoundaryAcknowledged": True,  # bool
+    "status": "example_status",  # str
+    "testEvidence": "example_testEvidence",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -661,9 +684,9 @@ Create an instance: `trial = client.Trial()`
 | --- | --- | --- |
 | `consent` | `bool` |  |
 | `email` | `str` |  |
-| `expected_render` | `str` |  |
+| `expectedRenders` | `str` |  |
 | `name` | `str` |  |
-| `use_case` | `str` |  |
+| `useCase` | `str` |  |
 
 #### Example: Create
 
@@ -689,19 +712,25 @@ Create an instance: `upgrade = client.Upgrade()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `consent` | `bool` |  |
+| `createdAt` | `str` |  |
+| `currentPlan` | `str` |  |
+| `id` | `int` |  |
 | `note` | `str` |  |
-| `notice` | `str` |  |
-| `request` | `dict` |  |
-| `requested_plan` | `str` |  |
+| `requestedPlan` | `str` |  |
+| `status` | `str` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Create
 
 ```python
 upgrade = client.Upgrade().create({
     "consent": True,  # bool
-    "notice": "example_notice",  # str
-    "request": {},  # dict
-    "requested_plan": "example_requested_plan",  # str
+    "createdAt": "example_createdAt",  # str
+    "currentPlan": "example_currentPlan",  # str
+    "id": 1,  # int
+    "requestedPlan": "example_requestedPlan",  # str
+    "status": "example_status",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -721,8 +750,8 @@ Create an instance: `usage = client.Usage()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `customer` | `dict` |  |
-| `link` | `dict` |  |
-| `upgrade_request` | `Any` |  |
+| `links` | `dict` |  |
+| `upgradeRequest` | `Any` |  |
 | `usage` | `dict` |  |
 
 #### Example: Load

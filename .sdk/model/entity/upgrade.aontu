@@ -11,26 +11,46 @@ main: kit: entity: upgrade: {
       type: "`$BOOLEAN`"
     }
     {
+      name: "createdAt"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "currentPlan"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
       name: "note"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "notice"
+      name: "requestedPlan"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "request"
+      name: "status"
       req: true
-      type: "`$OBJECT`"
+      type: "`$STRING`"
     }
     {
-      name: "requested_plan"
+      name: "updatedAt"
       req: true
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "upgrade"
   op: {
@@ -46,7 +66,7 @@ main: kit: entity: upgrade: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.request`"
           }
         }
       ]

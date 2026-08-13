@@ -11,12 +11,12 @@ main: kit: entity: usage: {
       type: "`$OBJECT`"
     }
     {
-      name: "link"
+      name: "links"
       req: true
       type: "`$OBJECT`"
     }
     {
-      name: "upgrade_request"
+      name: "upgradeRequest"
       req: true
       type: "`$ANY`"
     }

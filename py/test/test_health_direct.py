@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from latchshotscreenshot_sdk.utility.voxgig_struct import voxgig_struct as vs
 from latchshotscreenshot_sdk import LatchshotScreenshotSDK
-from core import helpers
+from latchshotscreenshot_sdk.core import helpers
 from test import runner
 
 
@@ -56,16 +56,16 @@ def _health_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "LATCHSHOTSCREENSHOT_TEST_HEALTH_ENTID": {},
-        "LATCHSHOTSCREENSHOT_TEST_LIVE": "FALSE",
-        "LATCHSHOTSCREENSHOT_APIKEY": "NONE",
+        "LATCHSHOT_SCREENSHOT_TEST_HEALTH_ENTID": {},
+        "LATCHSHOT_SCREENSHOT_TEST_LIVE": "FALSE",
+        "LATCHSHOT_SCREENSHOT_APIKEY": "NONE",
     })
 
-    live = env.get("LATCHSHOTSCREENSHOT_TEST_LIVE") == "TRUE"
+    live = env.get("LATCHSHOT_SCREENSHOT_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("LATCHSHOTSCREENSHOT_APIKEY"),
+            "apikey": env.get("LATCHSHOT_SCREENSHOT_APIKEY"),
         }
         client = LatchshotScreenshotSDK(merged_opts)
         return {

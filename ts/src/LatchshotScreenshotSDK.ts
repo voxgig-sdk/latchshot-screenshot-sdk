@@ -154,8 +154,29 @@ class LatchshotScreenshotSDK {
   }
 
 
+  // Raw endpoint access is operator-controllable, like every entity op.
+  // Blocking it means denying BOTH the 'direct' and 'graphql' tokens, since
+  // either one reaches the same endpoint.
   async direct(fetchargs?: any) {
+    if (!this._options.allow.op.includes('direct')) {
+      return {
+        ok: false,
+        err: new Error('LatchshotScreenshotSDK: direct: operation not allowed by' +
+          ' SDK option allow.op value: "' + this._options.allow.op + '"'),
+      }
+    }
+
+    return this._rawRequest(fetchargs)
+  }
+
+
+  // Ungated request path shared by direct() and graphql(), each of which
+  // checks its own allow.op token first. Private, rather than a flag on
+  // fetchargs: a caller-supplied marker would let anyone opt straight back
+  // out of the gate by passing it.
+  async _rawRequest(fetchargs?: any) {
     const utility = this._utility
+
     const fetcher = utility.fetcher
     const makeContext = utility.makeContext
 
@@ -216,66 +237,138 @@ class LatchshotScreenshotSDK {
 
 
 
+  // Raw GraphQL access: the pressure valve that makes the generated
+  // surface's deliberate omissions (per-call selection sets, typed filter
+  // builders, batching, subscriptions) livable — the whole schema stays
+  // reachable.
+  //
+  // Thin wrapper over the same prepare/fetch path `direct` uses, with the
+  // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
+  // HTTP 200 as a top-level `errors` array, so status alone would report a
+  // failed query as ok.
+  //
+  // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
+  // ratelimit or paging features apply.
+  async graphql(query: string, variables?: any, ctrl?: any) {
+    const options = this._options
+
+    if (!options.allow.op.includes('graphql')) {
+      return {
+        ok: false,
+        err: new Error('LatchshotScreenshotSDK: graphql: operation not allowed by' +
+          ' SDK option allow.op value: "' + options.allow.op + '"'),
+      }
+    }
+
+    const res: any = await this._rawRequest({
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: { query, variables: variables || {} },
+      ctrl,
+    })
+
+    if (res instanceof Error) {
+      return res
+    }
+
+    // Errors are read BEFORE any status check: a GraphQL parse or validation
+    // failure comes back as HTTP 400 carrying the standard { errors: [...] }
+    // body, and the raw path represents a non-2xx as { ok: false } with no
+    // err — so returning early on status would discard the server's own
+    // diagnostics, which are the only useful part of that response.
+    const errors = null == res.data ? undefined : res.data.errors
+
+    if (null != errors && Array.isArray(errors) && 0 < errors.length) {
+      const first = errors[0] || {}
+      const err: any = new Error('LatchshotScreenshotSDK: graphql: ' +
+        (first.message || 'graphql error'))
+      err.graphql = errors
+      return { ok: false, status: res.status, headers: res.headers, err, data: res.data }
+    }
+
+    return res
+  }
+
+
+
   // Entity access: `client.Health().list()` / `client.Health().load({ id })`.
-  Health(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Health(entopts?: Record<string, any>) {
     const self = this
-    return new HealthEntity(self,data)
+    return new HealthEntity(self, entopts)
   }
 
 
   // Entity access: `client.MonitoringRequest().list()` / `client.MonitoringRequest().load({ id })`.
-  MonitoringRequest(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  MonitoringRequest(entopts?: Record<string, any>) {
     const self = this
-    return new MonitoringRequestEntity(self,data)
+    return new MonitoringRequestEntity(self, entopts)
   }
 
 
   // Entity access: `client.PilotRequest().list()` / `client.PilotRequest().load({ id })`.
-  PilotRequest(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  PilotRequest(entopts?: Record<string, any>) {
     const self = this
-    return new PilotRequestEntity(self,data)
+    return new PilotRequestEntity(self, entopts)
   }
 
 
   // Entity access: `client.Render().list()` / `client.Render().load({ id })`.
-  Render(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Render(entopts?: Record<string, any>) {
     const self = this
-    return new RenderEntity(self,data)
+    return new RenderEntity(self, entopts)
   }
 
 
   // Entity access: `client.Rendering().list()` / `client.Rendering().load({ id })`.
-  Rendering(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Rendering(entopts?: Record<string, any>) {
     const self = this
-    return new RenderingEntity(self,data)
+    return new RenderingEntity(self, entopts)
   }
 
 
   // Entity access: `client.SafetyReviewRequest().list()` / `client.SafetyReviewRequest().load({ id })`.
-  SafetyReviewRequest(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  SafetyReviewRequest(entopts?: Record<string, any>) {
     const self = this
-    return new SafetyReviewRequestEntity(self,data)
+    return new SafetyReviewRequestEntity(self, entopts)
   }
 
 
   // Entity access: `client.Trial().list()` / `client.Trial().load({ id })`.
-  Trial(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Trial(entopts?: Record<string, any>) {
     const self = this
-    return new TrialEntity(self,data)
+    return new TrialEntity(self, entopts)
   }
 
 
   // Entity access: `client.Upgrade().list()` / `client.Upgrade().load({ id })`.
-  Upgrade(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Upgrade(entopts?: Record<string, any>) {
     const self = this
-    return new UpgradeEntity(self,data)
+    return new UpgradeEntity(self, entopts)
   }
 
 
   // Entity access: `client.Usage().list()` / `client.Usage().load({ id })`.
-  Usage(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Usage(entopts?: Record<string, any>) {
     const self = this
-    return new UsageEntity(self,data)
+    return new UsageEntity(self, entopts)
   }
 
 

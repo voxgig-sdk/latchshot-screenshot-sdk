@@ -26,8 +26,8 @@ import {
 describe('RenderEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LATCHSHOTSCREENSHOT_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LATCHSHOTSCREENSHOT_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LATCHSHOT_SCREENSHOT_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LATCHSHOT_SCREENSHOT_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = LatchshotScreenshotSDK.test()
@@ -62,7 +62,7 @@ describe('RenderEntity', async () => {
     const render_ref01_ent = client.Render()
     let render_ref01_data = setup.data.new.render['render_ref01']
 
-    render_ref01_data = await render_ref01_ent.create(render_ref01_data)
+    render_ref01_data = (await render_ref01_ent.create(render_ref01_data)).data()
     assert(null != render_ref01_data)
 
 

@@ -16,11 +16,11 @@
 import pytest
 
 from latchshotscreenshot_sdk import LatchshotScreenshotSDK
-from core.error import LatchshotScreenshotError
-from core.result import LatchshotScreenshotResult
-from core.response import LatchshotScreenshotResponse
-from core.spec import LatchshotScreenshotSpec
-from feature.base_feature import LatchshotScreenshotBaseFeature
+from latchshotscreenshot_sdk.core.error import LatchshotScreenshotError
+from latchshotscreenshot_sdk.core.result import LatchshotScreenshotResult
+from latchshotscreenshot_sdk.core.response import LatchshotScreenshotResponse
+from latchshotscreenshot_sdk.core.spec import LatchshotScreenshotSpec
+from latchshotscreenshot_sdk.feature.base_feature import LatchshotScreenshotBaseFeature
 
 
 def _client():

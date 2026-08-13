@@ -7,119 +7,127 @@
 -- edit by hand.
 
 ---@class Health
----@field ok boolean
----@field render table
----@field service string
+---@field active number
+---@field concurrency number
+---@field pending number
 
 ---@class HealthLoadMatch
----@field ok? boolean
----@field render? table
----@field service? string
+---@field active? number
+---@field concurrency? number
+---@field pending? number
 
 ---@class MonitoringRequest
----@field change_context? string
+---@field changeContext? string
+---@field createdAt string
 ---@field email string
----@field monitoring_goal string
----@field notice string
----@field page_count string
----@field page_url string
----@field public_page_authority boolean
----@field reply_consent boolean
----@field request table
----@field safety_acknowledged boolean
----@field start_boundary_acknowledged boolean
+---@field id number
+---@field monitoringGoal string
+---@field pageCount string
+---@field pageUrl string
+---@field publicPageAuthority boolean
+---@field replyConsent boolean
+---@field safetyAcknowledged boolean
+---@field startBoundaryAcknowledged boolean
+---@field status string
+---@field updatedAt string
 
 ---@class MonitoringRequestCreateData
----@field change_context? string
+---@field changeContext? string
+---@field createdAt string
 ---@field email string
----@field monitoring_goal string
----@field notice string
----@field page_count string
----@field page_url string
----@field public_page_authority boolean
----@field reply_consent boolean
----@field request table
----@field safety_acknowledged boolean
----@field start_boundary_acknowledged boolean
+---@field id number
+---@field monitoringGoal string
+---@field pageCount string
+---@field pageUrl string
+---@field publicPageAuthority boolean
+---@field replyConsent boolean
+---@field safetyAcknowledged boolean
+---@field startBoundaryAcknowledged boolean
+---@field status string
+---@field updatedAt string
 
 ---@class PilotRequest
----@field acceptance_sample? string
----@field call_site? string
----@field current_contract? string
+---@field acceptanceSample? string
+---@field callSite string
+---@field createdAt string
+---@field currentContract? string
 ---@field email string
----@field expected_render? string
+---@field expectedRenders? string
+---@field id number
 ---@field language? string
----@field notice string
 ---@field provider? string
----@field reply_consent boolean
----@field repository_authority boolean
----@field repository_url string
----@field request table
----@field required_behavior? string
----@field safety_acknowledged boolean
----@field start_boundary_acknowledged boolean
+---@field replyConsent boolean
+---@field repositoryAuthority boolean
+---@field repositoryUrl string
+---@field requiredBehavior? string
+---@field safetyAcknowledged boolean
+---@field startBoundaryAcknowledged boolean
+---@field status string
+---@field updatedAt string
 
 ---@class PilotRequestCreateData
----@field acceptance_sample? string
----@field call_site? string
----@field current_contract? string
+---@field acceptanceSample? string
+---@field callSite string
+---@field createdAt string
+---@field currentContract? string
 ---@field email string
----@field expected_render? string
+---@field expectedRenders? string
+---@field id number
 ---@field language? string
----@field notice string
 ---@field provider? string
----@field reply_consent boolean
----@field repository_authority boolean
----@field repository_url string
----@field request table
----@field required_behavior? string
----@field safety_acknowledged boolean
----@field start_boundary_acknowledged boolean
+---@field replyConsent boolean
+---@field repositoryAuthority boolean
+---@field repositoryUrl string
+---@field requiredBehavior? string
+---@field safetyAcknowledged boolean
+---@field startBoundaryAcknowledged boolean
+---@field status string
+---@field updatedAt string
 
 ---@class Render
----@field block_ad? boolean
----@field block_chat? boolean
----@field block_tracker? boolean
----@field dark_mode? boolean
+---@field blockAds? boolean
+---@field blockChats? boolean
+---@field blockTrackers? boolean
+---@field darkMode? boolean
 ---@field delay? number
 ---@field format? string
----@field full_page? boolean
+---@field fullPage? boolean
 ---@field height? number
----@field hide_cookie_banner? boolean
----@field hide_popup? boolean
+---@field hideCookieBanners? boolean
+---@field hidePopups? boolean
 ---@field kind? string
 ---@field landscape? boolean
 ---@field paper? string
 ---@field quality? number
----@field reduced_motion? boolean
+---@field reducedMotion? boolean
 ---@field scale? number
----@field scroll_page? boolean
+---@field scrollPage? boolean
 ---@field timeout? number
 ---@field url string
----@field wait_until? string
+---@field waitUntil? string
 ---@field width? number
 
 ---@class RenderCreateData
----@field block_ad? boolean
----@field block_chat? boolean
----@field block_tracker? boolean
----@field dark_mode? boolean
+---@field blockAds? boolean
+---@field blockChats? boolean
+---@field blockTrackers? boolean
+---@field darkMode? boolean
 ---@field delay? number
 ---@field format? string
----@field full_page? boolean
+---@field fullPage? boolean
 ---@field height? number
----@field hide_cookie_banner? boolean
----@field hide_popup? boolean
+---@field hideCookieBanners? boolean
+---@field hidePopups? boolean
 ---@field kind? string
 ---@field landscape? boolean
 ---@field paper? string
 ---@field quality? number
----@field reduced_motion? boolean
+---@field reducedMotion? boolean
 ---@field scale? number
----@field scroll_page? boolean
+---@field scrollPage? boolean
 ---@field timeout? number
 ---@field url string
----@field wait_until? string
+---@field waitUntil? string
 ---@field width? number
 
 ---@class Rendering
@@ -127,77 +135,87 @@
 ---@class RenderingLoadMatch
 
 ---@class SafetyReviewRequest
----@field current_control string
----@field desired_outcome string
+---@field createdAt string
+---@field currentControls string
+---@field desiredOutcome string
 ---@field email string
+---@field id number
 ---@field language string
----@field notice string
----@field primary_concern string
----@field reply_consent boolean
----@field repository_authority boolean
----@field repository_url string
----@field request table
----@field route_path string
+---@field primaryConcern string
+---@field replyConsent boolean
+---@field repositoryAuthority boolean
+---@field repositoryUrl string
+---@field routePath string
 ---@field runtime string
----@field safety_acknowledged boolean
----@field start_boundary_acknowledged boolean
----@field test_evidence string
+---@field safetyAcknowledged boolean
+---@field startBoundaryAcknowledged boolean
+---@field status string
+---@field testEvidence string
+---@field updatedAt string
 
 ---@class SafetyReviewRequestCreateData
----@field current_control string
----@field desired_outcome string
+---@field createdAt string
+---@field currentControls string
+---@field desiredOutcome string
 ---@field email string
+---@field id number
 ---@field language string
----@field notice string
----@field primary_concern string
----@field reply_consent boolean
----@field repository_authority boolean
----@field repository_url string
----@field request table
----@field route_path string
+---@field primaryConcern string
+---@field replyConsent boolean
+---@field repositoryAuthority boolean
+---@field repositoryUrl string
+---@field routePath string
 ---@field runtime string
----@field safety_acknowledged boolean
----@field start_boundary_acknowledged boolean
----@field test_evidence string
+---@field safetyAcknowledged boolean
+---@field startBoundaryAcknowledged boolean
+---@field status string
+---@field testEvidence string
+---@field updatedAt string
 
 ---@class Trial
 ---@field consent? boolean
 ---@field email string
----@field expected_render? string
+---@field expectedRenders? string
 ---@field name? string
----@field use_case? string
+---@field useCase? string
 
 ---@class TrialCreateData
 ---@field consent? boolean
 ---@field email string
----@field expected_render? string
+---@field expectedRenders? string
 ---@field name? string
----@field use_case? string
+---@field useCase? string
 
 ---@class Upgrade
 ---@field consent boolean
+---@field createdAt string
+---@field currentPlan string
+---@field id number
 ---@field note? string
----@field notice string
----@field request table
----@field requested_plan string
+---@field requestedPlan string
+---@field status string
+---@field updatedAt string
 
 ---@class UpgradeCreateData
 ---@field consent boolean
+---@field createdAt string
+---@field currentPlan string
+---@field id number
 ---@field note? string
----@field notice string
----@field request table
----@field requested_plan string
+---@field requestedPlan string
+---@field status string
+---@field updatedAt string
 
 ---@class Usage
 ---@field customer table
----@field link table
----@field upgrade_request any
+---@field links table
+---@field upgradeRequest any
 ---@field usage table
 
 ---@class UsageLoadMatch
 ---@field customer? table
----@field link? table
----@field upgrade_request? any
+---@field links? table
+---@field upgradeRequest? any
 ---@field usage? table
 
 local M = {}

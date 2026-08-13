@@ -213,9 +213,9 @@ const health = client.Health()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ok` | `boolean` | Yes |  |
-| `render` | `Record<string, any>` | Yes |  |
-| `service` | `string` | Yes |  |
+| `active` | `number` | Yes |  |
+| `concurrency` | `number` | Yes |  |
+| `pending` | `number` | Yes |  |
 
 ### Operations
 
@@ -265,17 +265,19 @@ const monitoring_request = client.MonitoringRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `change_context` | `string` | No |  |
+| `changeContext` | `string` | No |  |
+| `createdAt` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
-| `monitoring_goal` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `page_count` | `string` | Yes |  |
-| `page_url` | `string` | Yes |  |
-| `public_page_authority` | `boolean` | Yes |  |
-| `reply_consent` | `boolean` | Yes |  |
-| `request` | `Record<string, any>` | Yes |  |
-| `safety_acknowledged` | `boolean` | Yes |  |
-| `start_boundary_acknowledged` | `boolean` | Yes |  |
+| `id` | `number` | Yes |  |
+| `monitoringGoal` | `string` | Yes |  |
+| `pageCount` | `string` | Yes |  |
+| `pageUrl` | `string` | Yes |  |
+| `publicPageAuthority` | `boolean` | Yes |  |
+| `replyConsent` | `boolean` | Yes |  |
+| `safetyAcknowledged` | `boolean` | Yes |  |
+| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -285,16 +287,18 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.MonitoringRequest().create({
+  createdAt: 'example_createdAt',
   email: 'example_email',
-  monitoring_goal: 'example_monitoring_goal',
-  notice: 'example_notice',
-  page_count: 'example_page_count',
-  page_url: 'example_page_url',
-  public_page_authority: true,
-  reply_consent: true,
-  request: {},
-  safety_acknowledged: true,
-  start_boundary_acknowledged: true,
+  id: 1,
+  monitoringGoal: 'example_monitoringGoal',
+  pageCount: 'example_pageCount',
+  pageUrl: 'example_pageUrl',
+  publicPageAuthority: true,
+  replyConsent: true,
+  safetyAcknowledged: true,
+  startBoundaryAcknowledged: true,
+  status: 'example_status',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -336,21 +340,45 @@ const pilot_request = client.PilotRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `acceptance_sample` | `string` | No |  |
-| `call_site` | `string` | No |  |
-| `current_contract` | `string` | No |  |
+| `acceptanceSample` | `string` | No |  |
+| `callSite` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentContract` | `string` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
+| `id` | `number` | Yes |  |
 | `language` | `string` | No |  |
-| `notice` | `string` | Yes |  |
 | `provider` | `string` | No |  |
-| `reply_consent` | `boolean` | Yes |  |
-| `repository_authority` | `boolean` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `Record<string, any>` | Yes |  |
-| `required_behavior` | `string` | No |  |
-| `safety_acknowledged` | `boolean` | Yes |  |
-| `start_boundary_acknowledged` | `boolean` | Yes |  |
+| `replyConsent` | `boolean` | Yes |  |
+| `repositoryAuthority` | `boolean` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `requiredBehavior` | `string` | No |  |
+| `safetyAcknowledged` | `boolean` | Yes |  |
+| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `acceptanceSample` | - |
+| `callSite` | Yes |
+| `createdAt` | - |
+| `currentContract` | - |
+| `email` | - |
+| `expectedRenders` | - |
+| `id` | - |
+| `language` | - |
+| `provider` | - |
+| `replyConsent` | - |
+| `repositoryAuthority` | - |
+| `repositoryUrl` | - |
+| `requiredBehavior` | - |
+| `safetyAcknowledged` | - |
+| `startBoundaryAcknowledged` | - |
+| `status` | - |
+| `updatedAt` | - |
 
 ### Operations
 
@@ -360,14 +388,17 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.PilotRequest().create({
+  callSite: 'example_callSite',
+  createdAt: 'example_createdAt',
   email: 'example_email',
-  notice: 'example_notice',
-  reply_consent: true,
-  repository_authority: true,
-  repository_url: 'example_repository_url',
-  request: {},
-  safety_acknowledged: true,
-  start_boundary_acknowledged: true,
+  id: 1,
+  replyConsent: true,
+  repositoryAuthority: true,
+  repositoryUrl: 'example_repositoryUrl',
+  safetyAcknowledged: true,
+  startBoundaryAcknowledged: true,
+  status: 'example_status',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -409,26 +440,26 @@ const render = client.Render()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `block_ad` | `boolean` | No |  |
-| `block_chat` | `boolean` | No |  |
-| `block_tracker` | `boolean` | No |  |
-| `dark_mode` | `boolean` | No |  |
+| `blockAds` | `boolean` | No |  |
+| `blockChats` | `boolean` | No |  |
+| `blockTrackers` | `boolean` | No |  |
+| `darkMode` | `boolean` | No |  |
 | `delay` | `number` | No |  |
 | `format` | `string` | No |  |
-| `full_page` | `boolean` | No |  |
+| `fullPage` | `boolean` | No |  |
 | `height` | `number` | No |  |
-| `hide_cookie_banner` | `boolean` | No |  |
-| `hide_popup` | `boolean` | No |  |
+| `hideCookieBanners` | `boolean` | No |  |
+| `hidePopups` | `boolean` | No |  |
 | `kind` | `string` | No |  |
 | `landscape` | `boolean` | No |  |
 | `paper` | `string` | No |  |
 | `quality` | `number` | No |  |
-| `reduced_motion` | `boolean` | No |  |
+| `reducedMotion` | `boolean` | No |  |
 | `scale` | `number` | No |  |
-| `scroll_page` | `boolean` | No |  |
+| `scrollPage` | `boolean` | No |  |
 | `timeout` | `number` | No |  |
 | `url` | `string` | Yes |  |
-| `wait_until` | `string` | No |  |
+| `waitUntil` | `string` | No |  |
 | `width` | `number` | No |  |
 
 ### Operations
@@ -525,21 +556,23 @@ const safety_review_request = client.SafetyReviewRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_control` | `string` | Yes |  |
-| `desired_outcome` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentControls` | `string` | Yes |  |
+| `desiredOutcome` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
+| `id` | `number` | Yes |  |
 | `language` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `primary_concern` | `string` | Yes |  |
-| `reply_consent` | `boolean` | Yes |  |
-| `repository_authority` | `boolean` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `Record<string, any>` | Yes |  |
-| `route_path` | `string` | Yes |  |
+| `primaryConcern` | `string` | Yes |  |
+| `replyConsent` | `boolean` | Yes |  |
+| `repositoryAuthority` | `boolean` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `routePath` | `string` | Yes |  |
 | `runtime` | `string` | Yes |  |
-| `safety_acknowledged` | `boolean` | Yes |  |
-| `start_boundary_acknowledged` | `boolean` | Yes |  |
-| `test_evidence` | `string` | Yes |  |
+| `safetyAcknowledged` | `boolean` | Yes |  |
+| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
+| `testEvidence` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -549,21 +582,23 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.SafetyReviewRequest().create({
-  current_control: 'example_current_control',
-  desired_outcome: 'example_desired_outcome',
+  createdAt: 'example_createdAt',
+  currentControls: 'example_currentControls',
+  desiredOutcome: 'example_desiredOutcome',
   email: 'example_email',
+  id: 1,
   language: 'example_language',
-  notice: 'example_notice',
-  primary_concern: 'example_primary_concern',
-  reply_consent: true,
-  repository_authority: true,
-  repository_url: 'example_repository_url',
-  request: {},
-  route_path: 'example_route_path',
+  primaryConcern: 'example_primaryConcern',
+  replyConsent: true,
+  repositoryAuthority: true,
+  repositoryUrl: 'example_repositoryUrl',
+  routePath: 'example_routePath',
   runtime: 'example_runtime',
-  safety_acknowledged: true,
-  start_boundary_acknowledged: true,
-  test_evidence: 'example_test_evidence',
+  safetyAcknowledged: true,
+  startBoundaryAcknowledged: true,
+  status: 'example_status',
+  testEvidence: 'example_testEvidence',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -607,9 +642,9 @@ const trial = client.Trial()
 | --- | --- | --- | --- |
 | `consent` | `boolean` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
 | `name` | `string` | No |  |
-| `use_case` | `string` | No |  |
+| `useCase` | `string` | No |  |
 
 ### Operations
 
@@ -662,10 +697,13 @@ const upgrade = client.Upgrade()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `consent` | `boolean` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentPlan` | `string` | Yes |  |
+| `id` | `number` | Yes |  |
 | `note` | `string` | No |  |
-| `notice` | `string` | Yes |  |
-| `request` | `Record<string, any>` | Yes |  |
-| `requested_plan` | `string` | Yes |  |
+| `requestedPlan` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -676,9 +714,12 @@ Create a new entity with the given data.
 ```ts
 const result = await client.Upgrade().create({
   consent: true,
-  notice: 'example_notice',
-  request: {},
-  requested_plan: 'example_requested_plan',
+  createdAt: 'example_createdAt',
+  currentPlan: 'example_currentPlan',
+  id: 1,
+  requestedPlan: 'example_requestedPlan',
+  status: 'example_status',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -721,8 +762,8 @@ const usage = client.Usage()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `customer` | `Record<string, any>` | Yes |  |
-| `link` | `Record<string, any>` | Yes |  |
-| `upgrade_request` | `any` | Yes |  |
+| `links` | `Record<string, any>` | Yes |  |
+| `upgradeRequest` | `any` | Yes |  |
 | `usage` | `Record<string, any>` | Yes |  |
 
 ### Operations

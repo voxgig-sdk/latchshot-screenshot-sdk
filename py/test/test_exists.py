@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# LatchshotScreenshot SDK exists test
 
 import pytest
 from latchshotscreenshot_sdk import LatchshotScreenshotSDK

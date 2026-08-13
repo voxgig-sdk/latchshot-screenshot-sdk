@@ -33,7 +33,7 @@ class PilotRequestEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set LATCHSHOTSCREENSHOT_TEST_PILOT_REQUEST_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set LATCHSHOT_SCREENSHOT_TEST_PILOT_REQUEST_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -44,8 +44,9 @@ class PilotRequestEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.pilot_request"), "pilot_request_ref01"));
 
         $pilot_request_ref01_data_result = $pilot_request_ref01_ent->create($pilot_request_ref01_data, null);
-        $pilot_request_ref01_data = Helpers::to_map($pilot_request_ref01_data_result);
+        $pilot_request_ref01_data = Helpers::to_map(is_object($pilot_request_ref01_data_result) && method_exists($pilot_request_ref01_data_result, 'data_get') ? $pilot_request_ref01_data_result->data_get() : $pilot_request_ref01_data_result);
         $this->assertNotNull($pilot_request_ref01_data);
+        $this->assertNotNull($pilot_request_ref01_data["id"]);
 
     }
 }
@@ -72,39 +73,39 @@ function pilot_request_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("LATCHSHOTSCREENSHOT_TEST_PILOT_REQUEST_ENTID");
+    $entid_env_raw = getenv("LATCHSHOT_SCREENSHOT_TEST_PILOT_REQUEST_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "LATCHSHOTSCREENSHOT_TEST_PILOT_REQUEST_ENTID" => $idmap,
-        "LATCHSHOTSCREENSHOT_TEST_LIVE" => "FALSE",
-        "LATCHSHOTSCREENSHOT_TEST_EXPLAIN" => "FALSE",
-        "LATCHSHOTSCREENSHOT_APIKEY" => "NONE",
+        "LATCHSHOT_SCREENSHOT_TEST_PILOT_REQUEST_ENTID" => $idmap,
+        "LATCHSHOT_SCREENSHOT_TEST_LIVE" => "FALSE",
+        "LATCHSHOT_SCREENSHOT_TEST_EXPLAIN" => "FALSE",
+        "LATCHSHOT_SCREENSHOT_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["LATCHSHOTSCREENSHOT_TEST_PILOT_REQUEST_ENTID"]);
+        $env["LATCHSHOT_SCREENSHOT_TEST_PILOT_REQUEST_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["LATCHSHOTSCREENSHOT_TEST_LIVE"] === "TRUE") {
+    if ($env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LATCHSHOTSCREENSHOT_APIKEY"],
+                "apikey" => $env["LATCHSHOT_SCREENSHOT_APIKEY"],
             ],
             $extra ?? [],
         ]);
         $client = new LatchshotScreenshotSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["LATCHSHOTSCREENSHOT_TEST_LIVE"] === "TRUE";
+    $live = $env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["LATCHSHOTSCREENSHOT_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["LATCHSHOT_SCREENSHOT_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

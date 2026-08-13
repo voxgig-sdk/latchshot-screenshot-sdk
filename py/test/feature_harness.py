@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import LatchshotScreenshotControl
-from core.error import LatchshotScreenshotError
-from core.result import LatchshotScreenshotResult
-from core.spec import LatchshotScreenshotSpec
+from latchshotscreenshot_sdk.config import make_config
+from latchshotscreenshot_sdk.features import _make_feature
+from latchshotscreenshot_sdk.core.control import LatchshotScreenshotControl
+from latchshotscreenshot_sdk.core.error import LatchshotScreenshotError
+from latchshotscreenshot_sdk.core.result import LatchshotScreenshotResult
+from latchshotscreenshot_sdk.core.spec import LatchshotScreenshotSpec
 
 
 # True when this SDK was generated with the named feature.

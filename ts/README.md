@@ -123,7 +123,8 @@ Create a mock client for unit testing — no server required:
 const client = LatchshotScreenshotSDK.test()
 
 const health = await client.Health().load()
-// health is a bare entity populated with mock response data
+// health is the entity, populated with mock response data
+// — call health.data() for the record itself
 console.log(health)
 ```
 
@@ -299,9 +300,9 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `ok` |  |
-| `render` |  |
-| `service` |  |
+| `active` |  |
+| `concurrency` |  |
+| `pending` |  |
 
 Operations: load.
 
@@ -311,17 +312,19 @@ API path: `/healthz`
 
 | Field | Description |
 | --- | --- |
-| `change_context` |  |
+| `changeContext` |  |
+| `createdAt` |  |
 | `email` |  |
-| `monitoring_goal` |  |
-| `notice` |  |
-| `page_count` |  |
-| `page_url` |  |
-| `public_page_authority` |  |
-| `reply_consent` |  |
-| `request` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `id` |  |
+| `monitoringGoal` |  |
+| `pageCount` |  |
+| `pageUrl` |  |
+| `publicPageAuthority` |  |
+| `replyConsent` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: create.
 
@@ -331,21 +334,23 @@ API path: `/api/monitoring-requests`
 
 | Field | Description |
 | --- | --- |
-| `acceptance_sample` |  |
-| `call_site` |  |
-| `current_contract` |  |
+| `acceptanceSample` |  |
+| `callSite` |  |
+| `createdAt` |  |
+| `currentContract` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
 | `provider` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `required_behavior` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `requiredBehavior` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: create.
 
@@ -355,26 +360,26 @@ API path: `/api/pilot-requests`
 
 | Field | Description |
 | --- | --- |
-| `block_ad` |  |
-| `block_chat` |  |
-| `block_tracker` |  |
-| `dark_mode` |  |
+| `blockAds` |  |
+| `blockChats` |  |
+| `blockTrackers` |  |
+| `darkMode` |  |
 | `delay` |  |
 | `format` |  |
-| `full_page` |  |
+| `fullPage` |  |
 | `height` |  |
-| `hide_cookie_banner` |  |
-| `hide_popup` |  |
+| `hideCookieBanners` |  |
+| `hidePopups` |  |
 | `kind` |  |
 | `landscape` |  |
 | `paper` |  |
 | `quality` |  |
-| `reduced_motion` |  |
+| `reducedMotion` |  |
 | `scale` |  |
-| `scroll_page` |  |
+| `scrollPage` |  |
 | `timeout` |  |
 | `url` |  |
-| `wait_until` |  |
+| `waitUntil` |  |
 | `width` |  |
 
 Operations: create.
@@ -394,21 +399,23 @@ API path: `/v1/screenshot`
 
 | Field | Description |
 | --- | --- |
-| `current_control` |  |
-| `desired_outcome` |  |
+| `createdAt` |  |
+| `currentControls` |  |
+| `desiredOutcome` |  |
 | `email` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
-| `primary_concern` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `route_path` |  |
+| `primaryConcern` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `routePath` |  |
 | `runtime` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
-| `test_evidence` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `testEvidence` |  |
+| `updatedAt` |  |
 
 Operations: create.
 
@@ -420,9 +427,9 @@ API path: `/api/safety-review-requests`
 | --- | --- |
 | `consent` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
 | `name` |  |
-| `use_case` |  |
+| `useCase` |  |
 
 Operations: create.
 
@@ -433,10 +440,13 @@ API path: `/api/trials`
 | Field | Description |
 | --- | --- |
 | `consent` |  |
+| `createdAt` |  |
+| `currentPlan` |  |
+| `id` |  |
 | `note` |  |
-| `notice` |  |
-| `request` |  |
-| `requested_plan` |  |
+| `requestedPlan` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: create.
 
@@ -447,8 +457,8 @@ API path: `/v1/upgrade-requests`
 | Field | Description |
 | --- | --- |
 | `customer` |  |
-| `link` |  |
-| `upgrade_request` |  |
+| `links` |  |
+| `upgradeRequest` |  |
 | `usage` |  |
 
 Operations: load.
@@ -474,9 +484,9 @@ Create an instance: `const health = client.Health()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ok` | `boolean` |  |
-| `render` | `Record<string, any>` |  |
-| `service` | `string` |  |
+| `active` | `number` |  |
+| `concurrency` | `number` |  |
+| `pending` | `number` |  |
 
 #### Example: Load
 
@@ -499,32 +509,36 @@ Create an instance: `const monitoring_request = client.MonitoringRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `change_context` | `string` |  |
+| `changeContext` | `string` |  |
+| `createdAt` | `string` |  |
 | `email` | `string` |  |
-| `monitoring_goal` | `string` |  |
-| `notice` | `string` |  |
-| `page_count` | `string` |  |
-| `page_url` | `string` |  |
-| `public_page_authority` | `boolean` |  |
-| `reply_consent` | `boolean` |  |
-| `request` | `Record<string, any>` |  |
-| `safety_acknowledged` | `boolean` |  |
-| `start_boundary_acknowledged` | `boolean` |  |
+| `id` | `number` |  |
+| `monitoringGoal` | `string` |  |
+| `pageCount` | `string` |  |
+| `pageUrl` | `string` |  |
+| `publicPageAuthority` | `boolean` |  |
+| `replyConsent` | `boolean` |  |
+| `safetyAcknowledged` | `boolean` |  |
+| `startBoundaryAcknowledged` | `boolean` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```ts
 const monitoring_request = await client.MonitoringRequest().create({
+  createdAt: 'example_createdAt',
   email: 'example_email',
-  monitoring_goal: 'example_monitoring_goal',
-  notice: 'example_notice',
-  page_count: 'example_page_count',
-  page_url: 'example_page_url',
-  public_page_authority: true,
-  reply_consent: true,
-  request: {},
-  safety_acknowledged: true,
-  start_boundary_acknowledged: true,
+  id: 1,
+  monitoringGoal: 'example_monitoringGoal',
+  pageCount: 'example_pageCount',
+  pageUrl: 'example_pageUrl',
+  publicPageAuthority: true,
+  replyConsent: true,
+  safetyAcknowledged: true,
+  startBoundaryAcknowledged: true,
+  status: 'example_status',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -543,34 +557,39 @@ Create an instance: `const pilot_request = client.PilotRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `acceptance_sample` | `string` |  |
-| `call_site` | `string` |  |
-| `current_contract` | `string` |  |
+| `acceptanceSample` | `string` |  |
+| `callSite` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentContract` | `string` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
+| `id` | `number` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
 | `provider` | `string` |  |
-| `reply_consent` | `boolean` |  |
-| `repository_authority` | `boolean` |  |
-| `repository_url` | `string` |  |
-| `request` | `Record<string, any>` |  |
-| `required_behavior` | `string` |  |
-| `safety_acknowledged` | `boolean` |  |
-| `start_boundary_acknowledged` | `boolean` |  |
+| `replyConsent` | `boolean` |  |
+| `repositoryAuthority` | `boolean` |  |
+| `repositoryUrl` | `string` |  |
+| `requiredBehavior` | `string` |  |
+| `safetyAcknowledged` | `boolean` |  |
+| `startBoundaryAcknowledged` | `boolean` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```ts
 const pilot_request = await client.PilotRequest().create({
+  callSite: 'example_callSite',
+  createdAt: 'example_createdAt',
   email: 'example_email',
-  notice: 'example_notice',
-  reply_consent: true,
-  repository_authority: true,
-  repository_url: 'example_repository_url',
-  request: {},
-  safety_acknowledged: true,
-  start_boundary_acknowledged: true,
+  id: 1,
+  replyConsent: true,
+  repositoryAuthority: true,
+  repositoryUrl: 'example_repositoryUrl',
+  safetyAcknowledged: true,
+  startBoundaryAcknowledged: true,
+  status: 'example_status',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -589,26 +608,26 @@ Create an instance: `const render = client.Render()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `block_ad` | `boolean` |  |
-| `block_chat` | `boolean` |  |
-| `block_tracker` | `boolean` |  |
-| `dark_mode` | `boolean` |  |
+| `blockAds` | `boolean` |  |
+| `blockChats` | `boolean` |  |
+| `blockTrackers` | `boolean` |  |
+| `darkMode` | `boolean` |  |
 | `delay` | `number` |  |
 | `format` | `string` |  |
-| `full_page` | `boolean` |  |
+| `fullPage` | `boolean` |  |
 | `height` | `number` |  |
-| `hide_cookie_banner` | `boolean` |  |
-| `hide_popup` | `boolean` |  |
+| `hideCookieBanners` | `boolean` |  |
+| `hidePopups` | `boolean` |  |
 | `kind` | `string` |  |
 | `landscape` | `boolean` |  |
 | `paper` | `string` |  |
 | `quality` | `number` |  |
-| `reduced_motion` | `boolean` |  |
+| `reducedMotion` | `boolean` |  |
 | `scale` | `number` |  |
-| `scroll_page` | `boolean` |  |
+| `scrollPage` | `boolean` |  |
 | `timeout` | `number` |  |
 | `url` | `string` |  |
-| `wait_until` | `string` |  |
+| `waitUntil` | `string` |  |
 | `width` | `number` |  |
 
 #### Example: Create
@@ -651,41 +670,45 @@ Create an instance: `const safety_review_request = client.SafetyReviewRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_control` | `string` |  |
-| `desired_outcome` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentControls` | `string` |  |
+| `desiredOutcome` | `string` |  |
 | `email` | `string` |  |
+| `id` | `number` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
-| `primary_concern` | `string` |  |
-| `reply_consent` | `boolean` |  |
-| `repository_authority` | `boolean` |  |
-| `repository_url` | `string` |  |
-| `request` | `Record<string, any>` |  |
-| `route_path` | `string` |  |
+| `primaryConcern` | `string` |  |
+| `replyConsent` | `boolean` |  |
+| `repositoryAuthority` | `boolean` |  |
+| `repositoryUrl` | `string` |  |
+| `routePath` | `string` |  |
 | `runtime` | `string` |  |
-| `safety_acknowledged` | `boolean` |  |
-| `start_boundary_acknowledged` | `boolean` |  |
-| `test_evidence` | `string` |  |
+| `safetyAcknowledged` | `boolean` |  |
+| `startBoundaryAcknowledged` | `boolean` |  |
+| `status` | `string` |  |
+| `testEvidence` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```ts
 const safety_review_request = await client.SafetyReviewRequest().create({
-  current_control: 'example_current_control',
-  desired_outcome: 'example_desired_outcome',
+  createdAt: 'example_createdAt',
+  currentControls: 'example_currentControls',
+  desiredOutcome: 'example_desiredOutcome',
   email: 'example_email',
+  id: 1,
   language: 'example_language',
-  notice: 'example_notice',
-  primary_concern: 'example_primary_concern',
-  reply_consent: true,
-  repository_authority: true,
-  repository_url: 'example_repository_url',
-  request: {},
-  route_path: 'example_route_path',
+  primaryConcern: 'example_primaryConcern',
+  replyConsent: true,
+  repositoryAuthority: true,
+  repositoryUrl: 'example_repositoryUrl',
+  routePath: 'example_routePath',
   runtime: 'example_runtime',
-  safety_acknowledged: true,
-  start_boundary_acknowledged: true,
-  test_evidence: 'example_test_evidence',
+  safetyAcknowledged: true,
+  startBoundaryAcknowledged: true,
+  status: 'example_status',
+  testEvidence: 'example_testEvidence',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -706,9 +729,9 @@ Create an instance: `const trial = client.Trial()`
 | --- | --- | --- |
 | `consent` | `boolean` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
 | `name` | `string` |  |
-| `use_case` | `string` |  |
+| `useCase` | `string` |  |
 
 #### Example: Create
 
@@ -734,19 +757,25 @@ Create an instance: `const upgrade = client.Upgrade()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `consent` | `boolean` |  |
+| `createdAt` | `string` |  |
+| `currentPlan` | `string` |  |
+| `id` | `number` |  |
 | `note` | `string` |  |
-| `notice` | `string` |  |
-| `request` | `Record<string, any>` |  |
-| `requested_plan` | `string` |  |
+| `requestedPlan` | `string` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```ts
 const upgrade = await client.Upgrade().create({
   consent: true,
-  notice: 'example_notice',
-  request: {},
-  requested_plan: 'example_requested_plan',
+  createdAt: 'example_createdAt',
+  currentPlan: 'example_currentPlan',
+  id: 1,
+  requestedPlan: 'example_requestedPlan',
+  status: 'example_status',
+  updatedAt: 'example_updatedAt',
 })
 ```
 
@@ -766,8 +795,8 @@ Create an instance: `const usage = client.Usage()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `customer` | `Record<string, any>` |  |
-| `link` | `Record<string, any>` |  |
-| `upgrade_request` | `any` |  |
+| `links` | `Record<string, any>` |  |
+| `upgradeRequest` | `any` |  |
 | `usage` | `Record<string, any>` |  |
 
 #### Example: Load

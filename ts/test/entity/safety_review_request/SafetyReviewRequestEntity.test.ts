@@ -26,8 +26,8 @@ import {
 describe('SafetyReviewRequestEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LATCHSHOTSCREENSHOT_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LATCHSHOTSCREENSHOT_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LATCHSHOT_SCREENSHOT_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LATCHSHOT_SCREENSHOT_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = LatchshotScreenshotSDK.test()
@@ -62,8 +62,8 @@ describe('SafetyReviewRequestEntity', async () => {
     const safety_review_request_ref01_ent = client.SafetyReviewRequest()
     let safety_review_request_ref01_data = setup.data.new.safety_review_request['safety_review_request_ref01']
 
-    safety_review_request_ref01_data = await safety_review_request_ref01_ent.create(safety_review_request_ref01_data)
-    assert(null != safety_review_request_ref01_data)
+    safety_review_request_ref01_data = (await safety_review_request_ref01_ent.create(safety_review_request_ref01_data)).data()
+    assert(null != safety_review_request_ref01_data.id)
 
 
   })

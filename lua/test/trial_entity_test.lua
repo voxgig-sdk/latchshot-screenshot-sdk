@@ -29,7 +29,7 @@ describe("TrialEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -41,7 +41,7 @@ describe("TrialEntity", function()
 
     local trial_ref01_data_result, err = trial_ref01_ent:create(trial_ref01_data, nil)
     assert.is_nil(err)
-    trial_ref01_data = helpers.to_map(trial_ref01_data_result)
+    trial_ref01_data = helpers.to_map(type(trial_ref01_data_result) == 'table' and trial_ref01_data_result.data_get and trial_ref01_data_result:data_get() or trial_ref01_data_result)
     assert.is_not_nil(trial_ref01_data)
 
   end)
@@ -79,39 +79,39 @@ function trial_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID")
+  local entid_env_raw = os.getenv("LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID"] = idmap,
-    ["LATCHSHOTSCREENSHOT_TEST_LIVE"] = "FALSE",
-    ["LATCHSHOTSCREENSHOT_TEST_EXPLAIN"] = "FALSE",
-    ["LATCHSHOTSCREENSHOT_APIKEY"] = "NONE",
+    ["LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID"] = idmap,
+    ["LATCHSHOT_SCREENSHOT_TEST_LIVE"] = "FALSE",
+    ["LATCHSHOT_SCREENSHOT_TEST_EXPLAIN"] = "FALSE",
+    ["LATCHSHOT_SCREENSHOT_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["LATCHSHOTSCREENSHOT_TEST_TRIAL_ENTID"])
+    env["LATCHSHOT_SCREENSHOT_TEST_TRIAL_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["LATCHSHOTSCREENSHOT_TEST_LIVE"] == "TRUE" then
+  if env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["LATCHSHOTSCREENSHOT_APIKEY"],
+        apikey = env["LATCHSHOT_SCREENSHOT_APIKEY"],
       },
       extra or {},
     })
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["LATCHSHOTSCREENSHOT_TEST_LIVE"] == "TRUE"
+  local live = env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["LATCHSHOTSCREENSHOT_TEST_EXPLAIN"] == "TRUE",
+    explain = env["LATCHSHOT_SCREENSHOT_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

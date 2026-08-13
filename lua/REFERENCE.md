@@ -123,9 +123,9 @@ local health = client:Health(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ok` | `boolean` | Yes |  |
-| `render` | `table` | Yes |  |
-| `service` | `string` | Yes |  |
+| `active` | `number` | Yes |  |
+| `concurrency` | `number` | Yes |  |
+| `pending` | `number` | Yes |  |
 
 ### Operations
 
@@ -177,17 +177,19 @@ local monitoring_request = client:MonitoringRequest(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `change_context` | `string` | No |  |
+| `changeContext` | `string` | No |  |
+| `createdAt` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
-| `monitoring_goal` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `page_count` | `string` | Yes |  |
-| `page_url` | `string` | Yes |  |
-| `public_page_authority` | `boolean` | Yes |  |
-| `reply_consent` | `boolean` | Yes |  |
-| `request` | `table` | Yes |  |
-| `safety_acknowledged` | `boolean` | Yes |  |
-| `start_boundary_acknowledged` | `boolean` | Yes |  |
+| `id` | `number` | Yes |  |
+| `monitoringGoal` | `string` | Yes |  |
+| `pageCount` | `string` | Yes |  |
+| `pageUrl` | `string` | Yes |  |
+| `publicPageAuthority` | `boolean` | Yes |  |
+| `replyConsent` | `boolean` | Yes |  |
+| `safetyAcknowledged` | `boolean` | Yes |  |
+| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -197,16 +199,18 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:MonitoringRequest():create({
+  createdAt = --[[ string ]],
   email = --[[ string ]],
-  monitoring_goal = --[[ string ]],
-  notice = --[[ string ]],
-  page_count = --[[ string ]],
-  page_url = --[[ string ]],
-  public_page_authority = --[[ boolean ]],
-  reply_consent = --[[ boolean ]],
-  request = --[[ table ]],
-  safety_acknowledged = --[[ boolean ]],
-  start_boundary_acknowledged = --[[ boolean ]],
+  id = --[[ number ]],
+  monitoringGoal = --[[ string ]],
+  pageCount = --[[ string ]],
+  pageUrl = --[[ string ]],
+  publicPageAuthority = --[[ boolean ]],
+  replyConsent = --[[ boolean ]],
+  safetyAcknowledged = --[[ boolean ]],
+  startBoundaryAcknowledged = --[[ boolean ]],
+  status = --[[ string ]],
+  updatedAt = --[[ string ]],
 })
 ```
 
@@ -250,21 +254,45 @@ local pilot_request = client:PilotRequest(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `acceptance_sample` | `string` | No |  |
-| `call_site` | `string` | No |  |
-| `current_contract` | `string` | No |  |
+| `acceptanceSample` | `string` | No |  |
+| `callSite` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentContract` | `string` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
+| `id` | `number` | Yes |  |
 | `language` | `string` | No |  |
-| `notice` | `string` | Yes |  |
 | `provider` | `string` | No |  |
-| `reply_consent` | `boolean` | Yes |  |
-| `repository_authority` | `boolean` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `table` | Yes |  |
-| `required_behavior` | `string` | No |  |
-| `safety_acknowledged` | `boolean` | Yes |  |
-| `start_boundary_acknowledged` | `boolean` | Yes |  |
+| `replyConsent` | `boolean` | Yes |  |
+| `repositoryAuthority` | `boolean` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `requiredBehavior` | `string` | No |  |
+| `safetyAcknowledged` | `boolean` | Yes |  |
+| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `acceptanceSample` | - |
+| `callSite` | Yes |
+| `createdAt` | - |
+| `currentContract` | - |
+| `email` | - |
+| `expectedRenders` | - |
+| `id` | - |
+| `language` | - |
+| `provider` | - |
+| `replyConsent` | - |
+| `repositoryAuthority` | - |
+| `repositoryUrl` | - |
+| `requiredBehavior` | - |
+| `safetyAcknowledged` | - |
+| `startBoundaryAcknowledged` | - |
+| `status` | - |
+| `updatedAt` | - |
 
 ### Operations
 
@@ -274,14 +302,17 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:PilotRequest():create({
+  callSite = --[[ string ]],
+  createdAt = --[[ string ]],
   email = --[[ string ]],
-  notice = --[[ string ]],
-  reply_consent = --[[ boolean ]],
-  repository_authority = --[[ boolean ]],
-  repository_url = --[[ string ]],
-  request = --[[ table ]],
-  safety_acknowledged = --[[ boolean ]],
-  start_boundary_acknowledged = --[[ boolean ]],
+  id = --[[ number ]],
+  replyConsent = --[[ boolean ]],
+  repositoryAuthority = --[[ boolean ]],
+  repositoryUrl = --[[ string ]],
+  safetyAcknowledged = --[[ boolean ]],
+  startBoundaryAcknowledged = --[[ boolean ]],
+  status = --[[ string ]],
+  updatedAt = --[[ string ]],
 })
 ```
 
@@ -325,26 +356,26 @@ local render = client:Render(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `block_ad` | `boolean` | No |  |
-| `block_chat` | `boolean` | No |  |
-| `block_tracker` | `boolean` | No |  |
-| `dark_mode` | `boolean` | No |  |
+| `blockAds` | `boolean` | No |  |
+| `blockChats` | `boolean` | No |  |
+| `blockTrackers` | `boolean` | No |  |
+| `darkMode` | `boolean` | No |  |
 | `delay` | `number` | No |  |
 | `format` | `string` | No |  |
-| `full_page` | `boolean` | No |  |
+| `fullPage` | `boolean` | No |  |
 | `height` | `number` | No |  |
-| `hide_cookie_banner` | `boolean` | No |  |
-| `hide_popup` | `boolean` | No |  |
+| `hideCookieBanners` | `boolean` | No |  |
+| `hidePopups` | `boolean` | No |  |
 | `kind` | `string` | No |  |
 | `landscape` | `boolean` | No |  |
 | `paper` | `string` | No |  |
 | `quality` | `number` | No |  |
-| `reduced_motion` | `boolean` | No |  |
+| `reducedMotion` | `boolean` | No |  |
 | `scale` | `number` | No |  |
-| `scroll_page` | `boolean` | No |  |
+| `scrollPage` | `boolean` | No |  |
 | `timeout` | `number` | No |  |
 | `url` | `string` | Yes |  |
-| `wait_until` | `string` | No |  |
+| `waitUntil` | `string` | No |  |
 | `width` | `number` | No |  |
 
 ### Operations
@@ -445,21 +476,23 @@ local safety_review_request = client:SafetyReviewRequest(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_control` | `string` | Yes |  |
-| `desired_outcome` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentControls` | `string` | Yes |  |
+| `desiredOutcome` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
+| `id` | `number` | Yes |  |
 | `language` | `string` | Yes |  |
-| `notice` | `string` | Yes |  |
-| `primary_concern` | `string` | Yes |  |
-| `reply_consent` | `boolean` | Yes |  |
-| `repository_authority` | `boolean` | Yes |  |
-| `repository_url` | `string` | Yes |  |
-| `request` | `table` | Yes |  |
-| `route_path` | `string` | Yes |  |
+| `primaryConcern` | `string` | Yes |  |
+| `replyConsent` | `boolean` | Yes |  |
+| `repositoryAuthority` | `boolean` | Yes |  |
+| `repositoryUrl` | `string` | Yes |  |
+| `routePath` | `string` | Yes |  |
 | `runtime` | `string` | Yes |  |
-| `safety_acknowledged` | `boolean` | Yes |  |
-| `start_boundary_acknowledged` | `boolean` | Yes |  |
-| `test_evidence` | `string` | Yes |  |
+| `safetyAcknowledged` | `boolean` | Yes |  |
+| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
+| `testEvidence` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -469,21 +502,23 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:SafetyReviewRequest():create({
-  current_control = --[[ string ]],
-  desired_outcome = --[[ string ]],
+  createdAt = --[[ string ]],
+  currentControls = --[[ string ]],
+  desiredOutcome = --[[ string ]],
   email = --[[ string ]],
+  id = --[[ number ]],
   language = --[[ string ]],
-  notice = --[[ string ]],
-  primary_concern = --[[ string ]],
-  reply_consent = --[[ boolean ]],
-  repository_authority = --[[ boolean ]],
-  repository_url = --[[ string ]],
-  request = --[[ table ]],
-  route_path = --[[ string ]],
+  primaryConcern = --[[ string ]],
+  replyConsent = --[[ boolean ]],
+  repositoryAuthority = --[[ boolean ]],
+  repositoryUrl = --[[ string ]],
+  routePath = --[[ string ]],
   runtime = --[[ string ]],
-  safety_acknowledged = --[[ boolean ]],
-  start_boundary_acknowledged = --[[ boolean ]],
-  test_evidence = --[[ string ]],
+  safetyAcknowledged = --[[ boolean ]],
+  startBoundaryAcknowledged = --[[ boolean ]],
+  status = --[[ string ]],
+  testEvidence = --[[ string ]],
+  updatedAt = --[[ string ]],
 })
 ```
 
@@ -529,9 +564,9 @@ local trial = client:Trial(nil)
 | --- | --- | --- | --- |
 | `consent` | `boolean` | No |  |
 | `email` | `string` | Yes |  |
-| `expected_render` | `string` | No |  |
+| `expectedRenders` | `string` | No |  |
 | `name` | `string` | No |  |
-| `use_case` | `string` | No |  |
+| `useCase` | `string` | No |  |
 
 ### Operations
 
@@ -586,10 +621,13 @@ local upgrade = client:Upgrade(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `consent` | `boolean` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `currentPlan` | `string` | Yes |  |
+| `id` | `number` | Yes |  |
 | `note` | `string` | No |  |
-| `notice` | `string` | Yes |  |
-| `request` | `table` | Yes |  |
-| `requested_plan` | `string` | Yes |  |
+| `requestedPlan` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 
 ### Operations
 
@@ -600,9 +638,12 @@ Create a new entity with the given data.
 ```lua
 local result, err = client:Upgrade():create({
   consent = --[[ boolean ]],
-  notice = --[[ string ]],
-  request = --[[ table ]],
-  requested_plan = --[[ string ]],
+  createdAt = --[[ string ]],
+  currentPlan = --[[ string ]],
+  id = --[[ number ]],
+  requestedPlan = --[[ string ]],
+  status = --[[ string ]],
+  updatedAt = --[[ string ]],
 })
 ```
 
@@ -647,8 +688,8 @@ local usage = client:Usage(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `customer` | `table` | Yes |  |
-| `link` | `table` | Yes |  |
-| `upgrade_request` | `any` | Yes |  |
+| `links` | `table` | Yes |  |
+| `upgradeRequest` | `any` | Yes |  |
 | `usage` | `table` | Yes |  |
 
 ### Operations

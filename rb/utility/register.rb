@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ LatchshotScreenshotUtility.registrar = ->(u) {
   u.prepare_params = LatchshotScreenshotUtilities::PrepareParams
   u.prepare_path = LatchshotScreenshotUtilities::PreparePath
   u.prepare_query = LatchshotScreenshotUtilities::PrepareQuery
+  u.graphql_body = LatchshotScreenshotUtilities::GraphqlBody
+  u.graphql_errors = LatchshotScreenshotUtilities::GraphqlErrors
   u.result_basic = LatchshotScreenshotUtilities::ResultBasic
   u.result_body = LatchshotScreenshotUtilities::ResultBody
   u.result_headers = LatchshotScreenshotUtilities::ResultHeaders

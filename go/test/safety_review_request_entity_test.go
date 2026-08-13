@@ -44,7 +44,7 @@ func TestSafetyReviewRequestEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set LATCHSHOTSCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set LATCHSHOT_SCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -58,9 +58,12 @@ func TestSafetyReviewRequestEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		safetyReviewRequestRef01Data = core.ToMapAny(safetyReviewRequestRef01DataResult)
+		safetyReviewRequestRef01Data = core.ToMapAny(entityData(safetyReviewRequestRef01DataResult))
 		if safetyReviewRequestRef01Data == nil {
 			t.Fatal("expected create result to be a map")
+		}
+		if safetyReviewRequestRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
 		}
 
 	})
@@ -103,38 +106,38 @@ func safety_review_requestBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("LATCHSHOTSCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID")
+	entidEnvRaw := os.Getenv("LATCHSHOT_SCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"LATCHSHOTSCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID": idmap,
-		"LATCHSHOTSCREENSHOT_TEST_LIVE":      "FALSE",
-		"LATCHSHOTSCREENSHOT_TEST_EXPLAIN":   "FALSE",
-		"LATCHSHOTSCREENSHOT_APIKEY":         "NONE",
+		"LATCHSHOT_SCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID": idmap,
+		"LATCHSHOT_SCREENSHOT_TEST_LIVE":      "FALSE",
+		"LATCHSHOT_SCREENSHOT_TEST_EXPLAIN":   "FALSE",
+		"LATCHSHOT_SCREENSHOT_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["LATCHSHOTSCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID"])
+	idmapResolved := core.ToMapAny(env["LATCHSHOT_SCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["LATCHSHOTSCREENSHOT_TEST_LIVE"] == "TRUE" {
+	if env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["LATCHSHOTSCREENSHOT_APIKEY"],
+				"apikey": env["LATCHSHOT_SCREENSHOT_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewLatchshotScreenshotSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["LATCHSHOTSCREENSHOT_TEST_LIVE"] == "TRUE"
+	live := env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["LATCHSHOTSCREENSHOT_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["LATCHSHOT_SCREENSHOT_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

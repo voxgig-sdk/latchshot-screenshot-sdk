@@ -3,27 +3,33 @@
     "upgrade": {
       "UPGRADE00": {
         "consent": true,
-        "note": "s33",
-        "notice": "s34",
-        "request": {},
-        "requested_plan": "s36",
-        "id": "UPGRADE00"
+        "createdAt": "s51",
+        "currentPlan": "s52",
+        "id": "UPGRADE00",
+        "note": "s54",
+        "requestedPlan": "s55",
+        "status": "s56",
+        "updatedAt": "s57"
       },
       "UPGRADE01": {
         "consent": true,
-        "note": "s65",
-        "notice": "s66",
-        "request": {},
-        "requested_plan": "s68",
-        "id": "UPGRADE01"
+        "createdAt": "sa1",
+        "currentPlan": "sa2",
+        "id": "UPGRADE01",
+        "note": "sa4",
+        "requestedPlan": "sa5",
+        "status": "sa6",
+        "updatedAt": "sa7"
       },
       "UPGRADE02": {
         "consent": true,
-        "note": "s97",
-        "notice": "s98",
-        "request": {},
-        "requested_plan": "s9a",
-        "id": "UPGRADE02"
+        "createdAt": "sf1",
+        "currentPlan": "sf2",
+        "id": "UPGRADE02",
+        "note": "sf4",
+        "requestedPlan": "sf5",
+        "status": "sf6",
+        "updatedAt": "sf7"
       }
     }
   },
@@ -31,10 +37,12 @@
     "upgrade": {
       "upgrade_ref01": {
         "consent": true,
-        "note": "sc9",
-        "notice": "sca",
-        "request": {},
-        "requested_plan": "scc"
+        "createdAt": "s141",
+        "currentPlan": "s142",
+        "note": "s144",
+        "requestedPlan": "s145",
+        "status": "s146",
+        "updatedAt": "s147"
       }
     }
   }

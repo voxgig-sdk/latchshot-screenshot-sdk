@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "health": {
           "active": true,
@@ -27,21 +32,21 @@
           "fields": [
             {
               "active": true,
-              "name": "ok",
+              "name": "active",
               "req": true,
-              "type": "`$BOOLEAN`"
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "render",
+              "name": "concurrency",
               "req": true,
-              "type": "`$OBJECT`"
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "service",
+              "name": "pending",
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$INTEGER`"
             }
           ],
           "name": "health",
@@ -53,6 +58,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/healthz",
                   "parts": [
@@ -61,7 +67,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.render`"
                   }
                 }
               ]
@@ -79,8 +85,14 @@
           "fields": [
             {
               "active": true,
-              "name": "change_context",
+              "name": "changeContext",
               "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "createdAt",
+              "req": true,
               "type": "`$STRING`"
             },
             {
@@ -91,59 +103,69 @@
             },
             {
               "active": true,
-              "name": "monitoring_goal",
+              "name": "id",
+              "req": true,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "monitoringGoal",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "notice",
+              "name": "pageCount",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "page_count",
+              "name": "pageUrl",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "page_url",
+              "name": "publicPageAuthority",
+              "req": true,
+              "type": "`$BOOLEAN`"
+            },
+            {
+              "active": true,
+              "name": "replyConsent",
+              "req": true,
+              "type": "`$BOOLEAN`"
+            },
+            {
+              "active": true,
+              "name": "safetyAcknowledged",
+              "req": true,
+              "type": "`$BOOLEAN`"
+            },
+            {
+              "active": true,
+              "name": "startBoundaryAcknowledged",
+              "req": true,
+              "type": "`$BOOLEAN`"
+            },
+            {
+              "active": true,
+              "name": "status",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "public_page_authority",
+              "name": "updatedAt",
               "req": true,
-              "type": "`$BOOLEAN`"
-            },
-            {
-              "active": true,
-              "name": "reply_consent",
-              "req": true,
-              "type": "`$BOOLEAN`"
-            },
-            {
-              "active": true,
-              "name": "request",
-              "req": true,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
-              "name": "safety_acknowledged",
-              "req": true,
-              "type": "`$BOOLEAN`"
-            },
-            {
-              "active": true,
-              "name": "start_boundary_acknowledged",
-              "req": true,
-              "type": "`$BOOLEAN`"
+              "type": "`$STRING`"
             }
           ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "monitoring_request",
           "op": {
             "create": {
@@ -153,6 +175,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/api/monitoring-requests",
                   "parts": [
@@ -162,7 +185,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.request`"
                   }
                 }
               ]
@@ -180,19 +203,31 @@
           "fields": [
             {
               "active": true,
-              "name": "acceptance_sample",
+              "name": "acceptanceSample",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "call_site",
-              "req": false,
+              "name": "callSite",
+              "op": {
+                "create": {
+                  "req": false,
+                  "type": "`$STRING`"
+                }
+              },
+              "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "current_contract",
+              "name": "createdAt",
+              "req": true,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "currentContract",
               "req": false,
               "type": "`$STRING`"
             },
@@ -204,20 +239,20 @@
             },
             {
               "active": true,
-              "name": "expected_render",
+              "name": "expectedRenders",
               "req": false,
               "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "id",
+              "req": true,
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "language",
               "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "notice",
-              "req": true,
               "type": "`$STRING`"
             },
             {
@@ -228,47 +263,57 @@
             },
             {
               "active": true,
-              "name": "reply_consent",
+              "name": "replyConsent",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "repository_authority",
+              "name": "repositoryAuthority",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "repository_url",
+              "name": "repositoryUrl",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "request",
-              "req": true,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
-              "name": "required_behavior",
+              "name": "requiredBehavior",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "safety_acknowledged",
+              "name": "safetyAcknowledged",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "start_boundary_acknowledged",
+              "name": "startBoundaryAcknowledged",
               "req": true,
               "type": "`$BOOLEAN`"
+            },
+            {
+              "active": true,
+              "name": "status",
+              "req": true,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "updatedAt",
+              "req": true,
+              "type": "`$STRING`"
             }
           ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "pilot_request",
           "op": {
             "create": {
@@ -278,6 +323,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/api/pilot-requests",
                   "parts": [
@@ -287,7 +333,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.request`"
                   }
                 }
               ]
@@ -305,25 +351,25 @@
           "fields": [
             {
               "active": true,
-              "name": "block_ad",
+              "name": "blockAds",
               "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "block_chat",
+              "name": "blockChats",
               "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "block_tracker",
+              "name": "blockTrackers",
               "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "dark_mode",
+              "name": "darkMode",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -341,7 +387,7 @@
             },
             {
               "active": true,
-              "name": "full_page",
+              "name": "fullPage",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -353,13 +399,13 @@
             },
             {
               "active": true,
-              "name": "hide_cookie_banner",
+              "name": "hideCookieBanners",
               "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "hide_popup",
+              "name": "hidePopups",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -389,7 +435,7 @@
             },
             {
               "active": true,
-              "name": "reduced_motion",
+              "name": "reducedMotion",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -401,7 +447,7 @@
             },
             {
               "active": true,
-              "name": "scroll_page",
+              "name": "scrollPage",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -419,7 +465,7 @@
             },
             {
               "active": true,
-              "name": "wait_until",
+              "name": "waitUntil",
               "req": false,
               "type": "`$STRING`"
             },
@@ -439,6 +485,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/render",
                   "parts": [
@@ -593,6 +640,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/screenshot",
                   "parts": [
@@ -636,13 +684,19 @@
           "fields": [
             {
               "active": true,
-              "name": "current_control",
+              "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "desired_outcome",
+              "name": "currentControls",
+              "req": true,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "desiredOutcome",
               "req": true,
               "type": "`$STRING`"
             },
@@ -654,49 +708,43 @@
             },
             {
               "active": true,
+              "name": "id",
+              "req": true,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
               "name": "language",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "notice",
+              "name": "primaryConcern",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "primary_concern",
-              "req": true,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "reply_consent",
+              "name": "replyConsent",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "repository_authority",
+              "name": "repositoryAuthority",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "repository_url",
+              "name": "repositoryUrl",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "request",
-              "req": true,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
-              "name": "route_path",
+              "name": "routePath",
               "req": true,
               "type": "`$STRING`"
             },
@@ -708,23 +756,39 @@
             },
             {
               "active": true,
-              "name": "safety_acknowledged",
+              "name": "safetyAcknowledged",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "start_boundary_acknowledged",
+              "name": "startBoundaryAcknowledged",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "test_evidence",
+              "name": "status",
+              "req": true,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "testEvidence",
+              "req": true,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
             }
           ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "safety_review_request",
           "op": {
             "create": {
@@ -734,6 +798,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/api/safety-review-requests",
                   "parts": [
@@ -743,7 +808,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.request`"
                   }
                 }
               ]
@@ -773,7 +838,7 @@
             },
             {
               "active": true,
-              "name": "expected_render",
+              "name": "expectedRenders",
               "req": false,
               "type": "`$STRING`"
             },
@@ -785,7 +850,7 @@
             },
             {
               "active": true,
-              "name": "use_case",
+              "name": "useCase",
               "req": false,
               "type": "`$STRING`"
             }
@@ -799,6 +864,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/api/trials",
                   "parts": [
@@ -832,29 +898,51 @@
             },
             {
               "active": true,
+              "name": "createdAt",
+              "req": true,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "currentPlan",
+              "req": true,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "id",
+              "req": true,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
               "name": "note",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "notice",
+              "name": "requestedPlan",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "request",
+              "name": "status",
               "req": true,
-              "type": "`$OBJECT`"
+              "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "requested_plan",
+              "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
             }
           ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "upgrade",
           "op": {
             "create": {
@@ -864,6 +952,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/upgrade-requests",
                   "parts": [
@@ -873,7 +962,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.request`"
                   }
                 }
               ]
@@ -897,13 +986,13 @@
             },
             {
               "active": true,
-              "name": "link",
+              "name": "links",
               "req": true,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "upgrade_request",
+              "name": "upgradeRequest",
               "req": true,
               "type": "`$ANY`"
             },
@@ -923,6 +1012,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/usage",
                   "parts": [
@@ -1279,18 +1369,41 @@
         "website": "https://latchshot.fly.dev/docs.md"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1312,22 +1425,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1366,21 +1497,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1419,12 +1568,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -1436,10 +1590,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1461,22 +1628,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1498,13 +1683,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1516,10 +1706,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1541,13 +1744,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1564,10 +1772,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1589,13 +1810,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -1618,10 +1844,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "latchshot-screenshot"
+            "goversion": "",
+            "name": "latchshot-screenshot",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1643,9 +1882,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

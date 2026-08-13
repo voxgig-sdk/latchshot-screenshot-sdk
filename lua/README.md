@@ -238,9 +238,9 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `ok` |  |
-| `render` |  |
-| `service` |  |
+| `active` |  |
+| `concurrency` |  |
+| `pending` |  |
 
 Operations: Load.
 
@@ -250,17 +250,19 @@ API path: `/healthz`
 
 | Field | Description |
 | --- | --- |
-| `change_context` |  |
+| `changeContext` |  |
+| `createdAt` |  |
 | `email` |  |
-| `monitoring_goal` |  |
-| `notice` |  |
-| `page_count` |  |
-| `page_url` |  |
-| `public_page_authority` |  |
-| `reply_consent` |  |
-| `request` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `id` |  |
+| `monitoringGoal` |  |
+| `pageCount` |  |
+| `pageUrl` |  |
+| `publicPageAuthority` |  |
+| `replyConsent` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -270,21 +272,23 @@ API path: `/api/monitoring-requests`
 
 | Field | Description |
 | --- | --- |
-| `acceptance_sample` |  |
-| `call_site` |  |
-| `current_contract` |  |
+| `acceptanceSample` |  |
+| `callSite` |  |
+| `createdAt` |  |
+| `currentContract` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
 | `provider` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `required_behavior` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `requiredBehavior` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -294,26 +298,26 @@ API path: `/api/pilot-requests`
 
 | Field | Description |
 | --- | --- |
-| `block_ad` |  |
-| `block_chat` |  |
-| `block_tracker` |  |
-| `dark_mode` |  |
+| `blockAds` |  |
+| `blockChats` |  |
+| `blockTrackers` |  |
+| `darkMode` |  |
 | `delay` |  |
 | `format` |  |
-| `full_page` |  |
+| `fullPage` |  |
 | `height` |  |
-| `hide_cookie_banner` |  |
-| `hide_popup` |  |
+| `hideCookieBanners` |  |
+| `hidePopups` |  |
 | `kind` |  |
 | `landscape` |  |
 | `paper` |  |
 | `quality` |  |
-| `reduced_motion` |  |
+| `reducedMotion` |  |
 | `scale` |  |
-| `scroll_page` |  |
+| `scrollPage` |  |
 | `timeout` |  |
 | `url` |  |
-| `wait_until` |  |
+| `waitUntil` |  |
 | `width` |  |
 
 Operations: Create.
@@ -333,21 +337,23 @@ API path: `/v1/screenshot`
 
 | Field | Description |
 | --- | --- |
-| `current_control` |  |
-| `desired_outcome` |  |
+| `createdAt` |  |
+| `currentControls` |  |
+| `desiredOutcome` |  |
 | `email` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
-| `primary_concern` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `route_path` |  |
+| `primaryConcern` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `routePath` |  |
 | `runtime` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
-| `test_evidence` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `testEvidence` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -359,9 +365,9 @@ API path: `/api/safety-review-requests`
 | --- | --- |
 | `consent` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
 | `name` |  |
-| `use_case` |  |
+| `useCase` |  |
 
 Operations: Create.
 
@@ -372,10 +378,13 @@ API path: `/api/trials`
 | Field | Description |
 | --- | --- |
 | `consent` |  |
+| `createdAt` |  |
+| `currentPlan` |  |
+| `id` |  |
 | `note` |  |
-| `notice` |  |
-| `request` |  |
-| `requested_plan` |  |
+| `requestedPlan` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -386,8 +395,8 @@ API path: `/v1/upgrade-requests`
 | Field | Description |
 | --- | --- |
 | `customer` |  |
-| `link` |  |
-| `upgrade_request` |  |
+| `links` |  |
+| `upgradeRequest` |  |
 | `usage` |  |
 
 Operations: Load.
@@ -413,9 +422,9 @@ Create an instance: `local health = client:Health(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ok` | `boolean` |  |
-| `render` | `table` |  |
-| `service` | `string` |  |
+| `active` | `number` |  |
+| `concurrency` | `number` |  |
+| `pending` | `number` |  |
 
 #### Example: Load
 
@@ -438,32 +447,36 @@ Create an instance: `local monitoring_request = client:MonitoringRequest(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `change_context` | `string` |  |
+| `changeContext` | `string` |  |
+| `createdAt` | `string` |  |
 | `email` | `string` |  |
-| `monitoring_goal` | `string` |  |
-| `notice` | `string` |  |
-| `page_count` | `string` |  |
-| `page_url` | `string` |  |
-| `public_page_authority` | `boolean` |  |
-| `reply_consent` | `boolean` |  |
-| `request` | `table` |  |
-| `safety_acknowledged` | `boolean` |  |
-| `start_boundary_acknowledged` | `boolean` |  |
+| `id` | `number` |  |
+| `monitoringGoal` | `string` |  |
+| `pageCount` | `string` |  |
+| `pageUrl` | `string` |  |
+| `publicPageAuthority` | `boolean` |  |
+| `replyConsent` | `boolean` |  |
+| `safetyAcknowledged` | `boolean` |  |
+| `startBoundaryAcknowledged` | `boolean` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local monitoring_request, err = client:MonitoringRequest():create({
+  createdAt = "example_createdAt", -- string
   email = "example_email", -- string
-  monitoring_goal = "example_monitoring_goal", -- string
-  notice = "example_notice", -- string
-  page_count = "example_page_count", -- string
-  page_url = "example_page_url", -- string
-  public_page_authority = true, -- boolean
-  reply_consent = true, -- boolean
-  request = {}, -- table
-  safety_acknowledged = true, -- boolean
-  start_boundary_acknowledged = true, -- boolean
+  id = 1, -- number
+  monitoringGoal = "example_monitoringGoal", -- string
+  pageCount = "example_pageCount", -- string
+  pageUrl = "example_pageUrl", -- string
+  publicPageAuthority = true, -- boolean
+  replyConsent = true, -- boolean
+  safetyAcknowledged = true, -- boolean
+  startBoundaryAcknowledged = true, -- boolean
+  status = "example_status", -- string
+  updatedAt = "example_updatedAt", -- string
 })
 ```
 
@@ -482,34 +495,39 @@ Create an instance: `local pilot_request = client:PilotRequest(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `acceptance_sample` | `string` |  |
-| `call_site` | `string` |  |
-| `current_contract` | `string` |  |
+| `acceptanceSample` | `string` |  |
+| `callSite` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentContract` | `string` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
+| `id` | `number` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
 | `provider` | `string` |  |
-| `reply_consent` | `boolean` |  |
-| `repository_authority` | `boolean` |  |
-| `repository_url` | `string` |  |
-| `request` | `table` |  |
-| `required_behavior` | `string` |  |
-| `safety_acknowledged` | `boolean` |  |
-| `start_boundary_acknowledged` | `boolean` |  |
+| `replyConsent` | `boolean` |  |
+| `repositoryAuthority` | `boolean` |  |
+| `repositoryUrl` | `string` |  |
+| `requiredBehavior` | `string` |  |
+| `safetyAcknowledged` | `boolean` |  |
+| `startBoundaryAcknowledged` | `boolean` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local pilot_request, err = client:PilotRequest():create({
+  callSite = "example_callSite", -- string
+  createdAt = "example_createdAt", -- string
   email = "example_email", -- string
-  notice = "example_notice", -- string
-  reply_consent = true, -- boolean
-  repository_authority = true, -- boolean
-  repository_url = "example_repository_url", -- string
-  request = {}, -- table
-  safety_acknowledged = true, -- boolean
-  start_boundary_acknowledged = true, -- boolean
+  id = 1, -- number
+  replyConsent = true, -- boolean
+  repositoryAuthority = true, -- boolean
+  repositoryUrl = "example_repositoryUrl", -- string
+  safetyAcknowledged = true, -- boolean
+  startBoundaryAcknowledged = true, -- boolean
+  status = "example_status", -- string
+  updatedAt = "example_updatedAt", -- string
 })
 ```
 
@@ -528,26 +546,26 @@ Create an instance: `local render = client:Render(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `block_ad` | `boolean` |  |
-| `block_chat` | `boolean` |  |
-| `block_tracker` | `boolean` |  |
-| `dark_mode` | `boolean` |  |
+| `blockAds` | `boolean` |  |
+| `blockChats` | `boolean` |  |
+| `blockTrackers` | `boolean` |  |
+| `darkMode` | `boolean` |  |
 | `delay` | `number` |  |
 | `format` | `string` |  |
-| `full_page` | `boolean` |  |
+| `fullPage` | `boolean` |  |
 | `height` | `number` |  |
-| `hide_cookie_banner` | `boolean` |  |
-| `hide_popup` | `boolean` |  |
+| `hideCookieBanners` | `boolean` |  |
+| `hidePopups` | `boolean` |  |
 | `kind` | `string` |  |
 | `landscape` | `boolean` |  |
 | `paper` | `string` |  |
 | `quality` | `number` |  |
-| `reduced_motion` | `boolean` |  |
+| `reducedMotion` | `boolean` |  |
 | `scale` | `number` |  |
-| `scroll_page` | `boolean` |  |
+| `scrollPage` | `boolean` |  |
 | `timeout` | `number` |  |
 | `url` | `string` |  |
-| `wait_until` | `string` |  |
+| `waitUntil` | `string` |  |
 | `width` | `number` |  |
 
 #### Example: Create
@@ -590,41 +608,45 @@ Create an instance: `local safety_review_request = client:SafetyReviewRequest(ni
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_control` | `string` |  |
-| `desired_outcome` | `string` |  |
+| `createdAt` | `string` |  |
+| `currentControls` | `string` |  |
+| `desiredOutcome` | `string` |  |
 | `email` | `string` |  |
+| `id` | `number` |  |
 | `language` | `string` |  |
-| `notice` | `string` |  |
-| `primary_concern` | `string` |  |
-| `reply_consent` | `boolean` |  |
-| `repository_authority` | `boolean` |  |
-| `repository_url` | `string` |  |
-| `request` | `table` |  |
-| `route_path` | `string` |  |
+| `primaryConcern` | `string` |  |
+| `replyConsent` | `boolean` |  |
+| `repositoryAuthority` | `boolean` |  |
+| `repositoryUrl` | `string` |  |
+| `routePath` | `string` |  |
 | `runtime` | `string` |  |
-| `safety_acknowledged` | `boolean` |  |
-| `start_boundary_acknowledged` | `boolean` |  |
-| `test_evidence` | `string` |  |
+| `safetyAcknowledged` | `boolean` |  |
+| `startBoundaryAcknowledged` | `boolean` |  |
+| `status` | `string` |  |
+| `testEvidence` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local safety_review_request, err = client:SafetyReviewRequest():create({
-  current_control = "example_current_control", -- string
-  desired_outcome = "example_desired_outcome", -- string
+  createdAt = "example_createdAt", -- string
+  currentControls = "example_currentControls", -- string
+  desiredOutcome = "example_desiredOutcome", -- string
   email = "example_email", -- string
+  id = 1, -- number
   language = "example_language", -- string
-  notice = "example_notice", -- string
-  primary_concern = "example_primary_concern", -- string
-  reply_consent = true, -- boolean
-  repository_authority = true, -- boolean
-  repository_url = "example_repository_url", -- string
-  request = {}, -- table
-  route_path = "example_route_path", -- string
+  primaryConcern = "example_primaryConcern", -- string
+  replyConsent = true, -- boolean
+  repositoryAuthority = true, -- boolean
+  repositoryUrl = "example_repositoryUrl", -- string
+  routePath = "example_routePath", -- string
   runtime = "example_runtime", -- string
-  safety_acknowledged = true, -- boolean
-  start_boundary_acknowledged = true, -- boolean
-  test_evidence = "example_test_evidence", -- string
+  safetyAcknowledged = true, -- boolean
+  startBoundaryAcknowledged = true, -- boolean
+  status = "example_status", -- string
+  testEvidence = "example_testEvidence", -- string
+  updatedAt = "example_updatedAt", -- string
 })
 ```
 
@@ -645,9 +667,9 @@ Create an instance: `local trial = client:Trial(nil)`
 | --- | --- | --- |
 | `consent` | `boolean` |  |
 | `email` | `string` |  |
-| `expected_render` | `string` |  |
+| `expectedRenders` | `string` |  |
 | `name` | `string` |  |
-| `use_case` | `string` |  |
+| `useCase` | `string` |  |
 
 #### Example: Create
 
@@ -673,19 +695,25 @@ Create an instance: `local upgrade = client:Upgrade(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `consent` | `boolean` |  |
+| `createdAt` | `string` |  |
+| `currentPlan` | `string` |  |
+| `id` | `number` |  |
 | `note` | `string` |  |
-| `notice` | `string` |  |
-| `request` | `table` |  |
-| `requested_plan` | `string` |  |
+| `requestedPlan` | `string` |  |
+| `status` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local upgrade, err = client:Upgrade():create({
   consent = true, -- boolean
-  notice = "example_notice", -- string
-  request = {}, -- table
-  requested_plan = "example_requested_plan", -- string
+  createdAt = "example_createdAt", -- string
+  currentPlan = "example_currentPlan", -- string
+  id = 1, -- number
+  requestedPlan = "example_requestedPlan", -- string
+  status = "example_status", -- string
+  updatedAt = "example_updatedAt", -- string
 })
 ```
 
@@ -705,8 +733,8 @@ Create an instance: `local usage = client:Usage(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `customer` | `table` |  |
-| `link` | `table` |  |
-| `upgrade_request` | `any` |  |
+| `links` | `table` |  |
+| `upgradeRequest` | `any` |  |
 | `usage` | `table` |  |
 
 #### Example: Load

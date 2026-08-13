@@ -26,8 +26,8 @@ import {
 describe('UpgradeEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LATCHSHOTSCREENSHOT_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LATCHSHOTSCREENSHOT_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LATCHSHOT_SCREENSHOT_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LATCHSHOT_SCREENSHOT_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = LatchshotScreenshotSDK.test()
@@ -62,8 +62,8 @@ describe('UpgradeEntity', async () => {
     const upgrade_ref01_ent = client.Upgrade()
     let upgrade_ref01_data = setup.data.new.upgrade['upgrade_ref01']
 
-    upgrade_ref01_data = await upgrade_ref01_ent.create(upgrade_ref01_data)
-    assert(null != upgrade_ref01_data)
+    upgrade_ref01_data = (await upgrade_ref01_ent.create(upgrade_ref01_data)).data()
+    assert(null != upgrade_ref01_data.id)
 
 
   })

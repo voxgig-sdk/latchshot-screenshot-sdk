@@ -10,278 +10,310 @@
 
 # Health entity data model.
 #
-# @!attribute [rw] ok
-#   @return [Boolean]
+# @!attribute [rw] active
+#   @return [Integer]
 #
-# @!attribute [rw] render
-#   @return [Hash]
+# @!attribute [rw] concurrency
+#   @return [Integer]
 #
-# @!attribute [rw] service
-#   @return [String]
+# @!attribute [rw] pending
+#   @return [Integer]
 Health = Struct.new(
-  :ok,
-  :render,
-  :service,
+  :active,
+  :concurrency,
+  :pending,
   keyword_init: true
 )
 
 # Request payload for Health#load.
 #
-# @!attribute [rw] ok
-#   @return [Boolean, nil]
+# @!attribute [rw] active
+#   @return [Integer, nil]
 #
-# @!attribute [rw] render
-#   @return [Hash, nil]
+# @!attribute [rw] concurrency
+#   @return [Integer, nil]
 #
-# @!attribute [rw] service
-#   @return [String, nil]
+# @!attribute [rw] pending
+#   @return [Integer, nil]
 HealthLoadMatch = Struct.new(
-  :ok,
-  :render,
-  :service,
+  :active,
+  :concurrency,
+  :pending,
   keyword_init: true
 )
 
 # MonitoringRequest entity data model.
 #
-# @!attribute [rw] change_context
+# @!attribute [rw] changeContext
 #   @return [String, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] monitoring_goal
+# @!attribute [rw] id
+#   @return [Integer]
+#
+# @!attribute [rw] monitoringGoal
 #   @return [String]
 #
-# @!attribute [rw] notice
+# @!attribute [rw] pageCount
 #   @return [String]
 #
-# @!attribute [rw] page_count
+# @!attribute [rw] pageUrl
 #   @return [String]
 #
-# @!attribute [rw] page_url
+# @!attribute [rw] publicPageAuthority
+#   @return [Boolean]
+#
+# @!attribute [rw] replyConsent
+#   @return [Boolean]
+#
+# @!attribute [rw] safetyAcknowledged
+#   @return [Boolean]
+#
+# @!attribute [rw] startBoundaryAcknowledged
+#   @return [Boolean]
+#
+# @!attribute [rw] status
 #   @return [String]
 #
-# @!attribute [rw] public_page_authority
-#   @return [Boolean]
-#
-# @!attribute [rw] reply_consent
-#   @return [Boolean]
-#
-# @!attribute [rw] request
-#   @return [Hash]
-#
-# @!attribute [rw] safety_acknowledged
-#   @return [Boolean]
-#
-# @!attribute [rw] start_boundary_acknowledged
-#   @return [Boolean]
+# @!attribute [rw] updatedAt
+#   @return [String]
 MonitoringRequest = Struct.new(
-  :change_context,
+  :changeContext,
+  :createdAt,
   :email,
-  :monitoring_goal,
-  :notice,
-  :page_count,
-  :page_url,
-  :public_page_authority,
-  :reply_consent,
-  :request,
-  :safety_acknowledged,
-  :start_boundary_acknowledged,
+  :id,
+  :monitoringGoal,
+  :pageCount,
+  :pageUrl,
+  :publicPageAuthority,
+  :replyConsent,
+  :safetyAcknowledged,
+  :startBoundaryAcknowledged,
+  :status,
+  :updatedAt,
   keyword_init: true
 )
 
 # Request payload for MonitoringRequest#create.
 #
-# @!attribute [rw] change_context
+# @!attribute [rw] changeContext
 #   @return [String, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] monitoring_goal
+# @!attribute [rw] id
+#   @return [Integer]
+#
+# @!attribute [rw] monitoringGoal
 #   @return [String]
 #
-# @!attribute [rw] notice
+# @!attribute [rw] pageCount
 #   @return [String]
 #
-# @!attribute [rw] page_count
+# @!attribute [rw] pageUrl
 #   @return [String]
 #
-# @!attribute [rw] page_url
+# @!attribute [rw] publicPageAuthority
+#   @return [Boolean]
+#
+# @!attribute [rw] replyConsent
+#   @return [Boolean]
+#
+# @!attribute [rw] safetyAcknowledged
+#   @return [Boolean]
+#
+# @!attribute [rw] startBoundaryAcknowledged
+#   @return [Boolean]
+#
+# @!attribute [rw] status
 #   @return [String]
 #
-# @!attribute [rw] public_page_authority
-#   @return [Boolean]
-#
-# @!attribute [rw] reply_consent
-#   @return [Boolean]
-#
-# @!attribute [rw] request
-#   @return [Hash]
-#
-# @!attribute [rw] safety_acknowledged
-#   @return [Boolean]
-#
-# @!attribute [rw] start_boundary_acknowledged
-#   @return [Boolean]
+# @!attribute [rw] updatedAt
+#   @return [String]
 MonitoringRequestCreateData = Struct.new(
-  :change_context,
+  :changeContext,
+  :createdAt,
   :email,
-  :monitoring_goal,
-  :notice,
-  :page_count,
-  :page_url,
-  :public_page_authority,
-  :reply_consent,
-  :request,
-  :safety_acknowledged,
-  :start_boundary_acknowledged,
+  :id,
+  :monitoringGoal,
+  :pageCount,
+  :pageUrl,
+  :publicPageAuthority,
+  :replyConsent,
+  :safetyAcknowledged,
+  :startBoundaryAcknowledged,
+  :status,
+  :updatedAt,
   keyword_init: true
 )
 
 # PilotRequest entity data model.
 #
-# @!attribute [rw] acceptance_sample
+# @!attribute [rw] acceptanceSample
 #   @return [String, nil]
 #
-# @!attribute [rw] call_site
-#   @return [String, nil]
+# @!attribute [rw] callSite
+#   @return [String]
 #
-# @!attribute [rw] current_contract
+# @!attribute [rw] createdAt
+#   @return [String]
+#
+# @!attribute [rw] currentContract
 #   @return [String, nil]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] expected_render
+# @!attribute [rw] expectedRenders
 #   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer]
 #
 # @!attribute [rw] language
 #   @return [String, nil]
 #
-# @!attribute [rw] notice
-#   @return [String]
-#
 # @!attribute [rw] provider
 #   @return [String, nil]
 #
-# @!attribute [rw] reply_consent
+# @!attribute [rw] replyConsent
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_authority
+# @!attribute [rw] repositoryAuthority
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_url
+# @!attribute [rw] repositoryUrl
 #   @return [String]
 #
-# @!attribute [rw] request
-#   @return [Hash]
-#
-# @!attribute [rw] required_behavior
+# @!attribute [rw] requiredBehavior
 #   @return [String, nil]
 #
-# @!attribute [rw] safety_acknowledged
+# @!attribute [rw] safetyAcknowledged
 #   @return [Boolean]
 #
-# @!attribute [rw] start_boundary_acknowledged
+# @!attribute [rw] startBoundaryAcknowledged
 #   @return [Boolean]
+#
+# @!attribute [rw] status
+#   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 PilotRequest = Struct.new(
-  :acceptance_sample,
-  :call_site,
-  :current_contract,
+  :acceptanceSample,
+  :callSite,
+  :createdAt,
+  :currentContract,
   :email,
-  :expected_render,
+  :expectedRenders,
+  :id,
   :language,
-  :notice,
   :provider,
-  :reply_consent,
-  :repository_authority,
-  :repository_url,
-  :request,
-  :required_behavior,
-  :safety_acknowledged,
-  :start_boundary_acknowledged,
+  :replyConsent,
+  :repositoryAuthority,
+  :repositoryUrl,
+  :requiredBehavior,
+  :safetyAcknowledged,
+  :startBoundaryAcknowledged,
+  :status,
+  :updatedAt,
   keyword_init: true
 )
 
 # Request payload for PilotRequest#create.
 #
-# @!attribute [rw] acceptance_sample
+# @!attribute [rw] acceptanceSample
 #   @return [String, nil]
 #
-# @!attribute [rw] call_site
-#   @return [String, nil]
+# @!attribute [rw] callSite
+#   @return [String]
 #
-# @!attribute [rw] current_contract
+# @!attribute [rw] createdAt
+#   @return [String]
+#
+# @!attribute [rw] currentContract
 #   @return [String, nil]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] expected_render
+# @!attribute [rw] expectedRenders
 #   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer]
 #
 # @!attribute [rw] language
 #   @return [String, nil]
 #
-# @!attribute [rw] notice
-#   @return [String]
-#
 # @!attribute [rw] provider
 #   @return [String, nil]
 #
-# @!attribute [rw] reply_consent
+# @!attribute [rw] replyConsent
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_authority
+# @!attribute [rw] repositoryAuthority
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_url
+# @!attribute [rw] repositoryUrl
 #   @return [String]
 #
-# @!attribute [rw] request
-#   @return [Hash]
-#
-# @!attribute [rw] required_behavior
+# @!attribute [rw] requiredBehavior
 #   @return [String, nil]
 #
-# @!attribute [rw] safety_acknowledged
+# @!attribute [rw] safetyAcknowledged
 #   @return [Boolean]
 #
-# @!attribute [rw] start_boundary_acknowledged
+# @!attribute [rw] startBoundaryAcknowledged
 #   @return [Boolean]
+#
+# @!attribute [rw] status
+#   @return [String]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
 PilotRequestCreateData = Struct.new(
-  :acceptance_sample,
-  :call_site,
-  :current_contract,
+  :acceptanceSample,
+  :callSite,
+  :createdAt,
+  :currentContract,
   :email,
-  :expected_render,
+  :expectedRenders,
+  :id,
   :language,
-  :notice,
   :provider,
-  :reply_consent,
-  :repository_authority,
-  :repository_url,
-  :request,
-  :required_behavior,
-  :safety_acknowledged,
-  :start_boundary_acknowledged,
+  :replyConsent,
+  :repositoryAuthority,
+  :repositoryUrl,
+  :requiredBehavior,
+  :safetyAcknowledged,
+  :startBoundaryAcknowledged,
+  :status,
+  :updatedAt,
   keyword_init: true
 )
 
 # Render entity data model.
 #
-# @!attribute [rw] block_ad
+# @!attribute [rw] blockAds
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] block_chat
+# @!attribute [rw] blockChats
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] block_tracker
+# @!attribute [rw] blockTrackers
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] dark_mode
+# @!attribute [rw] darkMode
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] delay
@@ -290,16 +322,16 @@ PilotRequestCreateData = Struct.new(
 # @!attribute [rw] format
 #   @return [String, nil]
 #
-# @!attribute [rw] full_page
+# @!attribute [rw] fullPage
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] height
 #   @return [Integer, nil]
 #
-# @!attribute [rw] hide_cookie_banner
+# @!attribute [rw] hideCookieBanners
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] hide_popup
+# @!attribute [rw] hidePopups
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] kind
@@ -314,13 +346,13 @@ PilotRequestCreateData = Struct.new(
 # @!attribute [rw] quality
 #   @return [Integer, nil]
 #
-# @!attribute [rw] reduced_motion
+# @!attribute [rw] reducedMotion
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] scale
 #   @return [Integer, nil]
 #
-# @!attribute [rw] scroll_page
+# @!attribute [rw] scrollPage
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] timeout
@@ -329,48 +361,48 @@ PilotRequestCreateData = Struct.new(
 # @!attribute [rw] url
 #   @return [String]
 #
-# @!attribute [rw] wait_until
+# @!attribute [rw] waitUntil
 #   @return [String, nil]
 #
 # @!attribute [rw] width
 #   @return [Integer, nil]
 Render = Struct.new(
-  :block_ad,
-  :block_chat,
-  :block_tracker,
-  :dark_mode,
+  :blockAds,
+  :blockChats,
+  :blockTrackers,
+  :darkMode,
   :delay,
   :format,
-  :full_page,
+  :fullPage,
   :height,
-  :hide_cookie_banner,
-  :hide_popup,
+  :hideCookieBanners,
+  :hidePopups,
   :kind,
   :landscape,
   :paper,
   :quality,
-  :reduced_motion,
+  :reducedMotion,
   :scale,
-  :scroll_page,
+  :scrollPage,
   :timeout,
   :url,
-  :wait_until,
+  :waitUntil,
   :width,
   keyword_init: true
 )
 
 # Request payload for Render#create.
 #
-# @!attribute [rw] block_ad
+# @!attribute [rw] blockAds
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] block_chat
+# @!attribute [rw] blockChats
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] block_tracker
+# @!attribute [rw] blockTrackers
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] dark_mode
+# @!attribute [rw] darkMode
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] delay
@@ -379,16 +411,16 @@ Render = Struct.new(
 # @!attribute [rw] format
 #   @return [String, nil]
 #
-# @!attribute [rw] full_page
+# @!attribute [rw] fullPage
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] height
 #   @return [Integer, nil]
 #
-# @!attribute [rw] hide_cookie_banner
+# @!attribute [rw] hideCookieBanners
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] hide_popup
+# @!attribute [rw] hidePopups
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] kind
@@ -403,13 +435,13 @@ Render = Struct.new(
 # @!attribute [rw] quality
 #   @return [Integer, nil]
 #
-# @!attribute [rw] reduced_motion
+# @!attribute [rw] reducedMotion
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] scale
 #   @return [Integer, nil]
 #
-# @!attribute [rw] scroll_page
+# @!attribute [rw] scrollPage
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] timeout
@@ -418,32 +450,32 @@ Render = Struct.new(
 # @!attribute [rw] url
 #   @return [String]
 #
-# @!attribute [rw] wait_until
+# @!attribute [rw] waitUntil
 #   @return [String, nil]
 #
 # @!attribute [rw] width
 #   @return [Integer, nil]
 RenderCreateData = Struct.new(
-  :block_ad,
-  :block_chat,
-  :block_tracker,
-  :dark_mode,
+  :blockAds,
+  :blockChats,
+  :blockTrackers,
+  :darkMode,
   :delay,
   :format,
-  :full_page,
+  :fullPage,
   :height,
-  :hide_cookie_banner,
-  :hide_popup,
+  :hideCookieBanners,
+  :hidePopups,
   :kind,
   :landscape,
   :paper,
   :quality,
-  :reduced_motion,
+  :reducedMotion,
   :scale,
-  :scroll_page,
+  :scrollPage,
   :timeout,
   :url,
-  :wait_until,
+  :waitUntil,
   :width,
   keyword_init: true
 )
@@ -458,131 +490,147 @@ end
 
 # SafetyReviewRequest entity data model.
 #
-# @!attribute [rw] current_control
+# @!attribute [rw] createdAt
 #   @return [String]
 #
-# @!attribute [rw] desired_outcome
+# @!attribute [rw] currentControls
+#   @return [String]
+#
+# @!attribute [rw] desiredOutcome
 #   @return [String]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
+# @!attribute [rw] id
+#   @return [Integer]
+#
 # @!attribute [rw] language
 #   @return [String]
 #
-# @!attribute [rw] notice
+# @!attribute [rw] primaryConcern
 #   @return [String]
 #
-# @!attribute [rw] primary_concern
-#   @return [String]
-#
-# @!attribute [rw] reply_consent
+# @!attribute [rw] replyConsent
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_authority
+# @!attribute [rw] repositoryAuthority
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_url
+# @!attribute [rw] repositoryUrl
 #   @return [String]
 #
-# @!attribute [rw] request
-#   @return [Hash]
-#
-# @!attribute [rw] route_path
+# @!attribute [rw] routePath
 #   @return [String]
 #
 # @!attribute [rw] runtime
 #   @return [String]
 #
-# @!attribute [rw] safety_acknowledged
+# @!attribute [rw] safetyAcknowledged
 #   @return [Boolean]
 #
-# @!attribute [rw] start_boundary_acknowledged
+# @!attribute [rw] startBoundaryAcknowledged
 #   @return [Boolean]
 #
-# @!attribute [rw] test_evidence
+# @!attribute [rw] status
+#   @return [String]
+#
+# @!attribute [rw] testEvidence
+#   @return [String]
+#
+# @!attribute [rw] updatedAt
 #   @return [String]
 SafetyReviewRequest = Struct.new(
-  :current_control,
-  :desired_outcome,
+  :createdAt,
+  :currentControls,
+  :desiredOutcome,
   :email,
+  :id,
   :language,
-  :notice,
-  :primary_concern,
-  :reply_consent,
-  :repository_authority,
-  :repository_url,
-  :request,
-  :route_path,
+  :primaryConcern,
+  :replyConsent,
+  :repositoryAuthority,
+  :repositoryUrl,
+  :routePath,
   :runtime,
-  :safety_acknowledged,
-  :start_boundary_acknowledged,
-  :test_evidence,
+  :safetyAcknowledged,
+  :startBoundaryAcknowledged,
+  :status,
+  :testEvidence,
+  :updatedAt,
   keyword_init: true
 )
 
 # Request payload for SafetyReviewRequest#create.
 #
-# @!attribute [rw] current_control
+# @!attribute [rw] createdAt
 #   @return [String]
 #
-# @!attribute [rw] desired_outcome
+# @!attribute [rw] currentControls
+#   @return [String]
+#
+# @!attribute [rw] desiredOutcome
 #   @return [String]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
+# @!attribute [rw] id
+#   @return [Integer]
+#
 # @!attribute [rw] language
 #   @return [String]
 #
-# @!attribute [rw] notice
+# @!attribute [rw] primaryConcern
 #   @return [String]
 #
-# @!attribute [rw] primary_concern
-#   @return [String]
-#
-# @!attribute [rw] reply_consent
+# @!attribute [rw] replyConsent
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_authority
+# @!attribute [rw] repositoryAuthority
 #   @return [Boolean]
 #
-# @!attribute [rw] repository_url
+# @!attribute [rw] repositoryUrl
 #   @return [String]
 #
-# @!attribute [rw] request
-#   @return [Hash]
-#
-# @!attribute [rw] route_path
+# @!attribute [rw] routePath
 #   @return [String]
 #
 # @!attribute [rw] runtime
 #   @return [String]
 #
-# @!attribute [rw] safety_acknowledged
+# @!attribute [rw] safetyAcknowledged
 #   @return [Boolean]
 #
-# @!attribute [rw] start_boundary_acknowledged
+# @!attribute [rw] startBoundaryAcknowledged
 #   @return [Boolean]
 #
-# @!attribute [rw] test_evidence
+# @!attribute [rw] status
+#   @return [String]
+#
+# @!attribute [rw] testEvidence
+#   @return [String]
+#
+# @!attribute [rw] updatedAt
 #   @return [String]
 SafetyReviewRequestCreateData = Struct.new(
-  :current_control,
-  :desired_outcome,
+  :createdAt,
+  :currentControls,
+  :desiredOutcome,
   :email,
+  :id,
   :language,
-  :notice,
-  :primary_concern,
-  :reply_consent,
-  :repository_authority,
-  :repository_url,
-  :request,
-  :route_path,
+  :primaryConcern,
+  :replyConsent,
+  :repositoryAuthority,
+  :repositoryUrl,
+  :routePath,
   :runtime,
-  :safety_acknowledged,
-  :start_boundary_acknowledged,
-  :test_evidence,
+  :safetyAcknowledged,
+  :startBoundaryAcknowledged,
+  :status,
+  :testEvidence,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -594,20 +642,20 @@ SafetyReviewRequestCreateData = Struct.new(
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] expected_render
+# @!attribute [rw] expectedRenders
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] use_case
+# @!attribute [rw] useCase
 #   @return [String, nil]
 Trial = Struct.new(
   :consent,
   :email,
-  :expected_render,
+  :expectedRenders,
   :name,
-  :use_case,
+  :useCase,
   keyword_init: true
 )
 
@@ -619,20 +667,20 @@ Trial = Struct.new(
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] expected_render
+# @!attribute [rw] expectedRenders
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] use_case
+# @!attribute [rw] useCase
 #   @return [String, nil]
 TrialCreateData = Struct.new(
   :consent,
   :email,
-  :expected_render,
+  :expectedRenders,
   :name,
-  :use_case,
+  :useCase,
   keyword_init: true
 )
 
@@ -641,23 +689,35 @@ TrialCreateData = Struct.new(
 # @!attribute [rw] consent
 #   @return [Boolean]
 #
+# @!attribute [rw] createdAt
+#   @return [String]
+#
+# @!attribute [rw] currentPlan
+#   @return [String]
+#
+# @!attribute [rw] id
+#   @return [Integer]
+#
 # @!attribute [rw] note
 #   @return [String, nil]
 #
-# @!attribute [rw] notice
+# @!attribute [rw] requestedPlan
 #   @return [String]
 #
-# @!attribute [rw] request
-#   @return [Hash]
+# @!attribute [rw] status
+#   @return [String]
 #
-# @!attribute [rw] requested_plan
+# @!attribute [rw] updatedAt
 #   @return [String]
 Upgrade = Struct.new(
   :consent,
+  :createdAt,
+  :currentPlan,
+  :id,
   :note,
-  :notice,
-  :request,
-  :requested_plan,
+  :requestedPlan,
+  :status,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -666,23 +726,35 @@ Upgrade = Struct.new(
 # @!attribute [rw] consent
 #   @return [Boolean]
 #
+# @!attribute [rw] createdAt
+#   @return [String]
+#
+# @!attribute [rw] currentPlan
+#   @return [String]
+#
+# @!attribute [rw] id
+#   @return [Integer]
+#
 # @!attribute [rw] note
 #   @return [String, nil]
 #
-# @!attribute [rw] notice
+# @!attribute [rw] requestedPlan
 #   @return [String]
 #
-# @!attribute [rw] request
-#   @return [Hash]
+# @!attribute [rw] status
+#   @return [String]
 #
-# @!attribute [rw] requested_plan
+# @!attribute [rw] updatedAt
 #   @return [String]
 UpgradeCreateData = Struct.new(
   :consent,
+  :createdAt,
+  :currentPlan,
+  :id,
   :note,
-  :notice,
-  :request,
-  :requested_plan,
+  :requestedPlan,
+  :status,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -691,18 +763,18 @@ UpgradeCreateData = Struct.new(
 # @!attribute [rw] customer
 #   @return [Hash]
 #
-# @!attribute [rw] link
+# @!attribute [rw] links
 #   @return [Hash]
 #
-# @!attribute [rw] upgrade_request
+# @!attribute [rw] upgradeRequest
 #   @return [Object]
 #
 # @!attribute [rw] usage
 #   @return [Hash]
 Usage = Struct.new(
   :customer,
-  :link,
-  :upgrade_request,
+  :links,
+  :upgradeRequest,
   :usage,
   keyword_init: true
 )
@@ -712,18 +784,18 @@ Usage = Struct.new(
 # @!attribute [rw] customer
 #   @return [Hash, nil]
 #
-# @!attribute [rw] link
+# @!attribute [rw] links
 #   @return [Hash, nil]
 #
-# @!attribute [rw] upgrade_request
+# @!attribute [rw] upgradeRequest
 #   @return [Object, nil]
 #
 # @!attribute [rw] usage
 #   @return [Hash, nil]
 UsageLoadMatch = Struct.new(
   :customer,
-  :link,
-  :upgrade_request,
+  :links,
+  :upgradeRequest,
   :usage,
   keyword_init: true
 )

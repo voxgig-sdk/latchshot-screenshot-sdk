@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ LatchshotScreenshotUtility::setRegistrar(function (LatchshotScreenshotUtility $u
     $u->prepare_params = [LatchshotScreenshotPrepareParams::class, 'call'];
     $u->prepare_path = [LatchshotScreenshotPreparePath::class, 'call'];
     $u->prepare_query = [LatchshotScreenshotPrepareQuery::class, 'call'];
+    $u->graphql_body = [LatchshotScreenshotGraphql::class, 'body'];
+    $u->graphql_errors = [LatchshotScreenshotGraphql::class, 'errors'];
     $u->result_basic = [LatchshotScreenshotResultBasic::class, 'call'];
     $u->result_body = [LatchshotScreenshotResultBody::class, 'call'];
     $u->result_headers = [LatchshotScreenshotResultHeaders::class, 'call'];

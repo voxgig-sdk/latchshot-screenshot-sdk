@@ -120,9 +120,9 @@ health = client.Health()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ok` | `bool` | Yes |  |
-| `render` | `dict` | Yes |  |
-| `service` | `str` | Yes |  |
+| `active` | `int` | Yes |  |
+| `concurrency` | `int` | Yes |  |
+| `pending` | `int` | Yes |  |
 
 ### Operations
 
@@ -173,17 +173,19 @@ monitoring_request = client.MonitoringRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `change_context` | `str` | No |  |
+| `changeContext` | `str` | No |  |
+| `createdAt` | `str` | Yes |  |
 | `email` | `str` | Yes |  |
-| `monitoring_goal` | `str` | Yes |  |
-| `notice` | `str` | Yes |  |
-| `page_count` | `str` | Yes |  |
-| `page_url` | `str` | Yes |  |
-| `public_page_authority` | `bool` | Yes |  |
-| `reply_consent` | `bool` | Yes |  |
-| `request` | `dict` | Yes |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
+| `id` | `int` | Yes |  |
+| `monitoringGoal` | `str` | Yes |  |
+| `pageCount` | `str` | Yes |  |
+| `pageUrl` | `str` | Yes |  |
+| `publicPageAuthority` | `bool` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `str` | Yes |  |
+| `updatedAt` | `str` | Yes |  |
 
 ### Operations
 
@@ -193,16 +195,18 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.MonitoringRequest().create({
+    "createdAt": "example_createdAt",  # str
     "email": "example_email",  # str
-    "monitoring_goal": "example_monitoring_goal",  # str
-    "notice": "example_notice",  # str
-    "page_count": "example_page_count",  # str
-    "page_url": "example_page_url",  # str
-    "public_page_authority": True,  # bool
-    "reply_consent": True,  # bool
-    "request": {},  # dict
-    "safety_acknowledged": True,  # bool
-    "start_boundary_acknowledged": True,  # bool
+    "id": 1,  # int
+    "monitoringGoal": "example_monitoringGoal",  # str
+    "pageCount": "example_pageCount",  # str
+    "pageUrl": "example_pageUrl",  # str
+    "publicPageAuthority": True,  # bool
+    "replyConsent": True,  # bool
+    "safetyAcknowledged": True,  # bool
+    "startBoundaryAcknowledged": True,  # bool
+    "status": "example_status",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -245,21 +249,45 @@ pilot_request = client.PilotRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `acceptance_sample` | `str` | No |  |
-| `call_site` | `str` | No |  |
-| `current_contract` | `str` | No |  |
+| `acceptanceSample` | `str` | No |  |
+| `callSite` | `str` | Yes |  |
+| `createdAt` | `str` | Yes |  |
+| `currentContract` | `str` | No |  |
 | `email` | `str` | Yes |  |
-| `expected_render` | `str` | No |  |
+| `expectedRenders` | `str` | No |  |
+| `id` | `int` | Yes |  |
 | `language` | `str` | No |  |
-| `notice` | `str` | Yes |  |
 | `provider` | `str` | No |  |
-| `reply_consent` | `bool` | Yes |  |
-| `repository_authority` | `bool` | Yes |  |
-| `repository_url` | `str` | Yes |  |
-| `request` | `dict` | Yes |  |
-| `required_behavior` | `str` | No |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `repositoryAuthority` | `bool` | Yes |  |
+| `repositoryUrl` | `str` | Yes |  |
+| `requiredBehavior` | `str` | No |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `str` | Yes |  |
+| `updatedAt` | `str` | Yes |  |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `acceptanceSample` | - |
+| `callSite` | Yes |
+| `createdAt` | - |
+| `currentContract` | - |
+| `email` | - |
+| `expectedRenders` | - |
+| `id` | - |
+| `language` | - |
+| `provider` | - |
+| `replyConsent` | - |
+| `repositoryAuthority` | - |
+| `repositoryUrl` | - |
+| `requiredBehavior` | - |
+| `safetyAcknowledged` | - |
+| `startBoundaryAcknowledged` | - |
+| `status` | - |
+| `updatedAt` | - |
 
 ### Operations
 
@@ -269,14 +297,17 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.PilotRequest().create({
+    "callSite": "example_callSite",  # str
+    "createdAt": "example_createdAt",  # str
     "email": "example_email",  # str
-    "notice": "example_notice",  # str
-    "reply_consent": True,  # bool
-    "repository_authority": True,  # bool
-    "repository_url": "example_repository_url",  # str
-    "request": {},  # dict
-    "safety_acknowledged": True,  # bool
-    "start_boundary_acknowledged": True,  # bool
+    "id": 1,  # int
+    "replyConsent": True,  # bool
+    "repositoryAuthority": True,  # bool
+    "repositoryUrl": "example_repositoryUrl",  # str
+    "safetyAcknowledged": True,  # bool
+    "startBoundaryAcknowledged": True,  # bool
+    "status": "example_status",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -319,26 +350,26 @@ render = client.Render()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `block_ad` | `bool` | No |  |
-| `block_chat` | `bool` | No |  |
-| `block_tracker` | `bool` | No |  |
-| `dark_mode` | `bool` | No |  |
+| `blockAds` | `bool` | No |  |
+| `blockChats` | `bool` | No |  |
+| `blockTrackers` | `bool` | No |  |
+| `darkMode` | `bool` | No |  |
 | `delay` | `int` | No |  |
 | `format` | `str` | No |  |
-| `full_page` | `bool` | No |  |
+| `fullPage` | `bool` | No |  |
 | `height` | `int` | No |  |
-| `hide_cookie_banner` | `bool` | No |  |
-| `hide_popup` | `bool` | No |  |
+| `hideCookieBanners` | `bool` | No |  |
+| `hidePopups` | `bool` | No |  |
 | `kind` | `str` | No |  |
 | `landscape` | `bool` | No |  |
 | `paper` | `str` | No |  |
 | `quality` | `int` | No |  |
-| `reduced_motion` | `bool` | No |  |
+| `reducedMotion` | `bool` | No |  |
 | `scale` | `int` | No |  |
-| `scroll_page` | `bool` | No |  |
+| `scrollPage` | `bool` | No |  |
 | `timeout` | `int` | No |  |
 | `url` | `str` | Yes |  |
-| `wait_until` | `str` | No |  |
+| `waitUntil` | `str` | No |  |
 | `width` | `int` | No |  |
 
 ### Operations
@@ -437,21 +468,23 @@ safety_review_request = client.SafetyReviewRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_control` | `str` | Yes |  |
-| `desired_outcome` | `str` | Yes |  |
+| `createdAt` | `str` | Yes |  |
+| `currentControls` | `str` | Yes |  |
+| `desiredOutcome` | `str` | Yes |  |
 | `email` | `str` | Yes |  |
+| `id` | `int` | Yes |  |
 | `language` | `str` | Yes |  |
-| `notice` | `str` | Yes |  |
-| `primary_concern` | `str` | Yes |  |
-| `reply_consent` | `bool` | Yes |  |
-| `repository_authority` | `bool` | Yes |  |
-| `repository_url` | `str` | Yes |  |
-| `request` | `dict` | Yes |  |
-| `route_path` | `str` | Yes |  |
+| `primaryConcern` | `str` | Yes |  |
+| `replyConsent` | `bool` | Yes |  |
+| `repositoryAuthority` | `bool` | Yes |  |
+| `repositoryUrl` | `str` | Yes |  |
+| `routePath` | `str` | Yes |  |
 | `runtime` | `str` | Yes |  |
-| `safety_acknowledged` | `bool` | Yes |  |
-| `start_boundary_acknowledged` | `bool` | Yes |  |
-| `test_evidence` | `str` | Yes |  |
+| `safetyAcknowledged` | `bool` | Yes |  |
+| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `status` | `str` | Yes |  |
+| `testEvidence` | `str` | Yes |  |
+| `updatedAt` | `str` | Yes |  |
 
 ### Operations
 
@@ -461,21 +494,23 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.SafetyReviewRequest().create({
-    "current_control": "example_current_control",  # str
-    "desired_outcome": "example_desired_outcome",  # str
+    "createdAt": "example_createdAt",  # str
+    "currentControls": "example_currentControls",  # str
+    "desiredOutcome": "example_desiredOutcome",  # str
     "email": "example_email",  # str
+    "id": 1,  # int
     "language": "example_language",  # str
-    "notice": "example_notice",  # str
-    "primary_concern": "example_primary_concern",  # str
-    "reply_consent": True,  # bool
-    "repository_authority": True,  # bool
-    "repository_url": "example_repository_url",  # str
-    "request": {},  # dict
-    "route_path": "example_route_path",  # str
+    "primaryConcern": "example_primaryConcern",  # str
+    "replyConsent": True,  # bool
+    "repositoryAuthority": True,  # bool
+    "repositoryUrl": "example_repositoryUrl",  # str
+    "routePath": "example_routePath",  # str
     "runtime": "example_runtime",  # str
-    "safety_acknowledged": True,  # bool
-    "start_boundary_acknowledged": True,  # bool
-    "test_evidence": "example_test_evidence",  # str
+    "safetyAcknowledged": True,  # bool
+    "startBoundaryAcknowledged": True,  # bool
+    "status": "example_status",  # str
+    "testEvidence": "example_testEvidence",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -520,9 +555,9 @@ trial = client.Trial()
 | --- | --- | --- | --- |
 | `consent` | `bool` | No |  |
 | `email` | `str` | Yes |  |
-| `expected_render` | `str` | No |  |
+| `expectedRenders` | `str` | No |  |
 | `name` | `str` | No |  |
-| `use_case` | `str` | No |  |
+| `useCase` | `str` | No |  |
 
 ### Operations
 
@@ -576,10 +611,13 @@ upgrade = client.Upgrade()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `consent` | `bool` | Yes |  |
+| `createdAt` | `str` | Yes |  |
+| `currentPlan` | `str` | Yes |  |
+| `id` | `int` | Yes |  |
 | `note` | `str` | No |  |
-| `notice` | `str` | Yes |  |
-| `request` | `dict` | Yes |  |
-| `requested_plan` | `str` | Yes |  |
+| `requestedPlan` | `str` | Yes |  |
+| `status` | `str` | Yes |  |
+| `updatedAt` | `str` | Yes |  |
 
 ### Operations
 
@@ -590,9 +628,12 @@ Create a new entity with the given data. Returns the created entity data and rai
 ```python
 result = client.Upgrade().create({
     "consent": True,  # bool
-    "notice": "example_notice",  # str
-    "request": {},  # dict
-    "requested_plan": "example_requested_plan",  # str
+    "createdAt": "example_createdAt",  # str
+    "currentPlan": "example_currentPlan",  # str
+    "id": 1,  # int
+    "requestedPlan": "example_requestedPlan",  # str
+    "status": "example_status",  # str
+    "updatedAt": "example_updatedAt",  # str
 })
 ```
 
@@ -636,8 +677,8 @@ usage = client.Usage()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `customer` | `dict` | Yes |  |
-| `link` | `dict` | Yes |  |
-| `upgrade_request` | `Any` | Yes |  |
+| `links` | `dict` | Yes |  |
+| `upgradeRequest` | `Any` | Yes |  |
 | `usage` | `dict` | Yes |  |
 
 ### Operations

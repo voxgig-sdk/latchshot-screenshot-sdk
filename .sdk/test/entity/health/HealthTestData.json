@@ -2,21 +2,21 @@
   "existing": {
     "health": {
       "HEALTH00": {
-        "ok": true,
-        "render": {},
-        "service": "s20",
+        "active": "s1e",
+        "concurrency": "s1f",
+        "pending": "s20",
         "id": "HEALTH00"
       },
       "HEALTH01": {
-        "ok": true,
-        "render": {},
-        "service": "s3e",
+        "active": "s3c",
+        "concurrency": "s3d",
+        "pending": "s3e",
         "id": "HEALTH01"
       },
       "HEALTH02": {
-        "ok": true,
-        "render": {},
-        "service": "s5c",
+        "active": "s5a",
+        "concurrency": "s5b",
+        "pending": "s5c",
         "id": "HEALTH02"
       }
     }
@@ -24,9 +24,9 @@
   "new": {
     "health": {
       "health_ref01": {
-        "ok": true,
-        "render": {},
-        "service": "s7a"
+        "active": "s78",
+        "concurrency": "s79",
+        "pending": "s7a"
       }
     }
   }

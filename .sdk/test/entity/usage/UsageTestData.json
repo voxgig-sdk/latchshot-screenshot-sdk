@@ -3,22 +3,22 @@
     "usage": {
       "USAGE00": {
         "customer": {},
-        "link": {},
-        "upgrade_request": "s2a",
+        "links": {},
+        "upgradeRequest": "s2a",
         "usage": {},
         "id": "USAGE00"
       },
       "USAGE01": {
         "customer": {},
-        "link": {},
-        "upgrade_request": "s52",
+        "links": {},
+        "upgradeRequest": "s52",
         "usage": {},
         "id": "USAGE01"
       },
       "USAGE02": {
         "customer": {},
-        "link": {},
-        "upgrade_request": "s7a",
+        "links": {},
+        "upgradeRequest": "s7a",
         "usage": {},
         "id": "USAGE02"
       }
@@ -28,8 +28,8 @@
     "usage": {
       "usage_ref01": {
         "customer": {},
-        "link": {},
-        "upgrade_request": "sa2",
+        "links": {},
+        "upgradeRequest": "sa2",
         "usage": {}
       }
     }

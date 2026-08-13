@@ -8,18 +8,21 @@ guide: {
   entity: health: {
     path: "/healthz": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.render`")|top
     }
   }
 
   entity: monitoring_request: {
     path: "/api/monitoring-requests": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.request`")|top
     }
   }
 
   entity: pilot_request: {
     path: "/api/pilot-requests": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.request`")|top
     }
   }
 
@@ -38,6 +41,7 @@ guide: {
   entity: safety_review_request: {
     path: "/api/safety-review-requests": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.request`")|top
     }
   }
 
@@ -51,6 +55,7 @@ guide: {
   entity: upgrade: {
     path: "/v1/upgrade-requests": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.request`")|top
     }
   }
 

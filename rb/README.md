@@ -36,7 +36,7 @@ client = LatchshotScreenshotSDK.new({
 
 ```ruby
 begin
-  # load returns the bare Health record (raises on error).
+  # load returns the ENTITY — call data_get for the Health record (raises on error).
   health = client.Health.load()
   puts health
 rescue => err
@@ -119,7 +119,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = LatchshotScreenshotSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 health = client.Health.load()
 puts health
 ```
@@ -247,9 +248,9 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `ok` |  |
-| `render` |  |
-| `service` |  |
+| `active` |  |
+| `concurrency` |  |
+| `pending` |  |
 
 Operations: Load.
 
@@ -259,17 +260,19 @@ API path: `/healthz`
 
 | Field | Description |
 | --- | --- |
-| `change_context` |  |
+| `changeContext` |  |
+| `createdAt` |  |
 | `email` |  |
-| `monitoring_goal` |  |
-| `notice` |  |
-| `page_count` |  |
-| `page_url` |  |
-| `public_page_authority` |  |
-| `reply_consent` |  |
-| `request` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `id` |  |
+| `monitoringGoal` |  |
+| `pageCount` |  |
+| `pageUrl` |  |
+| `publicPageAuthority` |  |
+| `replyConsent` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -279,21 +282,23 @@ API path: `/api/monitoring-requests`
 
 | Field | Description |
 | --- | --- |
-| `acceptance_sample` |  |
-| `call_site` |  |
-| `current_contract` |  |
+| `acceptanceSample` |  |
+| `callSite` |  |
+| `createdAt` |  |
+| `currentContract` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
 | `provider` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `required_behavior` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `requiredBehavior` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -303,26 +308,26 @@ API path: `/api/pilot-requests`
 
 | Field | Description |
 | --- | --- |
-| `block_ad` |  |
-| `block_chat` |  |
-| `block_tracker` |  |
-| `dark_mode` |  |
+| `blockAds` |  |
+| `blockChats` |  |
+| `blockTrackers` |  |
+| `darkMode` |  |
 | `delay` |  |
 | `format` |  |
-| `full_page` |  |
+| `fullPage` |  |
 | `height` |  |
-| `hide_cookie_banner` |  |
-| `hide_popup` |  |
+| `hideCookieBanners` |  |
+| `hidePopups` |  |
 | `kind` |  |
 | `landscape` |  |
 | `paper` |  |
 | `quality` |  |
-| `reduced_motion` |  |
+| `reducedMotion` |  |
 | `scale` |  |
-| `scroll_page` |  |
+| `scrollPage` |  |
 | `timeout` |  |
 | `url` |  |
-| `wait_until` |  |
+| `waitUntil` |  |
 | `width` |  |
 
 Operations: Create.
@@ -342,21 +347,23 @@ API path: `/v1/screenshot`
 
 | Field | Description |
 | --- | --- |
-| `current_control` |  |
-| `desired_outcome` |  |
+| `createdAt` |  |
+| `currentControls` |  |
+| `desiredOutcome` |  |
 | `email` |  |
+| `id` |  |
 | `language` |  |
-| `notice` |  |
-| `primary_concern` |  |
-| `reply_consent` |  |
-| `repository_authority` |  |
-| `repository_url` |  |
-| `request` |  |
-| `route_path` |  |
+| `primaryConcern` |  |
+| `replyConsent` |  |
+| `repositoryAuthority` |  |
+| `repositoryUrl` |  |
+| `routePath` |  |
 | `runtime` |  |
-| `safety_acknowledged` |  |
-| `start_boundary_acknowledged` |  |
-| `test_evidence` |  |
+| `safetyAcknowledged` |  |
+| `startBoundaryAcknowledged` |  |
+| `status` |  |
+| `testEvidence` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -368,9 +375,9 @@ API path: `/api/safety-review-requests`
 | --- | --- |
 | `consent` |  |
 | `email` |  |
-| `expected_render` |  |
+| `expectedRenders` |  |
 | `name` |  |
-| `use_case` |  |
+| `useCase` |  |
 
 Operations: Create.
 
@@ -381,10 +388,13 @@ API path: `/api/trials`
 | Field | Description |
 | --- | --- |
 | `consent` |  |
+| `createdAt` |  |
+| `currentPlan` |  |
+| `id` |  |
 | `note` |  |
-| `notice` |  |
-| `request` |  |
-| `requested_plan` |  |
+| `requestedPlan` |  |
+| `status` |  |
+| `updatedAt` |  |
 
 Operations: Create.
 
@@ -395,8 +405,8 @@ API path: `/v1/upgrade-requests`
 | Field | Description |
 | --- | --- |
 | `customer` |  |
-| `link` |  |
-| `upgrade_request` |  |
+| `links` |  |
+| `upgradeRequest` |  |
 | `usage` |  |
 
 Operations: Load.
@@ -422,14 +432,14 @@ Create an instance: `health = client.Health`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ok` | `Boolean` |  |
-| `render` | `Hash` |  |
-| `service` | `String` |  |
+| `active` | `Integer` |  |
+| `concurrency` | `Integer` |  |
+| `pending` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Health record (raises on error).
+# load returns the ENTITY — call data_get for the Health record (raises on error).
 health = client.Health.load()
 ```
 
@@ -448,32 +458,36 @@ Create an instance: `monitoring_request = client.MonitoringRequest`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `change_context` | `String` |  |
+| `changeContext` | `String` |  |
+| `createdAt` | `String` |  |
 | `email` | `String` |  |
-| `monitoring_goal` | `String` |  |
-| `notice` | `String` |  |
-| `page_count` | `String` |  |
-| `page_url` | `String` |  |
-| `public_page_authority` | `Boolean` |  |
-| `reply_consent` | `Boolean` |  |
-| `request` | `Hash` |  |
-| `safety_acknowledged` | `Boolean` |  |
-| `start_boundary_acknowledged` | `Boolean` |  |
+| `id` | `Integer` |  |
+| `monitoringGoal` | `String` |  |
+| `pageCount` | `String` |  |
+| `pageUrl` | `String` |  |
+| `publicPageAuthority` | `Boolean` |  |
+| `replyConsent` | `Boolean` |  |
+| `safetyAcknowledged` | `Boolean` |  |
+| `startBoundaryAcknowledged` | `Boolean` |  |
+| `status` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Create
 
 ```ruby
 monitoring_request = client.MonitoringRequest.create({
+  "createdAt" => "example_createdAt", # String
   "email" => "example_email", # String
-  "monitoring_goal" => "example_monitoring_goal", # String
-  "notice" => "example_notice", # String
-  "page_count" => "example_page_count", # String
-  "page_url" => "example_page_url", # String
-  "public_page_authority" => true, # Boolean
-  "reply_consent" => true, # Boolean
-  "request" => {}, # Hash
-  "safety_acknowledged" => true, # Boolean
-  "start_boundary_acknowledged" => true, # Boolean
+  "id" => 1, # Integer
+  "monitoringGoal" => "example_monitoringGoal", # String
+  "pageCount" => "example_pageCount", # String
+  "pageUrl" => "example_pageUrl", # String
+  "publicPageAuthority" => true, # Boolean
+  "replyConsent" => true, # Boolean
+  "safetyAcknowledged" => true, # Boolean
+  "startBoundaryAcknowledged" => true, # Boolean
+  "status" => "example_status", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -492,34 +506,39 @@ Create an instance: `pilot_request = client.PilotRequest`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `acceptance_sample` | `String` |  |
-| `call_site` | `String` |  |
-| `current_contract` | `String` |  |
+| `acceptanceSample` | `String` |  |
+| `callSite` | `String` |  |
+| `createdAt` | `String` |  |
+| `currentContract` | `String` |  |
 | `email` | `String` |  |
-| `expected_render` | `String` |  |
+| `expectedRenders` | `String` |  |
+| `id` | `Integer` |  |
 | `language` | `String` |  |
-| `notice` | `String` |  |
 | `provider` | `String` |  |
-| `reply_consent` | `Boolean` |  |
-| `repository_authority` | `Boolean` |  |
-| `repository_url` | `String` |  |
-| `request` | `Hash` |  |
-| `required_behavior` | `String` |  |
-| `safety_acknowledged` | `Boolean` |  |
-| `start_boundary_acknowledged` | `Boolean` |  |
+| `replyConsent` | `Boolean` |  |
+| `repositoryAuthority` | `Boolean` |  |
+| `repositoryUrl` | `String` |  |
+| `requiredBehavior` | `String` |  |
+| `safetyAcknowledged` | `Boolean` |  |
+| `startBoundaryAcknowledged` | `Boolean` |  |
+| `status` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Create
 
 ```ruby
 pilot_request = client.PilotRequest.create({
+  "callSite" => "example_callSite", # String
+  "createdAt" => "example_createdAt", # String
   "email" => "example_email", # String
-  "notice" => "example_notice", # String
-  "reply_consent" => true, # Boolean
-  "repository_authority" => true, # Boolean
-  "repository_url" => "example_repository_url", # String
-  "request" => {}, # Hash
-  "safety_acknowledged" => true, # Boolean
-  "start_boundary_acknowledged" => true, # Boolean
+  "id" => 1, # Integer
+  "replyConsent" => true, # Boolean
+  "repositoryAuthority" => true, # Boolean
+  "repositoryUrl" => "example_repositoryUrl", # String
+  "safetyAcknowledged" => true, # Boolean
+  "startBoundaryAcknowledged" => true, # Boolean
+  "status" => "example_status", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -538,26 +557,26 @@ Create an instance: `render = client.Render`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `block_ad` | `Boolean` |  |
-| `block_chat` | `Boolean` |  |
-| `block_tracker` | `Boolean` |  |
-| `dark_mode` | `Boolean` |  |
+| `blockAds` | `Boolean` |  |
+| `blockChats` | `Boolean` |  |
+| `blockTrackers` | `Boolean` |  |
+| `darkMode` | `Boolean` |  |
 | `delay` | `Integer` |  |
 | `format` | `String` |  |
-| `full_page` | `Boolean` |  |
+| `fullPage` | `Boolean` |  |
 | `height` | `Integer` |  |
-| `hide_cookie_banner` | `Boolean` |  |
-| `hide_popup` | `Boolean` |  |
+| `hideCookieBanners` | `Boolean` |  |
+| `hidePopups` | `Boolean` |  |
 | `kind` | `String` |  |
 | `landscape` | `Boolean` |  |
 | `paper` | `String` |  |
 | `quality` | `Integer` |  |
-| `reduced_motion` | `Boolean` |  |
+| `reducedMotion` | `Boolean` |  |
 | `scale` | `Integer` |  |
-| `scroll_page` | `Boolean` |  |
+| `scrollPage` | `Boolean` |  |
 | `timeout` | `Integer` |  |
 | `url` | `String` |  |
-| `wait_until` | `String` |  |
+| `waitUntil` | `String` |  |
 | `width` | `Integer` |  |
 
 #### Example: Create
@@ -582,7 +601,7 @@ Create an instance: `rendering = client.Rendering`
 #### Example: Load
 
 ```ruby
-# load returns the bare Rendering record (raises on error).
+# load returns the ENTITY — call data_get for the Rendering record (raises on error).
 rendering = client.Rendering.load()
 ```
 
@@ -601,41 +620,45 @@ Create an instance: `safety_review_request = client.SafetyReviewRequest`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_control` | `String` |  |
-| `desired_outcome` | `String` |  |
+| `createdAt` | `String` |  |
+| `currentControls` | `String` |  |
+| `desiredOutcome` | `String` |  |
 | `email` | `String` |  |
+| `id` | `Integer` |  |
 | `language` | `String` |  |
-| `notice` | `String` |  |
-| `primary_concern` | `String` |  |
-| `reply_consent` | `Boolean` |  |
-| `repository_authority` | `Boolean` |  |
-| `repository_url` | `String` |  |
-| `request` | `Hash` |  |
-| `route_path` | `String` |  |
+| `primaryConcern` | `String` |  |
+| `replyConsent` | `Boolean` |  |
+| `repositoryAuthority` | `Boolean` |  |
+| `repositoryUrl` | `String` |  |
+| `routePath` | `String` |  |
 | `runtime` | `String` |  |
-| `safety_acknowledged` | `Boolean` |  |
-| `start_boundary_acknowledged` | `Boolean` |  |
-| `test_evidence` | `String` |  |
+| `safetyAcknowledged` | `Boolean` |  |
+| `startBoundaryAcknowledged` | `Boolean` |  |
+| `status` | `String` |  |
+| `testEvidence` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Create
 
 ```ruby
 safety_review_request = client.SafetyReviewRequest.create({
-  "current_control" => "example_current_control", # String
-  "desired_outcome" => "example_desired_outcome", # String
+  "createdAt" => "example_createdAt", # String
+  "currentControls" => "example_currentControls", # String
+  "desiredOutcome" => "example_desiredOutcome", # String
   "email" => "example_email", # String
+  "id" => 1, # Integer
   "language" => "example_language", # String
-  "notice" => "example_notice", # String
-  "primary_concern" => "example_primary_concern", # String
-  "reply_consent" => true, # Boolean
-  "repository_authority" => true, # Boolean
-  "repository_url" => "example_repository_url", # String
-  "request" => {}, # Hash
-  "route_path" => "example_route_path", # String
+  "primaryConcern" => "example_primaryConcern", # String
+  "replyConsent" => true, # Boolean
+  "repositoryAuthority" => true, # Boolean
+  "repositoryUrl" => "example_repositoryUrl", # String
+  "routePath" => "example_routePath", # String
   "runtime" => "example_runtime", # String
-  "safety_acknowledged" => true, # Boolean
-  "start_boundary_acknowledged" => true, # Boolean
-  "test_evidence" => "example_test_evidence", # String
+  "safetyAcknowledged" => true, # Boolean
+  "startBoundaryAcknowledged" => true, # Boolean
+  "status" => "example_status", # String
+  "testEvidence" => "example_testEvidence", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -656,9 +679,9 @@ Create an instance: `trial = client.Trial`
 | --- | --- | --- |
 | `consent` | `Boolean` |  |
 | `email` | `String` |  |
-| `expected_render` | `String` |  |
+| `expectedRenders` | `String` |  |
 | `name` | `String` |  |
-| `use_case` | `String` |  |
+| `useCase` | `String` |  |
 
 #### Example: Create
 
@@ -684,19 +707,25 @@ Create an instance: `upgrade = client.Upgrade`
 | Field | Type | Description |
 | --- | --- | --- |
 | `consent` | `Boolean` |  |
+| `createdAt` | `String` |  |
+| `currentPlan` | `String` |  |
+| `id` | `Integer` |  |
 | `note` | `String` |  |
-| `notice` | `String` |  |
-| `request` | `Hash` |  |
-| `requested_plan` | `String` |  |
+| `requestedPlan` | `String` |  |
+| `status` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Create
 
 ```ruby
 upgrade = client.Upgrade.create({
   "consent" => true, # Boolean
-  "notice" => "example_notice", # String
-  "request" => {}, # Hash
-  "requested_plan" => "example_requested_plan", # String
+  "createdAt" => "example_createdAt", # String
+  "currentPlan" => "example_currentPlan", # String
+  "id" => 1, # Integer
+  "requestedPlan" => "example_requestedPlan", # String
+  "status" => "example_status", # String
+  "updatedAt" => "example_updatedAt", # String
 })
 ```
 
@@ -716,14 +745,14 @@ Create an instance: `usage = client.Usage`
 | Field | Type | Description |
 | --- | --- | --- |
 | `customer` | `Hash` |  |
-| `link` | `Hash` |  |
-| `upgrade_request` | `Object` |  |
+| `links` | `Hash` |  |
+| `upgradeRequest` | `Object` |  |
 | `usage` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Usage record (raises on error).
+# load returns the ENTITY — call data_get for the Usage record (raises on error).
 usage = client.Usage.load()
 ```
 

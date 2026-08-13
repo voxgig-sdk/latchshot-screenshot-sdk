@@ -6,17 +6,28 @@ main: kit: entity: pilot_request: {
 
   fields: [
     {
-      name: "acceptance_sample"
+      name: "acceptanceSample"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "call_site"
-      req: false
+      name: "callSite"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
       type: "`$STRING`"
     }
     {
-      name: "current_contract"
+      name: "createdAt"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "currentContract"
       req: false
       type: "`$STRING`"
     }
@@ -26,18 +37,18 @@ main: kit: entity: pilot_request: {
       type: "`$STRING`"
     }
     {
-      name: "expected_render"
+      name: "expectedRenders"
       req: false
       type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
     }
     {
       name: "language"
       req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "notice"
-      req: true
       type: "`$STRING`"
     }
     {
@@ -46,41 +57,51 @@ main: kit: entity: pilot_request: {
       type: "`$STRING`"
     }
     {
-      name: "reply_consent"
+      name: "replyConsent"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "repository_authority"
+      name: "repositoryAuthority"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "repository_url"
+      name: "repositoryUrl"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "request"
-      req: true
-      type: "`$OBJECT`"
-    }
-    {
-      name: "required_behavior"
+      name: "requiredBehavior"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "safety_acknowledged"
+      name: "safetyAcknowledged"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "start_boundary_acknowledged"
+      name: "startBoundaryAcknowledged"
       req: true
       type: "`$BOOLEAN`"
     }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updatedAt"
+      req: true
+      type: "`$STRING`"
+    }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "pilot_request"
   op: {
@@ -96,7 +117,7 @@ main: kit: entity: pilot_request: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.request`"
           }
         }
       ]

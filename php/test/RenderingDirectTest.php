@@ -71,16 +71,16 @@ function rendering_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "LATCHSHOTSCREENSHOT_TEST_RENDERING_ENTID" => [],
-        "LATCHSHOTSCREENSHOT_TEST_LIVE" => "FALSE",
-        "LATCHSHOTSCREENSHOT_APIKEY" => "NONE",
+        "LATCHSHOT_SCREENSHOT_TEST_RENDERING_ENTID" => [],
+        "LATCHSHOT_SCREENSHOT_TEST_LIVE" => "FALSE",
+        "LATCHSHOT_SCREENSHOT_APIKEY" => "NONE",
     ]);
 
-    $live = $env["LATCHSHOTSCREENSHOT_TEST_LIVE"] === "TRUE";
+    $live = $env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["LATCHSHOTSCREENSHOT_APIKEY"],
+            "apikey" => $env["LATCHSHOT_SCREENSHOT_APIKEY"],
         ];
         $client = new LatchshotScreenshotSDK($merged_opts);
         return [
