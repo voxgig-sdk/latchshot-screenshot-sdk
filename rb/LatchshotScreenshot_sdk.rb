@@ -28,7 +28,7 @@ class LatchshotScreenshotSDK
     utility = LatchshotScreenshotUtility.new
     @_utility = utility
 
-    config = LatchshotScreenshotConfig.make_config
+    config = LatchshotScreenshotConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

@@ -23,7 +23,7 @@ func NewLatchshotScreenshotSDK(options map[string]any) *LatchshotScreenshotSDK {
 
 	sdk.utility = NewUtility()
 
-	config := MakeConfig()
+	config := SharedConfig()
 
 	sdk.rootctx = sdk.utility.MakeContext(map[string]any{
 		"client":  sdk,

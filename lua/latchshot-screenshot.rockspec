@@ -23,6 +23,7 @@ build = {
   modules = {
     ["latchshot-screenshot_sdk"] = "latchshot-screenshot_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

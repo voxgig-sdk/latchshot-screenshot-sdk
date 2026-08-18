@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from latchshotscreenshot_sdk.config import make_config
+from latchshotscreenshot_sdk.config import shared_config
 from latchshotscreenshot_sdk.features import _make_feature
 from latchshotscreenshot_sdk.core.control import LatchshotScreenshotControl
 from latchshotscreenshot_sdk.core.error import LatchshotScreenshotError
@@ -24,7 +24,7 @@ from latchshotscreenshot_sdk.core.spec import LatchshotScreenshotSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

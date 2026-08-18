@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class LatchshotScreenshotConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -42,25 +65,19 @@ class LatchshotScreenshotConfig
         'health' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'active',
               'req' => true,
               'type' => '`$INTEGER`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'concurrency',
               'req' => true,
               'type' => '`$INTEGER`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'pending',
               'req' => true,
               'type' => '`$INTEGER`',
-              'index$' => 2,
             ],
           ],
           'name' => 'health',
@@ -70,7 +87,6 @@ class LatchshotScreenshotConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
@@ -83,10 +99,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.render`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -96,95 +110,68 @@ class LatchshotScreenshotConfig
         'monitoring_request' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'changeContext',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'email',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'id',
               'req' => true,
               'type' => '`$INTEGER`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'monitoringGoal',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'pageCount',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'pageUrl',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'publicPageAuthority',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'replyConsent',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 8,
             ],
             [
-              'active' => true,
               'name' => 'safetyAcknowledged',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 9,
             ],
             [
-              'active' => true,
               'name' => 'startBoundaryAcknowledged',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 10,
             ],
             [
-              'active' => true,
               'name' => 'status',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 11,
             ],
             [
-              'active' => true,
               'name' => 'updatedAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 12,
             ],
           ],
           'name' => 'monitoring_request',
@@ -194,7 +181,6 @@ class LatchshotScreenshotConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -208,10 +194,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.request`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -221,129 +205,88 @@ class LatchshotScreenshotConfig
         'pilot_request' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'acceptanceSample',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'callSite',
               'op' => [
                 'create' => [
-                  'req' => false,
                   'type' => '`$STRING`',
                 ],
               ],
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'currentContract',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'email',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'expectedRenders',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'id',
               'req' => true,
               'type' => '`$INTEGER`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'language',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'provider',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 8,
             ],
             [
-              'active' => true,
               'name' => 'replyConsent',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 9,
             ],
             [
-              'active' => true,
               'name' => 'repositoryAuthority',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 10,
             ],
             [
-              'active' => true,
               'name' => 'repositoryUrl',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 11,
             ],
             [
-              'active' => true,
               'name' => 'requiredBehavior',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 12,
             ],
             [
-              'active' => true,
               'name' => 'safetyAcknowledged',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 13,
             ],
             [
-              'active' => true,
               'name' => 'startBoundaryAcknowledged',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 14,
             ],
             [
-              'active' => true,
               'name' => 'status',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 15,
             ],
             [
-              'active' => true,
               'name' => 'updatedAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 16,
             ],
           ],
           'name' => 'pilot_request',
@@ -353,7 +296,6 @@ class LatchshotScreenshotConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -367,10 +309,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.request`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -380,151 +320,89 @@ class LatchshotScreenshotConfig
         'render' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'blockAds',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'blockChats',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'blockTrackers',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'darkMode',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'delay',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'format',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'fullPage',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'height',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'hideCookieBanners',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 8,
             ],
             [
-              'active' => true,
               'name' => 'hidePopups',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 9,
             ],
             [
-              'active' => true,
               'name' => 'kind',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 10,
             ],
             [
-              'active' => true,
               'name' => 'landscape',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 11,
             ],
             [
-              'active' => true,
               'name' => 'paper',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 12,
             ],
             [
-              'active' => true,
               'name' => 'quality',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 13,
             ],
             [
-              'active' => true,
               'name' => 'reducedMotion',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 14,
             ],
             [
-              'active' => true,
               'name' => 'scale',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 15,
             ],
             [
-              'active' => true,
               'name' => 'scrollPage',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 16,
             ],
             [
-              'active' => true,
               'name' => 'timeout',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 17,
             ],
             [
-              'active' => true,
               'name' => 'url',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 18,
             ],
             [
-              'active' => true,
               'name' => 'waitUntil',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 19,
             ],
             [
-              'active' => true,
               'name' => 'width',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 20,
             ],
           ],
           'name' => 'render',
@@ -534,7 +412,6 @@ class LatchshotScreenshotConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -548,10 +425,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -567,110 +442,86 @@ class LatchshotScreenshotConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'block_ad',
                         'orig' => 'block_ad',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'block_chat',
                         'orig' => 'block_chat',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'block_tracker',
                         'orig' => 'block_tracker',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'dark_mode',
                         'orig' => 'dark_mode',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'png',
                         'kind' => 'query',
                         'name' => 'format',
                         'orig' => 'format',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'full_page',
                         'orig' => 'full_page',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => 900,
                         'kind' => 'query',
                         'name' => 'height',
                         'orig' => 'height',
-                        'reqd' => false,
                         'type' => '`$INTEGER`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'hide_cookie_banner',
                         'orig' => 'hide_cookie_banner',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'hide_popup',
                         'orig' => 'hide_popup',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => 85,
                         'kind' => 'query',
                         'name' => 'quality',
                         'orig' => 'quality',
-                        'reqd' => false,
                         'type' => '`$INTEGER`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'scroll_page',
                         'orig' => 'scroll_page',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'https://example.com',
                         'kind' => 'query',
                         'name' => 'url',
@@ -679,12 +530,10 @@ class LatchshotScreenshotConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => 1440,
                         'kind' => 'query',
                         'name' => 'width',
                         'orig' => 'width',
-                        'reqd' => false,
                         'type' => '`$INTEGER`',
                       ],
                     ],
@@ -717,10 +566,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -730,123 +577,89 @@ class LatchshotScreenshotConfig
         'safety_review_request' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'currentControls',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'desiredOutcome',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'email',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'id',
               'req' => true,
               'type' => '`$INTEGER`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'language',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'primaryConcern',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'replyConsent',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'repositoryAuthority',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 8,
             ],
             [
-              'active' => true,
               'name' => 'repositoryUrl',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 9,
             ],
             [
-              'active' => true,
               'name' => 'routePath',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 10,
             ],
             [
-              'active' => true,
               'name' => 'runtime',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 11,
             ],
             [
-              'active' => true,
               'name' => 'safetyAcknowledged',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 12,
             ],
             [
-              'active' => true,
               'name' => 'startBoundaryAcknowledged',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 13,
             ],
             [
-              'active' => true,
               'name' => 'status',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 14,
             ],
             [
-              'active' => true,
               'name' => 'testEvidence',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 15,
             ],
             [
-              'active' => true,
               'name' => 'updatedAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 16,
             ],
           ],
           'name' => 'safety_review_request',
@@ -856,7 +669,6 @@ class LatchshotScreenshotConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -870,10 +682,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.request`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -883,39 +693,25 @@ class LatchshotScreenshotConfig
         'trial' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'consent',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'email',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'expectedRenders',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'name',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'useCase',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
           ],
           'name' => 'trial',
@@ -925,7 +721,6 @@ class LatchshotScreenshotConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -939,10 +734,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.trial`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -952,60 +745,43 @@ class LatchshotScreenshotConfig
         'upgrade' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'consent',
               'req' => true,
               'type' => '`$BOOLEAN`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'currentPlan',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'id',
               'req' => true,
               'type' => '`$INTEGER`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'note',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'requestedPlan',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'status',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'updatedAt',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 7,
             ],
           ],
           'name' => 'upgrade',
@@ -1015,7 +791,6 @@ class LatchshotScreenshotConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -1029,10 +804,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.request`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -1042,32 +815,24 @@ class LatchshotScreenshotConfig
         'usage' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'customer',
               'req' => true,
               'type' => '`$OBJECT`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'links',
               'req' => true,
               'type' => '`$OBJECT`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'upgradeRequest',
               'req' => true,
               'type' => '`$ANY`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'usage',
               'req' => true,
               'type' => '`$OBJECT`',
-              'index$' => 3,
             ],
           ],
           'name' => 'usage',
@@ -1077,7 +842,6 @@ class LatchshotScreenshotConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
@@ -1091,10 +855,8 @@ class LatchshotScreenshotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.usage`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [

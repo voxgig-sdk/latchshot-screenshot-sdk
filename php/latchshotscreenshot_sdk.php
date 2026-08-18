@@ -40,7 +40,7 @@ class LatchshotScreenshotSDK
         $utility = new LatchshotScreenshotUtility();
         $this->_utility = $utility;
 
-        $config = LatchshotScreenshotConfig::make_config();
+        $config = LatchshotScreenshotConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

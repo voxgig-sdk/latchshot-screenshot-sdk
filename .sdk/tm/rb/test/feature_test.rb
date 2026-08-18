@@ -15,7 +15,7 @@ require_relative "../LatchshotScreenshot_sdk"
 module LatchshotScreenshotFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = LatchshotScreenshotConfig.make_config["feature"]
+    f = LatchshotScreenshotConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 
