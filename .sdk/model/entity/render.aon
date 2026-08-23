@@ -1,0 +1,159 @@
+# Entity: render
+
+main: kit: entity: render: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "blockAds"
+      req: false
+      short: "Best-effort blocking of requests to known third-party ad hosts."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "blockChats"
+      req: false
+      short: "Best-effort blocking and hiding of known third-party chat widgets."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "blockTrackers"
+      req: false
+      short: "Best-effort blocking of requests to known third-party analytics and tracker hosts."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "darkMode"
+      req: false
+      short: "Emulate a dark color-scheme preference."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "delay"
+      req: false
+      short: "Additional bounded wait in milliseconds after the lifecycle event."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "format"
+      req: false
+      short: "Exact artifact format."
+      type: "`$STRING`"
+    }
+    {
+      name: "fullPage"
+      req: false
+      short: "Capture the bounded full document height for screenshots."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "height"
+      req: false
+      short: "Viewport height in CSS pixels."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "hideCookieBanners"
+      req: false
+      short: "Hide common cookie-consent overlays after loading."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "hidePopups"
+      req: false
+      short: "Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "kind"
+      req: false
+      short: "Artifact family to return."
+      type: "`$STRING`"
+    }
+    {
+      name: "landscape"
+      req: false
+      short: "Use landscape orientation for PDF rendering."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "paper"
+      req: false
+      short: "Paper size used for PDF rendering."
+      type: "`$STRING`"
+    }
+    {
+      name: "quality"
+      req: false
+      short: "JPEG encoding quality."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "reducedMotion"
+      req: false
+      short: "Emulate reduced motion to improve capture stability."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "scale"
+      req: false
+      short: "Device scale factor used for image capture."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "scrollPage"
+      req: false
+      short: "Deterministically scroll before capture to activate lazy content."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "timeout"
+      req: false
+      short: "Navigation timeout in milliseconds."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "url"
+      req: true
+      short: "Public HTTP or HTTPS page URL."
+      type: "`$STRING`"
+    }
+    {
+      name: "waitUntil"
+      req: false
+      short: "Browser lifecycle event awaited before the optional delay."
+      type: "`$STRING`"
+    }
+    {
+      name: "width"
+      req: false
+      short: "Viewport width in CSS pixels."
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "render"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/v1/render"
+          parts: [
+            "v1"
+            "render"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

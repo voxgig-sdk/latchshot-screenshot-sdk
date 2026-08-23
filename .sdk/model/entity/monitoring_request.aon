@@ -1,0 +1,110 @@
+# Entity: monitoring_request
+
+main: kit: entity: monitoring_request: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "changeContext"
+      req: false
+      short: "Optional non-sensitive description of what the weekly owner-written note should call out."
+      type: "`$STRING`"
+    }
+    {
+      name: "createdAt"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      short: "Address the owner may use only to reply about this monitoring request."
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "monitoringGoal"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "pageCount"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "pageUrl"
+      req: true
+      short: "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment."
+      type: "`$STRING`"
+    }
+    {
+      name: "publicPageAuthority"
+      req: true
+      short: "Confirms authority to request recurring captures of every proposed public page."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "replyConsent"
+      req: true
+      short: "Allows the owner to email only about this monitoring-pilot request."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "safetyAcknowledged"
+      req: true
+      short: "Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "startBoundaryAcknowledged"
+      req: true
+      short: "Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updatedAt"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "monitoring_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/monitoring-requests"
+          parts: [
+            "api"
+            "monitoring-requests"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.request`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

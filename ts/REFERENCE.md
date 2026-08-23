@@ -265,17 +265,17 @@ const monitoring_request = client.MonitoringRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `changeContext` | `string` | No |  |
+| `changeContext` | `string` | No | Optional non-sensitive description of what the weekly owner-written note should call out. |
 | `createdAt` | `string` | Yes |  |
-| `email` | `string` | Yes |  |
+| `email` | `string` | Yes | Address the owner may use only to reply about this monitoring request. |
 | `id` | `number` | Yes |  |
 | `monitoringGoal` | `string` | Yes |  |
 | `pageCount` | `string` | Yes |  |
-| `pageUrl` | `string` | Yes |  |
-| `publicPageAuthority` | `boolean` | Yes |  |
-| `replyConsent` | `boolean` | Yes |  |
-| `safetyAcknowledged` | `boolean` | Yes |  |
-| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `pageUrl` | `string` | Yes | One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment. |
+| `publicPageAuthority` | `boolean` | Yes | Confirms authority to request recurring captures of every proposed public page. |
+| `replyConsent` | `boolean` | Yes | Allows the owner to email only about this monitoring-pilot request. |
+| `safetyAcknowledged` | `boolean` | Yes | Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information. |
+| `startBoundaryAcknowledged` | `boolean` | Yes | Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation. |
 | `status` | `string` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 
@@ -340,21 +340,21 @@ const pilot_request = client.PilotRequest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `acceptanceSample` | `string` | No |  |
-| `callSite` | `string` | Yes |  |
+| `acceptanceSample` | `string` | No | Optional safe description of one maintainer-approved public page and required artifact shape. |
+| `callSite` | `string` | Yes | Optional relative repository file path for the existing backend provider call. |
 | `createdAt` | `string` | Yes |  |
-| `currentContract` | `string` | No |  |
-| `email` | `string` | Yes |  |
+| `currentContract` | `string` | No | Optional non-secret current request, synchronous output, and application-owned byte handling. |
+| `email` | `string` | Yes | Address the owner may use only to reply about this pilot request. |
 | `expectedRenders` | `string` | No |  |
 | `id` | `number` | Yes |  |
 | `language` | `string` | No |  |
 | `provider` | `string` | No |  |
-| `replyConsent` | `boolean` | Yes |  |
-| `repositoryAuthority` | `boolean` | Yes |  |
-| `repositoryUrl` | `string` | Yes |  |
-| `requiredBehavior` | `string` | No |  |
-| `safetyAcknowledged` | `boolean` | Yes |  |
-| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `replyConsent` | `boolean` | Yes | Allows the owner to email only about this pilot request. |
+| `repositoryAuthority` | `boolean` | Yes | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | `string` | Yes | Exact public GitHub repository under the requester's control. |
+| `requiredBehavior` | `string` | No | Optional provider behavior that must be preserved. |
+| `safetyAcknowledged` | `boolean` | Yes | Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | `boolean` | Yes | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` | `string` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 
@@ -440,27 +440,27 @@ const render = client.Render()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `blockAds` | `boolean` | No |  |
-| `blockChats` | `boolean` | No |  |
-| `blockTrackers` | `boolean` | No |  |
-| `darkMode` | `boolean` | No |  |
-| `delay` | `number` | No |  |
-| `format` | `string` | No |  |
-| `fullPage` | `boolean` | No |  |
-| `height` | `number` | No |  |
-| `hideCookieBanners` | `boolean` | No |  |
-| `hidePopups` | `boolean` | No |  |
-| `kind` | `string` | No |  |
-| `landscape` | `boolean` | No |  |
-| `paper` | `string` | No |  |
-| `quality` | `number` | No |  |
-| `reducedMotion` | `boolean` | No |  |
-| `scale` | `number` | No |  |
-| `scrollPage` | `boolean` | No |  |
-| `timeout` | `number` | No |  |
-| `url` | `string` | Yes |  |
-| `waitUntil` | `string` | No |  |
-| `width` | `number` | No |  |
+| `blockAds` | `boolean` | No | Best-effort blocking of requests to known third-party ad hosts. |
+| `blockChats` | `boolean` | No | Best-effort blocking and hiding of known third-party chat widgets. |
+| `blockTrackers` | `boolean` | No | Best-effort blocking of requests to known third-party analytics and tracker hosts. |
+| `darkMode` | `boolean` | No | Emulate a dark color-scheme preference. |
+| `delay` | `number` | No | Additional bounded wait in milliseconds after the lifecycle event. |
+| `format` | `string` | No | Exact artifact format. |
+| `fullPage` | `boolean` | No | Capture the bounded full document height for screenshots. |
+| `height` | `number` | No | Viewport height in CSS pixels. |
+| `hideCookieBanners` | `boolean` | No | Hide common cookie-consent overlays after loading. |
+| `hidePopups` | `boolean` | No | Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state. |
+| `kind` | `string` | No | Artifact family to return. |
+| `landscape` | `boolean` | No | Use landscape orientation for PDF rendering. |
+| `paper` | `string` | No | Paper size used for PDF rendering. |
+| `quality` | `number` | No | JPEG encoding quality. |
+| `reducedMotion` | `boolean` | No | Emulate reduced motion to improve capture stability. |
+| `scale` | `number` | No | Device scale factor used for image capture. |
+| `scrollPage` | `boolean` | No | Deterministically scroll before capture to activate lazy content. |
+| `timeout` | `number` | No | Navigation timeout in milliseconds. |
+| `url` | `string` | Yes | Public HTTP or HTTPS page URL. |
+| `waitUntil` | `string` | No | Browser lifecycle event awaited before the optional delay. |
+| `width` | `number` | No | Viewport width in CSS pixels. |
 
 ### Operations
 
@@ -557,21 +557,21 @@ const safety_review_request = client.SafetyReviewRequest()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `createdAt` | `string` | Yes |  |
-| `currentControls` | `string` | Yes |  |
-| `desiredOutcome` | `string` | Yes |  |
-| `email` | `string` | Yes |  |
+| `currentControls` | `string` | Yes | Non-secret current URL, network, browser, resource, and caller controls. |
+| `desiredOutcome` | `string` | Yes | Requested risk report, focused patch, regression tests, and handoff outcome. |
+| `email` | `string` | Yes | Address the owner may use only to reply about this safety-review request. |
 | `id` | `number` | Yes |  |
 | `language` | `string` | Yes |  |
 | `primaryConcern` | `string` | Yes |  |
-| `replyConsent` | `boolean` | Yes |  |
-| `repositoryAuthority` | `boolean` | Yes |  |
-| `repositoryUrl` | `string` | Yes |  |
-| `routePath` | `string` | Yes |  |
+| `replyConsent` | `boolean` | Yes | Allows the owner to email only about this safety-review request. |
+| `repositoryAuthority` | `boolean` | Yes | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | `string` | Yes | Exact public GitHub repository under the requester's control. |
+| `routePath` | `string` | Yes | One relative repository file path for the existing screenshot endpoint or worker. |
 | `runtime` | `string` | Yes |  |
-| `safetyAcknowledged` | `boolean` | Yes |  |
-| `startBoundaryAcknowledged` | `boolean` | Yes |  |
+| `safetyAcknowledged` | `boolean` | Yes | Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | `boolean` | Yes | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` | `string` | Yes |  |
-| `testEvidence` | `string` | Yes |  |
+| `testEvidence` | `string` | Yes | Non-sensitive description of current happy-path and rejection tests, or none. |
 | `updatedAt` | `string` | Yes |  |
 
 ### Operations
@@ -640,11 +640,11 @@ const trial = client.Trial()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `consent` | `boolean` | No |  |
-| `email` | `string` | Yes |  |
+| `consent` | `boolean` | No | Optional permission for the owner to send product-fit guidance. |
+| `email` | `string` | Yes | Email used to enforce one lifetime Free-plan key. |
 | `expectedRenders` | `string` | No |  |
-| `name` | `string` | No |  |
-| `useCase` | `string` | No |  |
+| `name` | `string` | No | Optional display name for owner review. |
+| `useCase` | `string` | No | Optional public-page capture use case. |
 
 ### Operations
 
@@ -762,8 +762,8 @@ const usage = client.Usage()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `customer` | `Record<string, any>` | Yes |  |
-| `links` | `Record<string, any>` | Yes |  |
-| `upgradeRequest` | `any` | Yes |  |
+| `links` | `Record<string, any>` | Yes | Stable self-serve continuation links. |
+| `upgradeRequest` | `any` | Yes | Latest paid-plan request attached to this key, or null when none exists. |
 | `usage` | `Record<string, any>` | Yes |  |
 
 ### Operations

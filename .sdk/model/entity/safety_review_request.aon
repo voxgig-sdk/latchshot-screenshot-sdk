@@ -1,0 +1,133 @@
+# Entity: safety_review_request
+
+main: kit: entity: safety_review_request: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "createdAt"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "currentControls"
+      req: true
+      short: "Non-secret current URL, network, browser, resource, and caller controls."
+      type: "`$STRING`"
+    }
+    {
+      name: "desiredOutcome"
+      req: true
+      short: "Requested risk report, focused patch, regression tests, and handoff outcome."
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      short: "Address the owner may use only to reply about this safety-review request."
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "language"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "primaryConcern"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "replyConsent"
+      req: true
+      short: "Allows the owner to email only about this safety-review request."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repositoryAuthority"
+      req: true
+      short: "Confirms authority to review, merge, deploy, and roll back the public repository change."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repositoryUrl"
+      req: true
+      short: "Exact public GitHub repository under the requester's control."
+      type: "`$STRING`"
+    }
+    {
+      name: "routePath"
+      req: true
+      short: "One relative repository file path for the existing screenshot endpoint or worker."
+      type: "`$STRING`"
+    }
+    {
+      name: "runtime"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "safetyAcknowledged"
+      req: true
+      short: "Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "startBoundaryAcknowledged"
+      req: true
+      short: "Confirms that no payment or work starts before separate owner confirmation."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "testEvidence"
+      req: true
+      short: "Non-sensitive description of current happy-path and rejection tests, or none."
+      type: "`$STRING`"
+    }
+    {
+      name: "updatedAt"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "safety_review_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/safety-review-requests"
+          parts: [
+            "api"
+            "safety-review-requests"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.request`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

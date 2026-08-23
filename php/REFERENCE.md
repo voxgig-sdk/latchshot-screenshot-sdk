@@ -179,17 +179,17 @@ $monitoring_request = $client->MonitoringRequest();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `changeContext` | `string` | No |  |
+| `changeContext` | `string` | No | Optional non-sensitive description of what the weekly owner-written note should call out. |
 | `createdAt` | `string` | Yes |  |
-| `email` | `string` | Yes |  |
+| `email` | `string` | Yes | Address the owner may use only to reply about this monitoring request. |
 | `id` | `int` | Yes |  |
 | `monitoringGoal` | `string` | Yes |  |
 | `pageCount` | `string` | Yes |  |
-| `pageUrl` | `string` | Yes |  |
-| `publicPageAuthority` | `bool` | Yes |  |
-| `replyConsent` | `bool` | Yes |  |
-| `safetyAcknowledged` | `bool` | Yes |  |
-| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `pageUrl` | `string` | Yes | One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment. |
+| `publicPageAuthority` | `bool` | Yes | Confirms authority to request recurring captures of every proposed public page. |
+| `replyConsent` | `bool` | Yes | Allows the owner to email only about this monitoring-pilot request. |
+| `safetyAcknowledged` | `bool` | Yes | Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information. |
+| `startBoundaryAcknowledged` | `bool` | Yes | Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation. |
 | `status` | `string` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 
@@ -256,21 +256,21 @@ $pilot_request = $client->PilotRequest();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `acceptanceSample` | `string` | No |  |
-| `callSite` | `string` | Yes |  |
+| `acceptanceSample` | `string` | No | Optional safe description of one maintainer-approved public page and required artifact shape. |
+| `callSite` | `string` | Yes | Optional relative repository file path for the existing backend provider call. |
 | `createdAt` | `string` | Yes |  |
-| `currentContract` | `string` | No |  |
-| `email` | `string` | Yes |  |
+| `currentContract` | `string` | No | Optional non-secret current request, synchronous output, and application-owned byte handling. |
+| `email` | `string` | Yes | Address the owner may use only to reply about this pilot request. |
 | `expectedRenders` | `string` | No |  |
 | `id` | `int` | Yes |  |
 | `language` | `string` | No |  |
 | `provider` | `string` | No |  |
-| `replyConsent` | `bool` | Yes |  |
-| `repositoryAuthority` | `bool` | Yes |  |
-| `repositoryUrl` | `string` | Yes |  |
-| `requiredBehavior` | `string` | No |  |
-| `safetyAcknowledged` | `bool` | Yes |  |
-| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `replyConsent` | `bool` | Yes | Allows the owner to email only about this pilot request. |
+| `repositoryAuthority` | `bool` | Yes | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | `string` | Yes | Exact public GitHub repository under the requester's control. |
+| `requiredBehavior` | `string` | No | Optional provider behavior that must be preserved. |
+| `safetyAcknowledged` | `bool` | Yes | Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | `bool` | Yes | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` | `string` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 
@@ -358,27 +358,27 @@ $render = $client->Render();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `blockAds` | `bool` | No |  |
-| `blockChats` | `bool` | No |  |
-| `blockTrackers` | `bool` | No |  |
-| `darkMode` | `bool` | No |  |
-| `delay` | `int` | No |  |
-| `format` | `string` | No |  |
-| `fullPage` | `bool` | No |  |
-| `height` | `int` | No |  |
-| `hideCookieBanners` | `bool` | No |  |
-| `hidePopups` | `bool` | No |  |
-| `kind` | `string` | No |  |
-| `landscape` | `bool` | No |  |
-| `paper` | `string` | No |  |
-| `quality` | `int` | No |  |
-| `reducedMotion` | `bool` | No |  |
-| `scale` | `int` | No |  |
-| `scrollPage` | `bool` | No |  |
-| `timeout` | `int` | No |  |
-| `url` | `string` | Yes |  |
-| `waitUntil` | `string` | No |  |
-| `width` | `int` | No |  |
+| `blockAds` | `bool` | No | Best-effort blocking of requests to known third-party ad hosts. |
+| `blockChats` | `bool` | No | Best-effort blocking and hiding of known third-party chat widgets. |
+| `blockTrackers` | `bool` | No | Best-effort blocking of requests to known third-party analytics and tracker hosts. |
+| `darkMode` | `bool` | No | Emulate a dark color-scheme preference. |
+| `delay` | `int` | No | Additional bounded wait in milliseconds after the lifecycle event. |
+| `format` | `string` | No | Exact artifact format. |
+| `fullPage` | `bool` | No | Capture the bounded full document height for screenshots. |
+| `height` | `int` | No | Viewport height in CSS pixels. |
+| `hideCookieBanners` | `bool` | No | Hide common cookie-consent overlays after loading. |
+| `hidePopups` | `bool` | No | Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state. |
+| `kind` | `string` | No | Artifact family to return. |
+| `landscape` | `bool` | No | Use landscape orientation for PDF rendering. |
+| `paper` | `string` | No | Paper size used for PDF rendering. |
+| `quality` | `int` | No | JPEG encoding quality. |
+| `reducedMotion` | `bool` | No | Emulate reduced motion to improve capture stability. |
+| `scale` | `int` | No | Device scale factor used for image capture. |
+| `scrollPage` | `bool` | No | Deterministically scroll before capture to activate lazy content. |
+| `timeout` | `int` | No | Navigation timeout in milliseconds. |
+| `url` | `string` | Yes | Public HTTP or HTTPS page URL. |
+| `waitUntil` | `string` | No | Browser lifecycle event awaited before the optional delay. |
+| `width` | `int` | No | Viewport width in CSS pixels. |
 
 ### Operations
 
@@ -479,21 +479,21 @@ $safety_review_request = $client->SafetyReviewRequest();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `createdAt` | `string` | Yes |  |
-| `currentControls` | `string` | Yes |  |
-| `desiredOutcome` | `string` | Yes |  |
-| `email` | `string` | Yes |  |
+| `currentControls` | `string` | Yes | Non-secret current URL, network, browser, resource, and caller controls. |
+| `desiredOutcome` | `string` | Yes | Requested risk report, focused patch, regression tests, and handoff outcome. |
+| `email` | `string` | Yes | Address the owner may use only to reply about this safety-review request. |
 | `id` | `int` | Yes |  |
 | `language` | `string` | Yes |  |
 | `primaryConcern` | `string` | Yes |  |
-| `replyConsent` | `bool` | Yes |  |
-| `repositoryAuthority` | `bool` | Yes |  |
-| `repositoryUrl` | `string` | Yes |  |
-| `routePath` | `string` | Yes |  |
+| `replyConsent` | `bool` | Yes | Allows the owner to email only about this safety-review request. |
+| `repositoryAuthority` | `bool` | Yes | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | `string` | Yes | Exact public GitHub repository under the requester's control. |
+| `routePath` | `string` | Yes | One relative repository file path for the existing screenshot endpoint or worker. |
 | `runtime` | `string` | Yes |  |
-| `safetyAcknowledged` | `bool` | Yes |  |
-| `startBoundaryAcknowledged` | `bool` | Yes |  |
+| `safetyAcknowledged` | `bool` | Yes | Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | `bool` | Yes | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` | `string` | Yes |  |
-| `testEvidence` | `string` | Yes |  |
+| `testEvidence` | `string` | Yes | Non-sensitive description of current happy-path and rejection tests, or none. |
 | `updatedAt` | `string` | Yes |  |
 
 ### Operations
@@ -564,11 +564,11 @@ $trial = $client->Trial();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `consent` | `bool` | No |  |
-| `email` | `string` | Yes |  |
+| `consent` | `bool` | No | Optional permission for the owner to send product-fit guidance. |
+| `email` | `string` | Yes | Email used to enforce one lifetime Free-plan key. |
 | `expectedRenders` | `string` | No |  |
-| `name` | `string` | No |  |
-| `useCase` | `string` | No |  |
+| `name` | `string` | No | Optional display name for owner review. |
+| `useCase` | `string` | No | Optional public-page capture use case. |
 
 ### Operations
 
@@ -690,8 +690,8 @@ $usage = $client->Usage();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `customer` | `array` | Yes |  |
-| `links` | `array` | Yes |  |
-| `upgradeRequest` | `mixed` | Yes |  |
+| `links` | `array` | Yes | Stable self-serve continuation links. |
+| `upgradeRequest` | `mixed` | Yes | Latest paid-plan request attached to this key, or null when none exists. |
 | `usage` | `array` | Yes |  |
 
 ### Operations

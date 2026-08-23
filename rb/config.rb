@@ -19,6 +19,9 @@ module LatchshotScreenshotConfig
     {
       "main" => {
         "name" => "LatchshotScreenshot",
+        "slug" => "latchshot-screenshot",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -97,6 +100,7 @@ module LatchshotScreenshotConfig
           "fields" => [
             {
               "name" => "changeContext",
+              "short" => "Optional non-sensitive description of what the weekly owner-written note should call out.",
               "type" => "`$STRING`",
             },
             {
@@ -107,6 +111,7 @@ module LatchshotScreenshotConfig
             {
               "name" => "email",
               "req" => true,
+              "short" => "Address the owner may use only to reply about this monitoring request.",
               "type" => "`$STRING`",
             },
             {
@@ -127,26 +132,31 @@ module LatchshotScreenshotConfig
             {
               "name" => "pageUrl",
               "req" => true,
+              "short" => "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.",
               "type" => "`$STRING`",
             },
             {
               "name" => "publicPageAuthority",
               "req" => true,
+              "short" => "Confirms authority to request recurring captures of every proposed public page.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "replyConsent",
               "req" => true,
+              "short" => "Allows the owner to email only about this monitoring-pilot request.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "safetyAcknowledged",
               "req" => true,
+              "short" => "Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "startBoundaryAcknowledged",
               "req" => true,
+              "short" => "Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation.",
               "type" => "`$BOOLEAN`",
             },
             {
@@ -192,6 +202,7 @@ module LatchshotScreenshotConfig
           "fields" => [
             {
               "name" => "acceptanceSample",
+              "short" => "Optional safe description of one maintainer-approved public page and required artifact shape.",
               "type" => "`$STRING`",
             },
             {
@@ -202,6 +213,7 @@ module LatchshotScreenshotConfig
                 },
               },
               "req" => true,
+              "short" => "Optional relative repository file path for the existing backend provider call.",
               "type" => "`$STRING`",
             },
             {
@@ -211,11 +223,13 @@ module LatchshotScreenshotConfig
             },
             {
               "name" => "currentContract",
+              "short" => "Optional non-secret current request, synchronous output, and application-owned byte handling.",
               "type" => "`$STRING`",
             },
             {
               "name" => "email",
               "req" => true,
+              "short" => "Address the owner may use only to reply about this pilot request.",
               "type" => "`$STRING`",
             },
             {
@@ -238,30 +252,36 @@ module LatchshotScreenshotConfig
             {
               "name" => "replyConsent",
               "req" => true,
+              "short" => "Allows the owner to email only about this pilot request.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "repositoryAuthority",
               "req" => true,
+              "short" => "Confirms authority to review, merge, deploy, and roll back the public repository change.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "repositoryUrl",
               "req" => true,
+              "short" => "Exact public GitHub repository under the requester's control.",
               "type" => "`$STRING`",
             },
             {
               "name" => "requiredBehavior",
+              "short" => "Optional provider behavior that must be preserved.",
               "type" => "`$STRING`",
             },
             {
               "name" => "safetyAcknowledged",
               "req" => true,
+              "short" => "Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "startBoundaryAcknowledged",
               "req" => true,
+              "short" => "Confirms that no payment or work starts before separate owner confirmation.",
               "type" => "`$BOOLEAN`",
             },
             {
@@ -307,87 +327,108 @@ module LatchshotScreenshotConfig
           "fields" => [
             {
               "name" => "blockAds",
+              "short" => "Best-effort blocking of requests to known third-party ad hosts.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "blockChats",
+              "short" => "Best-effort blocking and hiding of known third-party chat widgets.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "blockTrackers",
+              "short" => "Best-effort blocking of requests to known third-party analytics and tracker hosts.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "darkMode",
+              "short" => "Emulate a dark color-scheme preference.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "delay",
+              "short" => "Additional bounded wait in milliseconds after the lifecycle event.",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "format",
+              "short" => "Exact artifact format.",
               "type" => "`$STRING`",
             },
             {
               "name" => "fullPage",
+              "short" => "Capture the bounded full document height for screenshots.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "height",
+              "short" => "Viewport height in CSS pixels.",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "hideCookieBanners",
+              "short" => "Hide common cookie-consent overlays after loading.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "hidePopups",
+              "short" => "Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "kind",
+              "short" => "Artifact family to return.",
               "type" => "`$STRING`",
             },
             {
               "name" => "landscape",
+              "short" => "Use landscape orientation for PDF rendering.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "paper",
+              "short" => "Paper size used for PDF rendering.",
               "type" => "`$STRING`",
             },
             {
               "name" => "quality",
+              "short" => "JPEG encoding quality.",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "reducedMotion",
+              "short" => "Emulate reduced motion to improve capture stability.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "scale",
+              "short" => "Device scale factor used for image capture.",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "scrollPage",
+              "short" => "Deterministically scroll before capture to activate lazy content.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "timeout",
+              "short" => "Navigation timeout in milliseconds.",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "url",
               "req" => true,
+              "short" => "Public HTTP or HTTPS page URL.",
               "type" => "`$STRING`",
             },
             {
               "name" => "waitUntil",
+              "short" => "Browser lifecycle event awaited before the optional delay.",
               "type" => "`$STRING`",
             },
             {
               "name" => "width",
+              "short" => "Viewport width in CSS pixels.",
               "type" => "`$INTEGER`",
             },
           ],
@@ -570,16 +611,19 @@ module LatchshotScreenshotConfig
             {
               "name" => "currentControls",
               "req" => true,
+              "short" => "Non-secret current URL, network, browser, resource, and caller controls.",
               "type" => "`$STRING`",
             },
             {
               "name" => "desiredOutcome",
               "req" => true,
+              "short" => "Requested risk report, focused patch, regression tests, and handoff outcome.",
               "type" => "`$STRING`",
             },
             {
               "name" => "email",
               "req" => true,
+              "short" => "Address the owner may use only to reply about this safety-review request.",
               "type" => "`$STRING`",
             },
             {
@@ -600,21 +644,25 @@ module LatchshotScreenshotConfig
             {
               "name" => "replyConsent",
               "req" => true,
+              "short" => "Allows the owner to email only about this safety-review request.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "repositoryAuthority",
               "req" => true,
+              "short" => "Confirms authority to review, merge, deploy, and roll back the public repository change.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "repositoryUrl",
               "req" => true,
+              "short" => "Exact public GitHub repository under the requester's control.",
               "type" => "`$STRING`",
             },
             {
               "name" => "routePath",
               "req" => true,
+              "short" => "One relative repository file path for the existing screenshot endpoint or worker.",
               "type" => "`$STRING`",
             },
             {
@@ -625,11 +673,13 @@ module LatchshotScreenshotConfig
             {
               "name" => "safetyAcknowledged",
               "req" => true,
+              "short" => "Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "startBoundaryAcknowledged",
               "req" => true,
+              "short" => "Confirms that no payment or work starts before separate owner confirmation.",
               "type" => "`$BOOLEAN`",
             },
             {
@@ -640,6 +690,7 @@ module LatchshotScreenshotConfig
             {
               "name" => "testEvidence",
               "req" => true,
+              "short" => "Non-sensitive description of current happy-path and rejection tests, or none.",
               "type" => "`$STRING`",
             },
             {
@@ -680,11 +731,13 @@ module LatchshotScreenshotConfig
           "fields" => [
             {
               "name" => "consent",
+              "short" => "Optional permission for the owner to send product-fit guidance.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "email",
               "req" => true,
+              "short" => "Email used to enforce one lifetime Free-plan key.",
               "type" => "`$STRING`",
             },
             {
@@ -693,10 +746,12 @@ module LatchshotScreenshotConfig
             },
             {
               "name" => "name",
+              "short" => "Optional display name for owner review.",
               "type" => "`$STRING`",
             },
             {
               "name" => "useCase",
+              "short" => "Optional public-page capture use case.",
               "type" => "`$STRING`",
             },
           ],
@@ -808,11 +863,13 @@ module LatchshotScreenshotConfig
             {
               "name" => "links",
               "req" => true,
+              "short" => "Stable self-serve continuation links.",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "upgradeRequest",
               "req" => true,
+              "short" => "Latest paid-plan request attached to this key, or null when none exists.",
               "type" => "`$ANY`",
             },
             {

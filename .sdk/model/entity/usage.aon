@@ -1,0 +1,55 @@
+# Entity: usage
+
+main: kit: entity: usage: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "customer"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "links"
+      req: true
+      short: "Stable self-serve continuation links."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "upgradeRequest"
+      req: true
+      short: "Latest paid-plan request attached to this key, or null when none exists."
+      type: "`$ANY`"
+    }
+    {
+      name: "usage"
+      req: true
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "usage"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/v1/usage"
+          parts: [
+            "v1"
+            "usage"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.usage`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -312,17 +312,17 @@ API path: `/healthz`
 
 | Field | Description |
 | --- | --- |
-| `changeContext` |  |
+| `changeContext` | Optional non-sensitive description of what the weekly owner-written note should call out. |
 | `createdAt` |  |
-| `email` |  |
+| `email` | Address the owner may use only to reply about this monitoring request. |
 | `id` |  |
 | `monitoringGoal` |  |
 | `pageCount` |  |
-| `pageUrl` |  |
-| `publicPageAuthority` |  |
-| `replyConsent` |  |
-| `safetyAcknowledged` |  |
-| `startBoundaryAcknowledged` |  |
+| `pageUrl` | One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment. |
+| `publicPageAuthority` | Confirms authority to request recurring captures of every proposed public page. |
+| `replyConsent` | Allows the owner to email only about this monitoring-pilot request. |
+| `safetyAcknowledged` | Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information. |
+| `startBoundaryAcknowledged` | Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation. |
 | `status` |  |
 | `updatedAt` |  |
 
@@ -334,21 +334,21 @@ API path: `/api/monitoring-requests`
 
 | Field | Description |
 | --- | --- |
-| `acceptanceSample` |  |
-| `callSite` |  |
+| `acceptanceSample` | Optional safe description of one maintainer-approved public page and required artifact shape. |
+| `callSite` | Optional relative repository file path for the existing backend provider call. |
 | `createdAt` |  |
-| `currentContract` |  |
-| `email` |  |
+| `currentContract` | Optional non-secret current request, synchronous output, and application-owned byte handling. |
+| `email` | Address the owner may use only to reply about this pilot request. |
 | `expectedRenders` |  |
 | `id` |  |
 | `language` |  |
 | `provider` |  |
-| `replyConsent` |  |
-| `repositoryAuthority` |  |
-| `repositoryUrl` |  |
-| `requiredBehavior` |  |
-| `safetyAcknowledged` |  |
-| `startBoundaryAcknowledged` |  |
+| `replyConsent` | Allows the owner to email only about this pilot request. |
+| `repositoryAuthority` | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | Exact public GitHub repository under the requester's control. |
+| `requiredBehavior` | Optional provider behavior that must be preserved. |
+| `safetyAcknowledged` | Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` |  |
 | `updatedAt` |  |
 
@@ -360,27 +360,27 @@ API path: `/api/pilot-requests`
 
 | Field | Description |
 | --- | --- |
-| `blockAds` |  |
-| `blockChats` |  |
-| `blockTrackers` |  |
-| `darkMode` |  |
-| `delay` |  |
-| `format` |  |
-| `fullPage` |  |
-| `height` |  |
-| `hideCookieBanners` |  |
-| `hidePopups` |  |
-| `kind` |  |
-| `landscape` |  |
-| `paper` |  |
-| `quality` |  |
-| `reducedMotion` |  |
-| `scale` |  |
-| `scrollPage` |  |
-| `timeout` |  |
-| `url` |  |
-| `waitUntil` |  |
-| `width` |  |
+| `blockAds` | Best-effort blocking of requests to known third-party ad hosts. |
+| `blockChats` | Best-effort blocking and hiding of known third-party chat widgets. |
+| `blockTrackers` | Best-effort blocking of requests to known third-party analytics and tracker hosts. |
+| `darkMode` | Emulate a dark color-scheme preference. |
+| `delay` | Additional bounded wait in milliseconds after the lifecycle event. |
+| `format` | Exact artifact format. |
+| `fullPage` | Capture the bounded full document height for screenshots. |
+| `height` | Viewport height in CSS pixels. |
+| `hideCookieBanners` | Hide common cookie-consent overlays after loading. |
+| `hidePopups` | Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state. |
+| `kind` | Artifact family to return. |
+| `landscape` | Use landscape orientation for PDF rendering. |
+| `paper` | Paper size used for PDF rendering. |
+| `quality` | JPEG encoding quality. |
+| `reducedMotion` | Emulate reduced motion to improve capture stability. |
+| `scale` | Device scale factor used for image capture. |
+| `scrollPage` | Deterministically scroll before capture to activate lazy content. |
+| `timeout` | Navigation timeout in milliseconds. |
+| `url` | Public HTTP or HTTPS page URL. |
+| `waitUntil` | Browser lifecycle event awaited before the optional delay. |
+| `width` | Viewport width in CSS pixels. |
 
 Operations: create.
 
@@ -400,21 +400,21 @@ API path: `/v1/screenshot`
 | Field | Description |
 | --- | --- |
 | `createdAt` |  |
-| `currentControls` |  |
-| `desiredOutcome` |  |
-| `email` |  |
+| `currentControls` | Non-secret current URL, network, browser, resource, and caller controls. |
+| `desiredOutcome` | Requested risk report, focused patch, regression tests, and handoff outcome. |
+| `email` | Address the owner may use only to reply about this safety-review request. |
 | `id` |  |
 | `language` |  |
 | `primaryConcern` |  |
-| `replyConsent` |  |
-| `repositoryAuthority` |  |
-| `repositoryUrl` |  |
-| `routePath` |  |
+| `replyConsent` | Allows the owner to email only about this safety-review request. |
+| `repositoryAuthority` | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | Exact public GitHub repository under the requester's control. |
+| `routePath` | One relative repository file path for the existing screenshot endpoint or worker. |
 | `runtime` |  |
-| `safetyAcknowledged` |  |
-| `startBoundaryAcknowledged` |  |
+| `safetyAcknowledged` | Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` |  |
-| `testEvidence` |  |
+| `testEvidence` | Non-sensitive description of current happy-path and rejection tests, or none. |
 | `updatedAt` |  |
 
 Operations: create.
@@ -425,11 +425,11 @@ API path: `/api/safety-review-requests`
 
 | Field | Description |
 | --- | --- |
-| `consent` |  |
-| `email` |  |
+| `consent` | Optional permission for the owner to send product-fit guidance. |
+| `email` | Email used to enforce one lifetime Free-plan key. |
 | `expectedRenders` |  |
-| `name` |  |
-| `useCase` |  |
+| `name` | Optional display name for owner review. |
+| `useCase` | Optional public-page capture use case. |
 
 Operations: create.
 
@@ -457,8 +457,8 @@ API path: `/v1/upgrade-requests`
 | Field | Description |
 | --- | --- |
 | `customer` |  |
-| `links` |  |
-| `upgradeRequest` |  |
+| `links` | Stable self-serve continuation links. |
+| `upgradeRequest` | Latest paid-plan request attached to this key, or null when none exists. |
 | `usage` |  |
 
 Operations: load.
@@ -509,17 +509,17 @@ Create an instance: `const monitoring_request = client.MonitoringRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `changeContext` | `string` |  |
+| `changeContext` | `string` | Optional non-sensitive description of what the weekly owner-written note should call out. |
 | `createdAt` | `string` |  |
-| `email` | `string` |  |
+| `email` | `string` | Address the owner may use only to reply about this monitoring request. |
 | `id` | `number` |  |
 | `monitoringGoal` | `string` |  |
 | `pageCount` | `string` |  |
-| `pageUrl` | `string` |  |
-| `publicPageAuthority` | `boolean` |  |
-| `replyConsent` | `boolean` |  |
-| `safetyAcknowledged` | `boolean` |  |
-| `startBoundaryAcknowledged` | `boolean` |  |
+| `pageUrl` | `string` | One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment. |
+| `publicPageAuthority` | `boolean` | Confirms authority to request recurring captures of every proposed public page. |
+| `replyConsent` | `boolean` | Allows the owner to email only about this monitoring-pilot request. |
+| `safetyAcknowledged` | `boolean` | Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information. |
+| `startBoundaryAcknowledged` | `boolean` | Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation. |
 | `status` | `string` |  |
 | `updatedAt` | `string` |  |
 
@@ -557,21 +557,21 @@ Create an instance: `const pilot_request = client.PilotRequest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `acceptanceSample` | `string` |  |
-| `callSite` | `string` |  |
+| `acceptanceSample` | `string` | Optional safe description of one maintainer-approved public page and required artifact shape. |
+| `callSite` | `string` | Optional relative repository file path for the existing backend provider call. |
 | `createdAt` | `string` |  |
-| `currentContract` | `string` |  |
-| `email` | `string` |  |
+| `currentContract` | `string` | Optional non-secret current request, synchronous output, and application-owned byte handling. |
+| `email` | `string` | Address the owner may use only to reply about this pilot request. |
 | `expectedRenders` | `string` |  |
 | `id` | `number` |  |
 | `language` | `string` |  |
 | `provider` | `string` |  |
-| `replyConsent` | `boolean` |  |
-| `repositoryAuthority` | `boolean` |  |
-| `repositoryUrl` | `string` |  |
-| `requiredBehavior` | `string` |  |
-| `safetyAcknowledged` | `boolean` |  |
-| `startBoundaryAcknowledged` | `boolean` |  |
+| `replyConsent` | `boolean` | Allows the owner to email only about this pilot request. |
+| `repositoryAuthority` | `boolean` | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | `string` | Exact public GitHub repository under the requester's control. |
+| `requiredBehavior` | `string` | Optional provider behavior that must be preserved. |
+| `safetyAcknowledged` | `boolean` | Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | `boolean` | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` | `string` |  |
 | `updatedAt` | `string` |  |
 
@@ -608,27 +608,27 @@ Create an instance: `const render = client.Render()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `blockAds` | `boolean` |  |
-| `blockChats` | `boolean` |  |
-| `blockTrackers` | `boolean` |  |
-| `darkMode` | `boolean` |  |
-| `delay` | `number` |  |
-| `format` | `string` |  |
-| `fullPage` | `boolean` |  |
-| `height` | `number` |  |
-| `hideCookieBanners` | `boolean` |  |
-| `hidePopups` | `boolean` |  |
-| `kind` | `string` |  |
-| `landscape` | `boolean` |  |
-| `paper` | `string` |  |
-| `quality` | `number` |  |
-| `reducedMotion` | `boolean` |  |
-| `scale` | `number` |  |
-| `scrollPage` | `boolean` |  |
-| `timeout` | `number` |  |
-| `url` | `string` |  |
-| `waitUntil` | `string` |  |
-| `width` | `number` |  |
+| `blockAds` | `boolean` | Best-effort blocking of requests to known third-party ad hosts. |
+| `blockChats` | `boolean` | Best-effort blocking and hiding of known third-party chat widgets. |
+| `blockTrackers` | `boolean` | Best-effort blocking of requests to known third-party analytics and tracker hosts. |
+| `darkMode` | `boolean` | Emulate a dark color-scheme preference. |
+| `delay` | `number` | Additional bounded wait in milliseconds after the lifecycle event. |
+| `format` | `string` | Exact artifact format. |
+| `fullPage` | `boolean` | Capture the bounded full document height for screenshots. |
+| `height` | `number` | Viewport height in CSS pixels. |
+| `hideCookieBanners` | `boolean` | Hide common cookie-consent overlays after loading. |
+| `hidePopups` | `boolean` | Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state. |
+| `kind` | `string` | Artifact family to return. |
+| `landscape` | `boolean` | Use landscape orientation for PDF rendering. |
+| `paper` | `string` | Paper size used for PDF rendering. |
+| `quality` | `number` | JPEG encoding quality. |
+| `reducedMotion` | `boolean` | Emulate reduced motion to improve capture stability. |
+| `scale` | `number` | Device scale factor used for image capture. |
+| `scrollPage` | `boolean` | Deterministically scroll before capture to activate lazy content. |
+| `timeout` | `number` | Navigation timeout in milliseconds. |
+| `url` | `string` | Public HTTP or HTTPS page URL. |
+| `waitUntil` | `string` | Browser lifecycle event awaited before the optional delay. |
+| `width` | `number` | Viewport width in CSS pixels. |
 
 #### Example: Create
 
@@ -671,21 +671,21 @@ Create an instance: `const safety_review_request = client.SafetyReviewRequest()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `createdAt` | `string` |  |
-| `currentControls` | `string` |  |
-| `desiredOutcome` | `string` |  |
-| `email` | `string` |  |
+| `currentControls` | `string` | Non-secret current URL, network, browser, resource, and caller controls. |
+| `desiredOutcome` | `string` | Requested risk report, focused patch, regression tests, and handoff outcome. |
+| `email` | `string` | Address the owner may use only to reply about this safety-review request. |
 | `id` | `number` |  |
 | `language` | `string` |  |
 | `primaryConcern` | `string` |  |
-| `replyConsent` | `boolean` |  |
-| `repositoryAuthority` | `boolean` |  |
-| `repositoryUrl` | `string` |  |
-| `routePath` | `string` |  |
+| `replyConsent` | `boolean` | Allows the owner to email only about this safety-review request. |
+| `repositoryAuthority` | `boolean` | Confirms authority to review, merge, deploy, and roll back the public repository change. |
+| `repositoryUrl` | `string` | Exact public GitHub repository under the requester's control. |
+| `routePath` | `string` | One relative repository file path for the existing screenshot endpoint or worker. |
 | `runtime` | `string` |  |
-| `safetyAcknowledged` | `boolean` |  |
-| `startBoundaryAcknowledged` | `boolean` |  |
+| `safetyAcknowledged` | `boolean` | Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts. |
+| `startBoundaryAcknowledged` | `boolean` | Confirms that no payment or work starts before separate owner confirmation. |
 | `status` | `string` |  |
-| `testEvidence` | `string` |  |
+| `testEvidence` | `string` | Non-sensitive description of current happy-path and rejection tests, or none. |
 | `updatedAt` | `string` |  |
 
 #### Example: Create
@@ -727,11 +727,11 @@ Create an instance: `const trial = client.Trial()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `consent` | `boolean` |  |
-| `email` | `string` |  |
+| `consent` | `boolean` | Optional permission for the owner to send product-fit guidance. |
+| `email` | `string` | Email used to enforce one lifetime Free-plan key. |
 | `expectedRenders` | `string` |  |
-| `name` | `string` |  |
-| `useCase` | `string` |  |
+| `name` | `string` | Optional display name for owner review. |
+| `useCase` | `string` | Optional public-page capture use case. |
 
 #### Example: Create
 
@@ -795,8 +795,8 @@ Create an instance: `const usage = client.Usage()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `customer` | `Record<string, any>` |  |
-| `links` | `Record<string, any>` |  |
-| `upgradeRequest` | `any` |  |
+| `links` | `Record<string, any>` | Stable self-serve continuation links. |
+| `upgradeRequest` | `any` | Latest paid-plan request attached to this key, or null when none exists. |
 | `usage` | `Record<string, any>` |  |
 
 #### Example: Load

@@ -1,0 +1,139 @@
+# Entity: pilot_request
+
+main: kit: entity: pilot_request: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "acceptanceSample"
+      req: false
+      short: "Optional safe description of one maintainer-approved public page and required artifact shape."
+      type: "`$STRING`"
+    }
+    {
+      name: "callSite"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "Optional relative repository file path for the existing backend provider call."
+      type: "`$STRING`"
+    }
+    {
+      name: "createdAt"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "currentContract"
+      req: false
+      short: "Optional non-secret current request, synchronous output, and application-owned byte handling."
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      short: "Address the owner may use only to reply about this pilot request."
+      type: "`$STRING`"
+    }
+    {
+      name: "expectedRenders"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "language"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "provider"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "replyConsent"
+      req: true
+      short: "Allows the owner to email only about this pilot request."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repositoryAuthority"
+      req: true
+      short: "Confirms authority to review, merge, deploy, and roll back the public repository change."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "repositoryUrl"
+      req: true
+      short: "Exact public GitHub repository under the requester's control."
+      type: "`$STRING`"
+    }
+    {
+      name: "requiredBehavior"
+      req: false
+      short: "Optional provider behavior that must be preserved."
+      type: "`$STRING`"
+    }
+    {
+      name: "safetyAcknowledged"
+      req: true
+      short: "Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "startBoundaryAcknowledged"
+      req: true
+      short: "Confirms that no payment or work starts before separate owner confirmation."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updatedAt"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "pilot_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/pilot-requests"
+          parts: [
+            "api"
+            "pilot-requests"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.request`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
