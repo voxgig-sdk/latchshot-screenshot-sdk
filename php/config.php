@@ -42,6 +42,7 @@ class LatchshotScreenshotConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
