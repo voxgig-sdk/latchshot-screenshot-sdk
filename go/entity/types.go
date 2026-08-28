@@ -158,6 +158,19 @@ type Rendering struct {
 
 // RenderingLoadMatch is the typed request payload for Rendering.LoadTyped.
 type RenderingLoadMatch struct {
+	BlockAd *bool `json:"block_ad,omitempty"`
+	BlockChat *bool `json:"block_chat,omitempty"`
+	BlockTracker *bool `json:"block_tracker,omitempty"`
+	DarkMode *bool `json:"dark_mode,omitempty"`
+	Format *string `json:"format,omitempty"`
+	FullPage *bool `json:"full_page,omitempty"`
+	Height *int `json:"height,omitempty"`
+	HideCookieBanner *bool `json:"hide_cookie_banner,omitempty"`
+	HidePopup *bool `json:"hide_popup,omitempty"`
+	Quality *int `json:"quality,omitempty"`
+	ScrollPage *bool `json:"scroll_page,omitempty"`
+	Url string `json:"url"`
+	Width *int `json:"width,omitempty"`
 }
 
 // SafetyReviewRequest is the typed data model for the safety_review_request entity.

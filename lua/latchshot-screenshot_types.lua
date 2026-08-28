@@ -133,6 +133,19 @@
 ---@class Rendering
 
 ---@class RenderingLoadMatch
+---@field block_ad? boolean
+---@field block_chat? boolean
+---@field block_tracker? boolean
+---@field dark_mode? boolean
+---@field format? string
+---@field full_page? boolean
+---@field height? number
+---@field hide_cookie_banner? boolean
+---@field hide_popup? boolean
+---@field quality? number
+---@field scroll_page? boolean
+---@field url string
+---@field width? number
 
 ---@class SafetyReviewRequest
 ---@field createdAt string

@@ -485,8 +485,61 @@ class Rendering
 end
 
 # Request payload for Rendering#load.
-class RenderingLoadMatch
-end
+#
+# @!attribute [rw] block_ad
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] block_chat
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] block_tracker
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] dark_mode
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] format
+#   @return [String, nil]
+#
+# @!attribute [rw] full_page
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] height
+#   @return [Integer, nil]
+#
+# @!attribute [rw] hide_cookie_banner
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] hide_popup
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] quality
+#   @return [Integer, nil]
+#
+# @!attribute [rw] scroll_page
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] url
+#   @return [String]
+#
+# @!attribute [rw] width
+#   @return [Integer, nil]
+RenderingLoadMatch = Struct.new(
+  :block_ad,
+  :block_chat,
+  :block_tracker,
+  :dark_mode,
+  :format,
+  :full_page,
+  :height,
+  :hide_cookie_banner,
+  :hide_popup,
+  :quality,
+  :scroll_page,
+  :url,
+  :width,
+  keyword_init: true
+)
 
 # SafetyReviewRequest entity data model.
 #

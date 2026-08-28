@@ -141,6 +141,19 @@ export interface Rendering {
 }
 
 export interface RenderingLoadMatch {
+  block_ad?: boolean
+  block_chat?: boolean
+  block_tracker?: boolean
+  dark_mode?: boolean
+  format?: string
+  full_page?: boolean
+  height?: number
+  hide_cookie_banner?: boolean
+  hide_popup?: boolean
+  quality?: number
+  scroll_page?: boolean
+  url: string
+  width?: number
 }
 
 export interface SafetyReviewRequest {

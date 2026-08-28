@@ -170,8 +170,23 @@ class Rendering(TypedDict):
     pass
 
 
-class RenderingLoadMatch(TypedDict):
-    pass
+class RenderingLoadMatchRequired(TypedDict):
+    url: str
+
+
+class RenderingLoadMatch(RenderingLoadMatchRequired, total=False):
+    block_ad: bool
+    block_chat: bool
+    block_tracker: bool
+    dark_mode: bool
+    format: str
+    full_page: bool
+    height: int
+    hide_cookie_banner: bool
+    hide_popup: bool
+    quality: int
+    scroll_page: bool
+    width: int
 
 
 class SafetyReviewRequest(TypedDict):

@@ -168,6 +168,19 @@ class Rendering
 /** Request payload for Rendering#load. */
 class RenderingLoadMatch
 {
+    public ?bool $block_ad = null;
+    public ?bool $block_chat = null;
+    public ?bool $block_tracker = null;
+    public ?bool $dark_mode = null;
+    public ?string $format = null;
+    public ?bool $full_page = null;
+    public ?int $height = null;
+    public ?bool $hide_cookie_banner = null;
+    public ?bool $hide_popup = null;
+    public ?int $quality = null;
+    public ?bool $scroll_page = null;
+    public string $url;
+    public ?int $width = null;
 }
 
 /** SafetyReviewRequest entity data model. */
