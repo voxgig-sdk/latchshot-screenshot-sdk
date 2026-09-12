@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -121,14 +132,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/healthz",
-              "parts": [
-                "healthz"
+              "segments": [
+                {
+                  "lit": "healthz"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.render`"
-              }
+              },
+              "parts": [
+                "healthz"
+              ]
             }
           ]
         }
@@ -145,11 +161,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
         },
         {
+          "format": "email",
           "name": "email",
           "req": true,
           "short": "Address the owner may use only to reply about this monitoring request.",
@@ -171,6 +189,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uri",
           "name": "pageUrl",
           "req": true,
           "short": "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.",
@@ -206,11 +225,16 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "req": true,
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "monitoring_request",
       "op": {
         "create": {
@@ -222,15 +246,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/monitoring-requests",
-              "parts": [
-                "api",
-                "monitoring-requests"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "monitoring-requests"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.request`"
-              }
+              },
+              "parts": [
+                "api",
+                "monitoring-requests"
+              ]
             }
           ]
         }
@@ -258,6 +290,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
@@ -268,6 +301,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "email",
           "name": "email",
           "req": true,
           "short": "Address the owner may use only to reply about this pilot request.",
@@ -303,6 +337,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "uri",
           "name": "repositoryUrl",
           "req": true,
           "short": "Exact public GitHub repository under the requester's control.",
@@ -331,11 +366,16 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "req": true,
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "pilot_request",
       "op": {
         "create": {
@@ -347,15 +387,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/pilot-requests",
-              "parts": [
-                "api",
-                "pilot-requests"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "pilot-requests"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.request`"
-              }
+              },
+              "parts": [
+                "api",
+                "pilot-requests"
+              ]
             }
           ]
         }
@@ -457,6 +505,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "uri",
           "name": "url",
           "req": true,
           "short": "Public HTTP or HTTPS page URL.",
@@ -484,15 +533,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/v1/render",
-              "parts": [
-                "v1",
-                "render"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "render"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "render"
+              ]
             }
           ]
         }
@@ -609,9 +666,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/screenshot",
-              "parts": [
-                "v1",
-                "screenshot"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "screenshot"
+                }
               ],
               "select": {
                 "exist": [
@@ -633,7 +694,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "screenshot"
+              ]
             }
           ]
         }
@@ -645,6 +710,7 @@ class Config {
     "safety_review_request": {
       "fields": [
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
@@ -662,6 +728,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "email",
           "name": "email",
           "req": true,
           "short": "Address the owner may use only to reply about this safety-review request.",
@@ -695,6 +762,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "uri",
           "name": "repositoryUrl",
           "req": true,
           "short": "Exact public GitHub repository under the requester's control.",
@@ -735,11 +803,16 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "req": true,
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "safety_review_request",
       "op": {
         "create": {
@@ -751,15 +824,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/safety-review-requests",
-              "parts": [
-                "api",
-                "safety-review-requests"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "safety-review-requests"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.request`"
-              }
+              },
+              "parts": [
+                "api",
+                "safety-review-requests"
+              ]
             }
           ]
         }
@@ -776,6 +857,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "email",
           "name": "email",
           "req": true,
           "short": "Email used to enforce one lifetime Free-plan key.",
@@ -807,15 +889,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/trials",
-              "parts": [
-                "api",
-                "trials"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "trials"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.trial`"
-              }
+              },
+              "parts": [
+                "api",
+                "trials"
+              ]
             }
           ]
         }
@@ -832,6 +922,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
@@ -861,11 +952,16 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "req": true,
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "upgrade",
       "op": {
         "create": {
@@ -877,15 +973,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/v1/upgrade-requests",
-              "parts": [
-                "v1",
-                "upgrade-requests"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "upgrade-requests"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.request`"
-              }
+              },
+              "parts": [
+                "v1",
+                "upgrade-requests"
+              ]
             }
           ]
         }
@@ -930,15 +1034,23 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/usage",
-              "parts": [
-                "v1",
-                "usage"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "usage"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.usage`"
-              }
+              },
+              "parts": [
+                "v1",
+                "usage"
+              ]
             }
           ]
         }
@@ -954,6 +1066,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

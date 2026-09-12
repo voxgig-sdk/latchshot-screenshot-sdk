@@ -114,6 +114,7 @@ main: kit: entity: render: {
       type: "`$INTEGER`"
     }
     {
+      format: "uri"
       name: "url"
       req: true
       short: "Public HTTP or HTTPS page URL."
@@ -141,9 +142,13 @@ main: kit: entity: render: {
         {
           method: "POST"
           orig: "/v1/render"
-          parts: [
-            "v1"
-            "render"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "render"
+            }
           ]
           transform: {
             req: "`reqdata`"

@@ -63,8 +63,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/healthz",
-                  "parts": [
-                    "healthz"
+                  "segments": [
+                    {
+                      "lit": "healthz"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -94,12 +96,14 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
+              "format": "email",
               "name": "email",
               "req": true,
               "short": "Address the owner may use only to reply about this monitoring request.",
@@ -125,6 +129,7 @@
             },
             {
               "active": true,
+              "format": "uri",
               "name": "pageUrl",
               "req": true,
               "short": "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.",
@@ -166,6 +171,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
@@ -187,9 +193,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/monitoring-requests",
-                  "parts": [
-                    "api",
-                    "monitoring-requests"
+                  "segments": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "monitoring-requests"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -232,6 +242,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
@@ -245,6 +256,7 @@
             },
             {
               "active": true,
+              "format": "email",
               "name": "email",
               "req": true,
               "short": "Address the owner may use only to reply about this pilot request.",
@@ -290,6 +302,7 @@
             },
             {
               "active": true,
+              "format": "uri",
               "name": "repositoryUrl",
               "req": true,
               "short": "Exact public GitHub repository under the requester's control.",
@@ -324,6 +337,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
@@ -345,9 +359,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/pilot-requests",
-                  "parts": [
-                    "api",
-                    "pilot-requests"
+                  "segments": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "pilot-requests"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -496,6 +514,7 @@
             },
             {
               "active": true,
+              "format": "uri",
               "name": "url",
               "req": true,
               "short": "Public HTTP or HTTPS page URL.",
@@ -528,9 +547,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/render",
-                  "parts": [
-                    "v1",
-                    "render"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "render"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -683,9 +706,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/screenshot",
-                  "parts": [
-                    "v1",
-                    "screenshot"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "screenshot"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -724,6 +751,7 @@
           "fields": [
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
@@ -744,6 +772,7 @@
             },
             {
               "active": true,
+              "format": "email",
               "name": "email",
               "req": true,
               "short": "Address the owner may use only to reply about this safety-review request.",
@@ -783,6 +812,7 @@
             },
             {
               "active": true,
+              "format": "uri",
               "name": "repositoryUrl",
               "req": true,
               "short": "Exact public GitHub repository under the requester's control.",
@@ -830,6 +860,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
@@ -851,9 +882,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/safety-review-requests",
-                  "parts": [
-                    "api",
-                    "safety-review-requests"
+                  "segments": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "safety-review-requests"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -883,6 +918,7 @@
             },
             {
               "active": true,
+              "format": "email",
               "name": "email",
               "req": true,
               "short": "Email used to enforce one lifetime Free-plan key.",
@@ -921,9 +957,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/trials",
-                  "parts": [
-                    "api",
-                    "trials"
+                  "segments": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "trials"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -952,6 +992,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
@@ -988,6 +1029,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
@@ -1009,9 +1051,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/upgrade-requests",
-                  "parts": [
-                    "v1",
-                    "upgrade-requests"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "upgrade-requests"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1071,9 +1117,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/usage",
-                  "parts": [
-                    "v1",
-                    "usage"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "usage"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1153,8 +1203,11 @@
             }
           },
           "name": "test",
+          "needs": {},
           "origname": "",
           "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
           "target": {
             "go": {
               "deps": {}
@@ -1468,6 +1521,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1493,6 +1549,10 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/runner_test.go",
+            "test/struct_runner_test.go"
+          ],
           "title": "Golang"
         },
         "go-cli": {
@@ -1544,6 +1604,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -1568,6 +1629,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go CLI"
         },
         "go-mcp": {
@@ -1619,6 +1681,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -1643,6 +1706,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go MCP server"
         },
         "lua": {
@@ -1683,6 +1747,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1708,6 +1775,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.lua"
+          ],
           "title": "Lua"
         },
         "php": {
@@ -1742,6 +1812,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1767,6 +1840,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/StructRunner.php"
+          ],
           "title": "PHP"
         },
         "py": {
@@ -1807,6 +1883,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1832,6 +1911,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.py"
+          ],
           "title": "Python"
         },
         "rb": {
@@ -1877,6 +1959,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1902,6 +1987,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.rb"
+          ],
           "title": "Ruby"
         },
         "ts": {
@@ -1919,11 +2007,6 @@
               "active": true,
               "kind": "dev",
               "version": "^25.6.0"
-            },
-            "dotenv": {
-              "active": true,
-              "kind": "dev",
-              "version": "^17.4.2"
             },
             "typescript": {
               "active": true,
@@ -1952,6 +2035,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1976,6 +2062,14 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
           "title": "TypeScript"
         }
       },

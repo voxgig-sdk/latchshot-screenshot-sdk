@@ -100,14 +100,22 @@ func healthDirectSetup(mockres any) *healthDirectSetupResult {
 	env := envOverride(map[string]any{
 		"LATCHSHOT_SCREENSHOT_TEST_HEALTH_ENTID": map[string]any{},
 		"LATCHSHOT_SCREENSHOT_TEST_LIVE":    "FALSE",
-		"LATCHSHOT_SCREENSHOT_APIKEY":       "NONE",
+		"LATCHSHOT_SCREENSHOT_APIKEY":       "",
 	})
 
 	live := env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["LATCHSHOT_SCREENSHOT_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewLatchshotScreenshotSDK(mergedOpts)
 

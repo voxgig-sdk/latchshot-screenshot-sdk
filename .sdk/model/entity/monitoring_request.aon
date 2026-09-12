@@ -12,11 +12,13 @@ main: kit: entity: monitoring_request: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: true
       type: "`$STRING`"
     }
     {
+      format: "email"
       name: "email"
       req: true
       short: "Address the owner may use only to reply about this monitoring request."
@@ -38,6 +40,7 @@ main: kit: entity: monitoring_request: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "pageUrl"
       req: true
       short: "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment."
@@ -73,6 +76,7 @@ main: kit: entity: monitoring_request: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: true
       type: "`$STRING`"
@@ -92,9 +96,13 @@ main: kit: entity: monitoring_request: {
         {
           method: "POST"
           orig: "/api/monitoring-requests"
-          parts: [
-            "api"
-            "monitoring-requests"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "monitoring-requests"
+            }
           ]
           transform: {
             req: "`reqdata`"

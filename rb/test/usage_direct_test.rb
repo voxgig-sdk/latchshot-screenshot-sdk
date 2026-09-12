@@ -61,15 +61,17 @@ def usage_direct_setup(mockres)
   env = Runner.env_override({
     "LATCHSHOT_SCREENSHOT_TEST_USAGE_ENTID" => {},
     "LATCHSHOT_SCREENSHOT_TEST_LIVE" => "FALSE",
-    "LATCHSHOT_SCREENSHOT_APIKEY" => "NONE",
+    "LATCHSHOT_SCREENSHOT_APIKEY" => "",
   })
 
   live = env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["LATCHSHOT_SCREENSHOT_APIKEY"],
-    }
+    })
     client = LatchshotScreenshotSDK.new(merged_opts)
     return {
       client: client,

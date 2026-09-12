@@ -73,13 +73,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/healthz",
-								"parts": []any{
-									"healthz",
+								"segments": []any{
+									map[string]any{
+										"lit": "healthz",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.render`",
+								},
+								"parts": []any{
+									"healthz",
 								},
 							},
 						},
@@ -97,11 +102,13 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "createdAt",
 						"req": true,
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "email",
 						"name": "email",
 						"req": true,
 						"short": "Address the owner may use only to reply about this monitoring request.",
@@ -123,6 +130,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "uri",
 						"name": "pageUrl",
 						"req": true,
 						"short": "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.",
@@ -158,10 +166,15 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updatedAt",
 						"req": true,
 						"type": "`$STRING`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
 				},
 				"name": "monitoring_request",
 				"op": map[string]any{
@@ -174,14 +187,22 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/api/monitoring-requests",
-								"parts": []any{
-									"api",
-									"monitoring-requests",
+								"segments": []any{
+									map[string]any{
+										"lit": "api",
+									},
+									map[string]any{
+										"lit": "monitoring-requests",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.request`",
+								},
+								"parts": []any{
+									"api",
+									"monitoring-requests",
 								},
 							},
 						},
@@ -210,6 +231,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "createdAt",
 						"req": true,
 						"type": "`$STRING`",
@@ -220,6 +242,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "email",
 						"name": "email",
 						"req": true,
 						"short": "Address the owner may use only to reply about this pilot request.",
@@ -255,6 +278,7 @@ func MakeConfig() map[string]any {
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
+						"format": "uri",
 						"name": "repositoryUrl",
 						"req": true,
 						"short": "Exact public GitHub repository under the requester's control.",
@@ -283,10 +307,15 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updatedAt",
 						"req": true,
 						"type": "`$STRING`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
 				},
 				"name": "pilot_request",
 				"op": map[string]any{
@@ -299,14 +328,22 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/api/pilot-requests",
-								"parts": []any{
-									"api",
-									"pilot-requests",
+								"segments": []any{
+									map[string]any{
+										"lit": "api",
+									},
+									map[string]any{
+										"lit": "pilot-requests",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.request`",
+								},
+								"parts": []any{
+									"api",
+									"pilot-requests",
 								},
 							},
 						},
@@ -409,6 +446,7 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "uri",
 						"name": "url",
 						"req": true,
 						"short": "Public HTTP or HTTPS page URL.",
@@ -436,14 +474,22 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/render",
-								"parts": []any{
-									"v1",
-									"render",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "render",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"v1",
+									"render",
 								},
 							},
 						},
@@ -561,9 +607,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/screenshot",
-								"parts": []any{
-									"v1",
-									"screenshot",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "screenshot",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -586,6 +636,10 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"v1",
+									"screenshot",
+								},
 							},
 						},
 					},
@@ -597,6 +651,7 @@ func MakeConfig() map[string]any {
 			"safety_review_request": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"format": "date-time",
 						"name": "createdAt",
 						"req": true,
 						"type": "`$STRING`",
@@ -614,6 +669,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "email",
 						"name": "email",
 						"req": true,
 						"short": "Address the owner may use only to reply about this safety-review request.",
@@ -647,6 +703,7 @@ func MakeConfig() map[string]any {
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
+						"format": "uri",
 						"name": "repositoryUrl",
 						"req": true,
 						"short": "Exact public GitHub repository under the requester's control.",
@@ -687,10 +744,15 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updatedAt",
 						"req": true,
 						"type": "`$STRING`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
 				},
 				"name": "safety_review_request",
 				"op": map[string]any{
@@ -703,14 +765,22 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/api/safety-review-requests",
-								"parts": []any{
-									"api",
-									"safety-review-requests",
+								"segments": []any{
+									map[string]any{
+										"lit": "api",
+									},
+									map[string]any{
+										"lit": "safety-review-requests",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.request`",
+								},
+								"parts": []any{
+									"api",
+									"safety-review-requests",
 								},
 							},
 						},
@@ -728,6 +798,7 @@ func MakeConfig() map[string]any {
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
+						"format": "email",
 						"name": "email",
 						"req": true,
 						"short": "Email used to enforce one lifetime Free-plan key.",
@@ -759,14 +830,22 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/api/trials",
-								"parts": []any{
-									"api",
-									"trials",
+								"segments": []any{
+									map[string]any{
+										"lit": "api",
+									},
+									map[string]any{
+										"lit": "trials",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.trial`",
+								},
+								"parts": []any{
+									"api",
+									"trials",
 								},
 							},
 						},
@@ -784,6 +863,7 @@ func MakeConfig() map[string]any {
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "createdAt",
 						"req": true,
 						"type": "`$STRING`",
@@ -813,10 +893,15 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updatedAt",
 						"req": true,
 						"type": "`$STRING`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
 				},
 				"name": "upgrade",
 				"op": map[string]any{
@@ -829,14 +914,22 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/upgrade-requests",
-								"parts": []any{
-									"v1",
-									"upgrade-requests",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "upgrade-requests",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.request`",
+								},
+								"parts": []any{
+									"v1",
+									"upgrade-requests",
 								},
 							},
 						},
@@ -882,14 +975,22 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/usage",
-								"parts": []any{
-									"v1",
-									"usage",
+								"segments": []any{
+									map[string]any{
+										"lit": "v1",
+									},
+									map[string]any{
+										"lit": "usage",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.usage`",
+								},
+								"parts": []any{
+									"v1",
+									"usage",
 								},
 							},
 						},
@@ -901,6 +1002,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

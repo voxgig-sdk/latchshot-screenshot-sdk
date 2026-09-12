@@ -81,7 +81,7 @@ def rendering_basic_setup(extra)
     "LATCHSHOT_SCREENSHOT_TEST_RENDERING_ENTID" => idmap,
     "LATCHSHOT_SCREENSHOT_TEST_LIVE" => "FALSE",
     "LATCHSHOT_SCREENSHOT_TEST_EXPLAIN" => "FALSE",
-    "LATCHSHOT_SCREENSHOT_APIKEY" => "NONE",
+    "LATCHSHOT_SCREENSHOT_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -92,6 +92,9 @@ def rendering_basic_setup(extra)
 
   if env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["LATCHSHOT_SCREENSHOT_APIKEY"],
       },

@@ -12,6 +12,7 @@ main: kit: entity: trial: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "email"
       name: "email"
       req: true
       short: "Email used to enforce one lifetime Free-plan key."
@@ -44,9 +45,13 @@ main: kit: entity: trial: {
         {
           method: "POST"
           orig: "/api/trials"
-          parts: [
-            "api"
-            "trials"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "trials"
+            }
           ]
           transform: {
             req: "`reqdata`"

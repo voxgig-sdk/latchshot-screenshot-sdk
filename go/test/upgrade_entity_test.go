@@ -52,7 +52,7 @@ func TestUpgradeEntity(t *testing.T) {
 		// CREATE
 		upgradeRef01Ent := client.Upgrade(nil)
 		upgradeRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "upgrade"}, setup.data), "upgrade_ref01"))
+			vs.GetPath(setup.data, []any{"new", "upgrade"}), "upgrade_ref01"))
 
 		upgradeRef01DataResult, err := upgradeRef01Ent.Create(upgradeRef01Data, nil)
 		if err != nil {
@@ -93,7 +93,7 @@ func upgradeBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"upgrade01", "upgrade02", "upgrade03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -113,7 +113,7 @@ func upgradeBasicSetup(extra map[string]any) *entityTestSetup {
 		"LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID": idmap,
 		"LATCHSHOT_SCREENSHOT_TEST_LIVE":      "FALSE",
 		"LATCHSHOT_SCREENSHOT_TEST_EXPLAIN":   "FALSE",
-		"LATCHSHOT_SCREENSHOT_APIKEY":         "NONE",
+		"LATCHSHOT_SCREENSHOT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID"])
@@ -122,11 +122,23 @@ func upgradeBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["LATCHSHOT_SCREENSHOT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["LATCHSHOT_SCREENSHOT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewLatchshotScreenshotSDK(core.ToMapAny(mergedOpts))
 	}

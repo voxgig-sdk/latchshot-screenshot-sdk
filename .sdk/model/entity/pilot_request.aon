@@ -24,6 +24,7 @@ main: kit: entity: pilot_request: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: true
       type: "`$STRING`"
@@ -35,6 +36,7 @@ main: kit: entity: pilot_request: {
       type: "`$STRING`"
     }
     {
+      format: "email"
       name: "email"
       req: true
       short: "Address the owner may use only to reply about this pilot request."
@@ -73,6 +75,7 @@ main: kit: entity: pilot_request: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "uri"
       name: "repositoryUrl"
       req: true
       short: "Exact public GitHub repository under the requester's control."
@@ -102,6 +105,7 @@ main: kit: entity: pilot_request: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: true
       type: "`$STRING`"
@@ -121,9 +125,13 @@ main: kit: entity: pilot_request: {
         {
           method: "POST"
           orig: "/api/pilot-requests"
-          parts: [
-            "api"
-            "pilot-requests"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "pilot-requests"
+            }
           ]
           transform: {
             req: "`reqdata`"

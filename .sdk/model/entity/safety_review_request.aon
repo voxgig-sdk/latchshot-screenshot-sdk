@@ -6,6 +6,7 @@ main: kit: entity: safety_review_request: {
 
   fields: [
     {
+      format: "date-time"
       name: "createdAt"
       req: true
       type: "`$STRING`"
@@ -23,6 +24,7 @@ main: kit: entity: safety_review_request: {
       type: "`$STRING`"
     }
     {
+      format: "email"
       name: "email"
       req: true
       short: "Address the owner may use only to reply about this safety-review request."
@@ -56,6 +58,7 @@ main: kit: entity: safety_review_request: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "uri"
       name: "repositoryUrl"
       req: true
       short: "Exact public GitHub repository under the requester's control."
@@ -96,6 +99,7 @@ main: kit: entity: safety_review_request: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: true
       type: "`$STRING`"
@@ -115,9 +119,13 @@ main: kit: entity: safety_review_request: {
         {
           method: "POST"
           orig: "/api/safety-review-requests"
-          parts: [
-            "api"
-            "safety-review-requests"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "safety-review-requests"
+            }
           ]
           transform: {
             req: "`reqdata`"

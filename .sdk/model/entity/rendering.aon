@@ -120,9 +120,13 @@ main: kit: entity: rendering: {
           }
           method: "GET"
           orig: "/v1/screenshot"
-          parts: [
-            "v1"
-            "screenshot"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "screenshot"
+            }
           ]
           select: {
             exist: [

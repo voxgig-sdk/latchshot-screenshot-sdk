@@ -86,7 +86,7 @@ def _safety_review_request_basic_setup(extra):
         "LATCHSHOT_SCREENSHOT_TEST_SAFETY_REVIEW_REQUEST_ENTID": idmap,
         "LATCHSHOT_SCREENSHOT_TEST_LIVE": "FALSE",
         "LATCHSHOT_SCREENSHOT_TEST_EXPLAIN": "FALSE",
-        "LATCHSHOT_SCREENSHOT_APIKEY": "NONE",
+        "LATCHSHOT_SCREENSHOT_APIKEY": "",
     })
 
     idmap_resolved = helpers.to_map(
@@ -96,6 +96,10 @@ def _safety_review_request_basic_setup(extra):
 
     if env.get("LATCHSHOT_SCREENSHOT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
                 "apikey": env.get("LATCHSHOT_SCREENSHOT_APIKEY"),
             },
