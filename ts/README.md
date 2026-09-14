@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { LatchshotScreenshotSDK } from '@voxgig-sdk/latchshot-screenshot'
+import { LatchshotScreenshotSDK } from '@voxgig-sdk/latchshot-screenshot-sdk'
 
 const client = new LatchshotScreenshotSDK({
   apikey: process.env.LATCHSHOT_SCREENSHOT_APIKEY,
@@ -888,7 +888,7 @@ latchshot-screenshot/
 Import the SDK from the package root:
 
 ```ts
-import { LatchshotScreenshotSDK } from '@voxgig-sdk/latchshot-screenshot'
+import { LatchshotScreenshotSDK } from '@voxgig-sdk/latchshot-screenshot-sdk'
 ```
 
 ### Entity state

@@ -105,7 +105,7 @@ local result, err = client:Health():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
+| TypeScript | `@voxgig-sdk/latchshot-screenshot-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
 | Python | `voxgig-sdk-latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
 | PHP | `voxgig-sdk/latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/latchshot-screenshot-sdk/go` | `go get github.com/voxgig-sdk/latchshot-screenshot-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Health():load()
 ### TypeScript
 
 ```ts
-import { LatchshotScreenshotSDK } from '@voxgig-sdk/latchshot-screenshot'
+import { LatchshotScreenshotSDK } from '@voxgig-sdk/latchshot-screenshot-sdk'
 
 const client = new LatchshotScreenshotSDK({
   apikey: process.env.LATCHSHOT_SCREENSHOT_APIKEY,
