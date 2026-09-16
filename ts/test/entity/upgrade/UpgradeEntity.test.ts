@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { LatchshotScreenshotSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('UpgradeEntity', async () => {
 
     const live = 'TRUE' === process.env.LATCHSHOT_SCREENSHOT_TEST_LIVE
     for (const op of ['create']) {
-      if (maybeSkipControl(t, 'entityOp', 'upgrade.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'upgrade.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"consent","req":true,"type":"`$BOOLEAN`","index$":0},{"active":true,"format":"date-time","name":"createdAt","req":true,"type":"`$STRING`","index$":1},{"active":true,"name":"currentPlan","req":true,"type":"`$STRING`","index$":2},{"active":true,"name":"id","req":true,"type":"`$INTEGER`","index$":3},{"active":true,"name":"note","req":false,"type":"`$STRING`","index$":4},{"active":true,"name":"requestedPlan","req":true,"type":"`$STRING`","index$":5},{"active":true,"name":"status","req":true,"type":"`$STRING`","index$":6},{"active":true,"format":"date-time","name":"updatedAt","req":true,"type":"`$STRING`","index$":7}],"id":{"field":"id","name":"id"},"name":"upgrade","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{},"contract":{"id":"POST /v1/upgrade-requests","json":"{\"operationId\":\"requestUpgrade\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"consent\":{\"const\":true,\"type\":\"boolean\"},\"note\":{\"maxLength\":1000,\"type\":\"string\"},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"}},\"required\":[\"requestedPlan\",\"consent\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"currentPlan\":{\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fulfilled\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"currentPlan\",\"requestedPlan\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"Existing open request updated\"},\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"currentPlan\":{\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fulfilled\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"currentPlan\",\"requestedPlan\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"New paid-plan request recorded\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/v1/upgrade-requests","segments":[{"lit":"v1"},{"lit":"upgrade-requests"}],"select":{},"transform":{"req":"`reqdata`","res":"`body.request`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"upgrade","name__orig":"upgrade","Name":"Upgrade","name_":"upgrade","name-":"upgrade","NAME":"UPGRADE","index$":7}, {"active":true,"entity":"upgrade","key$":"BasicUpgradeFlow","kind":"basic","name":"BasicUpgradeFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"upgrade_ref01"},"match":{},"op":"create","spec":[],"valid":[],"index$":0}]}, 'Upgrade')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID': idmap,
     'LATCHSHOT_SCREENSHOT_TEST_LIVE': 'FALSE',
@@ -127,7 +119,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.LATCHSHOT_SCREENSHOT_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['LATCHSHOT_SCREENSHOT_TEST_UPGRADE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new LatchshotScreenshotSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.LATCHSHOT_SCREENSHOT_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

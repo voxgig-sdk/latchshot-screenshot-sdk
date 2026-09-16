@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.LATCHSHOT_SCREENSHOT_TEST_LIVE;
         for (const op of ['create']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'monitoring_request.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'monitoring_request.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set LATCHSHOT_SCREENSHOT_TEST_MONITORING_REQUEST_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "changeContext", "req": false, "short": "Optional non-sensitive description of what the weekly owner-written note should call out.", "type": "`$STRING`", "index$": 0 }, { "active": true, "format": "date-time", "name": "createdAt", "req": true, "type": "`$STRING`", "index$": 1 }, { "active": true, "format": "email", "name": "email", "req": true, "short": "Address the owner may use only to reply about this monitoring request.", "type": "`$STRING`", "index$": 2 }, { "active": true, "name": "id", "req": true, "type": "`$INTEGER`", "index$": 3 }, { "active": true, "name": "monitoringGoal", "req": true, "type": "`$STRING`", "index$": 4 }, { "active": true, "name": "pageCount", "req": true, "type": "`$STRING`", "index$": 5 }, { "active": true, "format": "uri", "name": "pageUrl", "req": true, "short": "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.", "type": "`$STRING`", "index$": 6 }, { "active": true, "name": "publicPageAuthority", "req": true, "short": "Confirms authority to request recurring captures of every proposed public page.", "type": "`$BOOLEAN`", "index$": 7 }, { "active": true, "name": "replyConsent", "req": true, "short": "Allows the owner to email only about this monitoring-pilot request.", "type": "`$BOOLEAN`", "index$": 8 }, { "active": true, "name": "safetyAcknowledged", "req": true, "short": "Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information.", "type": "`$BOOLEAN`", "index$": 9 }, { "active": true, "name": "startBoundaryAcknowledged", "req": true, "short": "Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation.", "type": "`$BOOLEAN`", "index$": 10 }, { "active": true, "name": "status", "req": true, "type": "`$STRING`", "index$": 11 }, { "active": true, "format": "date-time", "name": "updatedAt", "req": true, "type": "`$STRING`", "index$": 12 }], "id": { "field": "id", "name": "id" }, "name": "monitoring_request", "op": { "create": { "input": "data", "name": "create", "points": [{ "active": true, "args": {}, "contract": { "id": "POST /api/monitoring-requests", "json": "{\"operationId\":\"requestVisualMonitoringPilot\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"changeContext\":{\"default\":\"Not provided; owner will confirm what counts as a useful change.\",\"description\":\"Optional non-sensitive description of what the weekly owner-written note should call out.\",\"maxLength\":1000,\"type\":\"string\"},\"email\":{\"description\":\"Address the owner may use only to reply about this monitoring request.\",\"format\":\"email\",\"maxLength\":254,\"type\":\"string\"},\"monitoringGoal\":{\"enum\":[\"Release and content archive\",\"Competitive or market tracking\",\"Compliance or public record\",\"Client reporting\",\"Other\"],\"type\":\"string\"},\"pageCount\":{\"enum\":[\"1\",\"2–3\",\"4–5\"],\"type\":\"string\"},\"pageUrl\":{\"description\":\"One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.\",\"format\":\"uri\",\"maxLength\":500,\"pattern\":\"^https?://\",\"type\":\"string\"},\"publicPageAuthority\":{\"const\":true,\"description\":\"Confirms authority to request recurring captures of every proposed public page.\",\"type\":\"boolean\"},\"replyConsent\":{\"const\":true,\"description\":\"Allows the owner to email only about this monitoring-pilot request.\",\"type\":\"boolean\"},\"safetyAcknowledged\":{\"const\":true,\"description\":\"Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information.\",\"type\":\"boolean\"},\"startBoundaryAcknowledged\":{\"const\":true,\"description\":\"Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation.\",\"type\":\"boolean\"}},\"required\":[\"email\",\"pageUrl\",\"pageCount\",\"monitoringGoal\",\"publicPageAuthority\",\"safetyAcknowledged\",\"startBoundaryAcknowledged\",\"replyConsent\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-monitoring-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"pageCount\":{\"enum\":[\"1\",\"2–3\",\"4–5\"],\"type\":\"string\"},\"pageUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"pageUrl\",\"pageCount\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"Existing request for this email and example page updated for owner review\"},\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-monitoring-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"pageCount\":{\"enum\":[\"1\",\"2–3\",\"4–5\"],\"type\":\"string\"},\"pageUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"pageUrl\",\"pageCount\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"New monitoring request recorded for owner review\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"413\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "POST", "orig": "/api/monitoring-requests", "segments": [{ "lit": "api" }, { "lit": "monitoring-requests" }], "select": {}, "transform": { "req": "`reqdata`", "res": "`body.request`" }, "index$": 0 }], "key$": "create" } }, "relations": { "ancestors": [] }, "key$": "monitoring_request", "name__orig": "monitoring_request", "Name": "MonitoringRequest", "name_": "monitoring_request", "name-": "monitoring-request", "NAME": "MONITORING_REQUEST", "index$": 1 }, { "active": true, "entity": "monitoring_request", "key$": "BasicMonitoringRequestFlow", "kind": "basic", "name": "BasicMonitoringRequestFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "monitoring_request_ref01" }, "match": {}, "op": "create", "spec": [], "valid": [], "index$": 0 }] }, 'MonitoringRequest');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -101,12 +99,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['LATCHSHOT_SCREENSHOT_TEST_MONITORING_REQUEST_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'LATCHSHOT_SCREENSHOT_TEST_MONITORING_REQUEST_ENTID': idmap,
         'LATCHSHOT_SCREENSHOT_TEST_LIVE': 'FALSE',
@@ -115,7 +107,13 @@ function basicSetup(extra) {
     });
     idmap = env['LATCHSHOT_SCREENSHOT_TEST_MONITORING_REQUEST_ENTID'];
     const live = 'TRUE' === env.LATCHSHOT_SCREENSHOT_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['LATCHSHOT_SCREENSHOT_TEST_MONITORING_REQUEST_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.LatchshotScreenshotSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -128,7 +126,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -140,7 +139,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.LATCHSHOT_SCREENSHOT_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

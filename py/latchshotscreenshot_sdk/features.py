@@ -1,12 +1,18 @@
 # LatchshotScreenshot SDK feature factory
 
 from latchshotscreenshot_sdk.feature.base_feature import LatchshotScreenshotBaseFeature
+from latchshotscreenshot_sdk.feature.ratelimit_feature import LatchshotScreenshotRatelimitFeature
+from latchshotscreenshot_sdk.feature.retry_feature import LatchshotScreenshotRetryFeature
 from latchshotscreenshot_sdk.feature.test_feature import LatchshotScreenshotTestFeature
+from latchshotscreenshot_sdk.feature.timeout_feature import LatchshotScreenshotTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: LatchshotScreenshotBaseFeature(),
+    "ratelimit": lambda: LatchshotScreenshotRatelimitFeature(),
+    "retry": lambda: LatchshotScreenshotRetryFeature(),
     "test": lambda: LatchshotScreenshotTestFeature(),
+    "timeout": lambda: LatchshotScreenshotTimeoutFeature(),
 }
 
 

@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { LatchshotScreenshotSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('UsageEntity', async () => {
 
     const live = 'TRUE' === process.env.LATCHSHOT_SCREENSHOT_TEST_LIVE
     for (const op of ['load']) {
-      if (maybeSkipControl(t, 'entityOp', 'usage.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'usage.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set LATCHSHOT_SCREENSHOT_TEST_USAGE_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"customer","req":true,"type":"`$OBJECT`","index$":0},{"active":true,"name":"links","req":true,"short":"Stable self-serve continuation links.","type":"`$OBJECT`","index$":1},{"active":true,"name":"upgradeRequest","req":true,"short":"Latest paid-plan request attached to this key, or null when none exists.","type":"`$ANY`","index$":2},{"active":true,"name":"usage","req":true,"type":"`$OBJECT`","index$":3}],"name":"usage","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{},"contract":{"id":"GET /v1/usage","json":"{\"operationId\":\"getUsage\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"customer\":{\"properties\":{\"name\":{\"description\":\"Display name attached to the key.\",\"type\":\"string\"},\"plan\":{\"description\":\"Current internal plan identifier. The trial identifier is displayed publicly as Free.\",\"enum\":[\"trial\",\"launch\",\"build\",\"scale\"],\"type\":\"string\"}},\"required\":[\"name\",\"plan\"],\"type\":\"object\"},\"links\":{\"description\":\"Stable self-serve continuation links. They are informational and do not take payment, initiate an upgrade, or start implementation work.\",\"properties\":{\"implementationPilot\":{\"const\":\"https://latchshot.fly.dev/implementation-pilot.html\",\"description\":\"Describes the optional bounded $99 implementation service. The link itself starts neither work nor payment.\",\"format\":\"uri\",\"type\":\"string\"},\"plans\":{\"const\":\"https://latchshot.fly.dev/#pricing\",\"format\":\"uri\",\"type\":\"string\"},\"requestPaidPlan\":{\"const\":\"https://latchshot.fly.dev/#upgrade\",\"format\":\"uri\",\"type\":\"string\"},\"requestPaidPlanDocs\":{\"const\":\"https://latchshot.fly.dev/docs.md#request-a-paid-plan\",\"format\":\"uri\",\"type\":\"string\"}},\"required\":[\"plans\",\"requestPaidPlan\",\"requestPaidPlanDocs\",\"implementationPilot\"],\"type\":\"object\"},\"upgradeRequest\":{\"anyOf\":[{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"keyId\":{\"minimum\":1,\"type\":\"integer\"},\"note\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}]},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fulfilled\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"keyId\",\"requestedPlan\",\"note\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"},{\"type\":\"null\"}],\"description\":\"Latest paid-plan request attached to this key, or null when none exists.\"},\"usage\":{\"properties\":{\"failed\":{\"description\":\"Failed reserved renders; these do not consume successful-render quota.\",\"minimum\":0,\"type\":\"integer\"},\"limit\":{\"description\":\"Successful renders included in the current plan each calendar month.\",\"minimum\":1,\"type\":\"integer\"},\"outputBytes\":{\"minimum\":0,\"type\":\"integer\"},\"period\":{\"description\":\"Current UTC calendar month.\",\"pattern\":\"^[0-9]{4}-[0-9]{2}$\",\"type\":\"string\"},\"plan\":{\"enum\":[\"trial\",\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"remaining\":{\"description\":\"Successful renders still available in the current month.\",\"minimum\":0,\"type\":\"integer\"},\"renderMs\":{\"description\":\"Aggregate successful render time in milliseconds for the current month.\",\"minimum\":0,\"type\":\"integer\"},\"reserved\":{\"description\":\"Currently reserved render slots for this key.\",\"minimum\":0,\"type\":\"integer\"},\"resetAt\":{\"description\":\"Start of the next UTC calendar month, when the allowance replenishes.\",\"format\":\"date-time\",\"type\":\"string\"},\"successful\":{\"minimum\":0,\"type\":\"integer\"},\"updatedAt\":{\"anyOf\":[{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}]}},\"required\":[\"period\",\"plan\",\"limit\",\"remaining\",\"resetAt\",\"successful\",\"failed\",\"reserved\",\"outputBytes\",\"renderMs\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"customer\",\"usage\",\"upgradeRequest\",\"links\"],\"type\":\"object\"}}},\"description\":\"Current plan, quota usage, optional paid-plan request, and informational continuation links\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/v1/usage","segments":[{"lit":"v1"},{"lit":"usage"}],"select":{},"transform":{"req":"`reqdata`","res":"`body.usage`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"usage","name__orig":"usage","Name":"Usage","name_":"usage","name-":"usage","NAME":"USAGE","index$":8}, {"active":true,"entity":"usage","key$":"BasicUsageFlow","kind":"basic","name":"BasicUsageFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"usage_ref01","srcdatavar":"usage_ref01_data","suffix":"_dt0"},"match":{},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-usage_ref01"}}],"index$":0}]}, 'Usage')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['LATCHSHOT_SCREENSHOT_TEST_USAGE_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'LATCHSHOT_SCREENSHOT_TEST_USAGE_ENTID': idmap,
     'LATCHSHOT_SCREENSHOT_TEST_LIVE': 'FALSE',
@@ -127,7 +119,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.LATCHSHOT_SCREENSHOT_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['LATCHSHOT_SCREENSHOT_TEST_USAGE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new LatchshotScreenshotSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.LATCHSHOT_SCREENSHOT_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

@@ -81,5 +81,353 @@
         "updatedAt": "s2b8"
       }
     }
+  },
+  "requests": {
+    "POST /api/pilot-requests": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "requestImplementationPilot",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "acceptanceSample": {
+                    "default": "Not provided; owner will confirm a safe public sample before work.",
+                    "description": "Optional safe description of one maintainer-approved public page and required artifact shape.",
+                    "maxLength": 1000,
+                    "type": "string"
+                  },
+                  "callSite": {
+                    "default": "Not provided",
+                    "description": "Optional relative repository file path for the existing backend provider call. The owner can locate it during the free fit check.",
+                    "maxLength": 500,
+                    "type": "string"
+                  },
+                  "currentContract": {
+                    "default": "Not provided; owner will inspect the public repository.",
+                    "description": "Optional non-secret current request, synchronous output, and application-owned byte handling.",
+                    "maxLength": 1500,
+                    "type": "string"
+                  },
+                  "email": {
+                    "description": "Address the owner may use only to reply about this pilot request.",
+                    "format": "email",
+                    "maxLength": 254,
+                    "type": "string"
+                  },
+                  "expectedRenders": {
+                    "default": "Not sure",
+                    "enum": [
+                      "1–100",
+                      "101–2,500",
+                      "2,501–12,000",
+                      "12,001–50,000",
+                      "More than 50,000",
+                      "Not sure"
+                    ],
+                    "type": "string"
+                  },
+                  "language": {
+                    "default": "Not provided",
+                    "enum": [
+                      "JavaScript",
+                      "TypeScript",
+                      "Python",
+                      "Not provided"
+                    ],
+                    "type": "string"
+                  },
+                  "provider": {
+                    "default": "Not provided",
+                    "enum": [
+                      "ApiFlash",
+                      "ScreenshotMachine",
+                      "ScreenshotOne",
+                      "Urlbox",
+                      "Browserless",
+                      "Local Playwright or Puppeteer",
+                      "Another provider",
+                      "Not implemented yet",
+                      "Not provided"
+                    ],
+                    "type": "string"
+                  },
+                  "replyConsent": {
+                    "const": true,
+                    "description": "Allows the owner to email only about this pilot request.",
+                    "type": "boolean"
+                  },
+                  "repositoryAuthority": {
+                    "const": true,
+                    "description": "Confirms authority to review, merge, deploy, and roll back the public repository change.",
+                    "type": "boolean"
+                  },
+                  "repositoryUrl": {
+                    "description": "Exact public GitHub repository under the requester's control.",
+                    "format": "uri",
+                    "maxLength": 500,
+                    "pattern": "^https://github\\.com/[^/]+/[^/]+(?:\\.git)?$",
+                    "type": "string"
+                  },
+                  "requiredBehavior": {
+                    "default": "Not provided; owner will confirm required behavior before scope.",
+                    "description": "Optional provider behavior that must be preserved. The owner confirms it before paid scope is locked.",
+                    "maxLength": 1000,
+                    "type": "string"
+                  },
+                  "safetyAcknowledged": {
+                    "const": true,
+                    "description": "Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts.",
+                    "type": "boolean"
+                  },
+                  "startBoundaryAcknowledged": {
+                    "const": true,
+                    "description": "Confirms that no payment or work starts before separate owner confirmation.",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "email",
+                  "repositoryUrl",
+                  "repositoryAuthority",
+                  "safetyAcknowledged",
+                  "startBoundaryAcknowledged",
+                  "replyConsent"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "notice": {
+                      "description": "Confirms owner review and the no-payment/no-work-start boundary.",
+                      "type": "string"
+                    },
+                    "request": {
+                      "properties": {
+                        "callSite": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "id": {
+                          "minimum": 1,
+                          "type": "integer"
+                        },
+                        "repositoryUrl": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "status": {
+                          "enum": [
+                            "new",
+                            "contacted",
+                            "fit_confirmed",
+                            "declined"
+                          ],
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "repositoryUrl",
+                        "callSite",
+                        "status",
+                        "createdAt",
+                        "updatedAt"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "request",
+                    "notice"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Existing request for this email and repository updated for owner review"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "notice": {
+                      "description": "Confirms owner review and the no-payment/no-work-start boundary.",
+                      "type": "string"
+                    },
+                    "request": {
+                      "properties": {
+                        "callSite": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "id": {
+                          "minimum": 1,
+                          "type": "integer"
+                        },
+                        "repositoryUrl": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "status": {
+                          "enum": [
+                            "new",
+                            "contacted",
+                            "fit_confirmed",
+                            "declined"
+                          ],
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "repositoryUrl",
+                        "callSite",
+                        "status",
+                        "createdAt",
+                        "updatedAt"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "request",
+                    "notice"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "New pilot request recorded for owner review"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          }
+        },
+        "security": [],
+        "securitySchemes": {
+          "bearerAuth": {
+            "bearerFormat": "API key",
+            "description": "Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
   }
 }

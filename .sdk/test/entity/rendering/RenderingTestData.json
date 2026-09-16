@@ -16,5 +16,396 @@
     "rendering": {
       "rendering_ref01": {}
     }
+  },
+  "requests": {
+    "GET /v1/screenshot": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "renderScreenshot",
+        "parameters": [
+          {
+            "description": "Public HTTP or HTTPS page URL to capture.",
+            "example": "https://example.com",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "schema": {
+              "format": "uri",
+              "maxLength": 2048,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Viewport width in CSS pixels.",
+            "in": "query",
+            "name": "width",
+            "schema": {
+              "default": 1440,
+              "maximum": 2560,
+              "minimum": 320,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Viewport height in CSS pixels. Ignored for the final artifact when fullPage is true.",
+            "in": "query",
+            "name": "height",
+            "schema": {
+              "default": 900,
+              "maximum": 1440,
+              "minimum": 240,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Binary image format returned in the response body.",
+            "in": "query",
+            "name": "format",
+            "schema": {
+              "default": "png",
+              "enum": [
+                "png",
+                "jpeg"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "JPEG encoding quality from 1 to 100. Valid only when format is jpeg.",
+            "in": "query",
+            "name": "quality",
+            "schema": {
+              "default": 85,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "When true, capture the bounded full document height instead of only the viewport.",
+            "in": "query",
+            "name": "fullPage",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "For a fullPage screenshot, perform a bounded deterministic scroll before capture to activate lazy content. Does not click, type, or run caller-supplied actions.",
+            "in": "query",
+            "name": "scrollPage",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Emulate a dark color-scheme preference for the page.",
+            "in": "query",
+            "name": "darkMode",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Best-effort blocking of requests to known third-party ad hosts.",
+            "in": "query",
+            "name": "blockAds",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Best-effort blocking of requests to known third-party analytics and tracker hosts.",
+            "in": "query",
+            "name": "blockTrackers",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Best-effort blocking and hiding of known third-party chat widgets.",
+            "in": "query",
+            "name": "blockChats",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Hide common cookie-consent overlays after loading. This does not click consent or set consent cookies.",
+            "in": "query",
+            "name": "hideCookieBanners",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Hide common newsletter, signup, and discount popups without clicking or submitting them.",
+            "in": "query",
+            "name": "hidePopups",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Rendered image. Diagnostic, rate-limit, and quota values are returned in headers.",
+            "headers": {
+              "X-Latchshot-Implementation-Pilot-URL": {
+                "description": "Optional bounded implementation-pilot contract. Following this URL starts neither payment nor implementation work.",
+                "schema": {
+                  "const": "https://latchshot.fly.dev/implementation-pilot.html",
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "X-Latchshot-Navigation": {
+                "description": "Whether navigation completed normally or reached its bounded timeout after a usable page response.",
+                "schema": {
+                  "enum": [
+                    "complete",
+                    "timed-out"
+                  ],
+                  "type": "string"
+                }
+              },
+              "X-Latchshot-Paid-Plan-URL": {
+                "description": "Optional owner-managed paid-plan request form. Following this URL does not take payment or change a plan.",
+                "schema": {
+                  "const": "https://latchshot.fly.dev/#upgrade",
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "X-Latchshot-Render-Ms": {
+                "description": "End-to-end render duration in milliseconds.",
+                "schema": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "X-Latchshot-Scroll": {
+                "description": "Whether bounded lazy-content scrolling completed or the option was off.",
+                "schema": {
+                  "enum": [
+                    "complete",
+                    "off"
+                  ],
+                  "type": "string"
+                }
+              },
+              "X-Latchshot-Usage-URL": {
+                "description": "Authenticated read-only plan, quota, request-state, and continuation endpoint. Following this URL does not consume render quota or change a plan.",
+                "schema": {
+                  "const": "https://latchshot.fly.dev/v1/usage",
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "X-Quota-Remaining": {
+                "description": "Successful renders remaining in the current UTC calendar month after this response.",
+                "schema": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "X-Quota-Reset": {
+                "description": "UTC date-time when the monthly successful-render allowance replenishes.",
+                "schema": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          },
+          "504": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "bearerAuth": {
+            "bearerFormat": "API key",
+            "description": "Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
   }
 }

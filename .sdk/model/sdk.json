@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "health": {
           "active": true,
@@ -60,6 +124,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /healthz",
+                    "json": "{\"operationId\":\"getHealth\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"ok\":{\"type\":\"boolean\"},\"render\":{\"properties\":{\"active\":{\"type\":\"integer\"},\"concurrency\":{\"type\":\"integer\"},\"pending\":{\"type\":\"integer\"}},\"required\":[\"active\",\"pending\",\"concurrency\"],\"type\":\"object\"},\"service\":{\"type\":\"string\"}},\"required\":[\"ok\",\"service\",\"render\"],\"type\":\"object\"}}},\"description\":\"Healthy\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/healthz",
@@ -190,6 +260,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /api/monitoring-requests",
+                    "json": "{\"operationId\":\"requestVisualMonitoringPilot\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"changeContext\":{\"default\":\"Not provided; owner will confirm what counts as a useful change.\",\"description\":\"Optional non-sensitive description of what the weekly owner-written note should call out.\",\"maxLength\":1000,\"type\":\"string\"},\"email\":{\"description\":\"Address the owner may use only to reply about this monitoring request.\",\"format\":\"email\",\"maxLength\":254,\"type\":\"string\"},\"monitoringGoal\":{\"enum\":[\"Release and content archive\",\"Competitive or market tracking\",\"Compliance or public record\",\"Client reporting\",\"Other\"],\"type\":\"string\"},\"pageCount\":{\"enum\":[\"1\",\"2–3\",\"4–5\"],\"type\":\"string\"},\"pageUrl\":{\"description\":\"One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.\",\"format\":\"uri\",\"maxLength\":500,\"pattern\":\"^https?://\",\"type\":\"string\"},\"publicPageAuthority\":{\"const\":true,\"description\":\"Confirms authority to request recurring captures of every proposed public page.\",\"type\":\"boolean\"},\"replyConsent\":{\"const\":true,\"description\":\"Allows the owner to email only about this monitoring-pilot request.\",\"type\":\"boolean\"},\"safetyAcknowledged\":{\"const\":true,\"description\":\"Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information.\",\"type\":\"boolean\"},\"startBoundaryAcknowledged\":{\"const\":true,\"description\":\"Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation.\",\"type\":\"boolean\"}},\"required\":[\"email\",\"pageUrl\",\"pageCount\",\"monitoringGoal\",\"publicPageAuthority\",\"safetyAcknowledged\",\"startBoundaryAcknowledged\",\"replyConsent\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-monitoring-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"pageCount\":{\"enum\":[\"1\",\"2–3\",\"4–5\"],\"type\":\"string\"},\"pageUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"pageUrl\",\"pageCount\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"Existing request for this email and example page updated for owner review\"},\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-monitoring-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"pageCount\":{\"enum\":[\"1\",\"2–3\",\"4–5\"],\"type\":\"string\"},\"pageUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"pageUrl\",\"pageCount\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"New monitoring request recorded for owner review\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"413\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/monitoring-requests",
@@ -356,6 +432,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /api/pilot-requests",
+                    "json": "{\"operationId\":\"requestImplementationPilot\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"acceptanceSample\":{\"default\":\"Not provided; owner will confirm a safe public sample before work.\",\"description\":\"Optional safe description of one maintainer-approved public page and required artifact shape.\",\"maxLength\":1000,\"type\":\"string\"},\"callSite\":{\"default\":\"Not provided\",\"description\":\"Optional relative repository file path for the existing backend provider call. The owner can locate it during the free fit check.\",\"maxLength\":500,\"type\":\"string\"},\"currentContract\":{\"default\":\"Not provided; owner will inspect the public repository.\",\"description\":\"Optional non-secret current request, synchronous output, and application-owned byte handling.\",\"maxLength\":1500,\"type\":\"string\"},\"email\":{\"description\":\"Address the owner may use only to reply about this pilot request.\",\"format\":\"email\",\"maxLength\":254,\"type\":\"string\"},\"expectedRenders\":{\"default\":\"Not sure\",\"enum\":[\"1–100\",\"101–2,500\",\"2,501–12,000\",\"12,001–50,000\",\"More than 50,000\",\"Not sure\"],\"type\":\"string\"},\"language\":{\"default\":\"Not provided\",\"enum\":[\"JavaScript\",\"TypeScript\",\"Python\",\"Not provided\"],\"type\":\"string\"},\"provider\":{\"default\":\"Not provided\",\"enum\":[\"ApiFlash\",\"ScreenshotMachine\",\"ScreenshotOne\",\"Urlbox\",\"Browserless\",\"Local Playwright or Puppeteer\",\"Another provider\",\"Not implemented yet\",\"Not provided\"],\"type\":\"string\"},\"replyConsent\":{\"const\":true,\"description\":\"Allows the owner to email only about this pilot request.\",\"type\":\"boolean\"},\"repositoryAuthority\":{\"const\":true,\"description\":\"Confirms authority to review, merge, deploy, and roll back the public repository change.\",\"type\":\"boolean\"},\"repositoryUrl\":{\"description\":\"Exact public GitHub repository under the requester's control.\",\"format\":\"uri\",\"maxLength\":500,\"pattern\":\"^https://github\\\\.com/[^/]+/[^/]+(?:\\\\.git)?$\",\"type\":\"string\"},\"requiredBehavior\":{\"default\":\"Not provided; owner will confirm required behavior before scope.\",\"description\":\"Optional provider behavior that must be preserved. The owner confirms it before paid scope is locked.\",\"maxLength\":1000,\"type\":\"string\"},\"safetyAcknowledged\":{\"const\":true,\"description\":\"Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts.\",\"type\":\"boolean\"},\"startBoundaryAcknowledged\":{\"const\":true,\"description\":\"Confirms that no payment or work starts before separate owner confirmation.\",\"type\":\"boolean\"}},\"required\":[\"email\",\"repositoryUrl\",\"repositoryAuthority\",\"safetyAcknowledged\",\"startBoundaryAcknowledged\",\"replyConsent\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-work-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"callSite\":{\"type\":\"string\"},\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"repositoryUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"repositoryUrl\",\"callSite\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"Existing request for this email and repository updated for owner review\"},\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-work-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"callSite\":{\"type\":\"string\"},\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"repositoryUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"repositoryUrl\",\"callSite\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"New pilot request recorded for owner review\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"413\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/pilot-requests",
@@ -544,6 +626,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /v1/render",
+                    "json": "{\"operationId\":\"renderPage\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"examples\":{\"pdf\":{\"value\":{\"kind\":\"pdf\",\"paper\":\"A4\",\"url\":\"https://example.com\"}},\"screenshot\":{\"value\":{\"height\":900,\"url\":\"https://example.com\",\"width\":1440}}},\"schema\":{\"properties\":{\"blockAds\":{\"default\":false,\"description\":\"Best-effort blocking of requests to known third-party ad hosts. This is not anti-bot bypass.\",\"type\":\"boolean\"},\"blockChats\":{\"default\":false,\"description\":\"Best-effort blocking and hiding of known third-party chat widgets.\",\"type\":\"boolean\"},\"blockTrackers\":{\"default\":false,\"description\":\"Best-effort blocking of requests to known third-party analytics and tracker hosts.\",\"type\":\"boolean\"},\"darkMode\":{\"default\":false,\"description\":\"Emulate a dark color-scheme preference.\",\"type\":\"boolean\"},\"delay\":{\"default\":0,\"description\":\"Additional bounded wait in milliseconds after the lifecycle event.\",\"maximum\":3000,\"minimum\":0,\"type\":\"integer\"},\"format\":{\"description\":\"Exact artifact format. PDF selects PDF rendering even when kind is omitted.\",\"enum\":[\"png\",\"jpeg\",\"pdf\"],\"type\":\"string\"},\"fullPage\":{\"default\":false,\"description\":\"Capture the bounded full document height for screenshots.\",\"type\":\"boolean\"},\"height\":{\"default\":900,\"description\":\"Viewport height in CSS pixels.\",\"maximum\":1440,\"minimum\":240,\"type\":\"integer\"},\"hideCookieBanners\":{\"default\":false,\"description\":\"Hide common cookie-consent overlays after loading. This does not click consent, set consent cookies, or bypass access controls.\",\"type\":\"boolean\"},\"hidePopups\":{\"default\":false,\"description\":\"Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state.\",\"type\":\"boolean\"},\"kind\":{\"default\":\"screenshot\",\"description\":\"Artifact family to return.\",\"enum\":[\"screenshot\",\"pdf\"],\"type\":\"string\"},\"landscape\":{\"default\":false,\"description\":\"Use landscape orientation for PDF rendering.\",\"type\":\"boolean\"},\"paper\":{\"default\":\"A4\",\"description\":\"Paper size used for PDF rendering.\",\"enum\":[\"A4\",\"Letter\",\"Legal\"],\"type\":\"string\"},\"quality\":{\"default\":85,\"description\":\"JPEG encoding quality. Valid only for JPEG screenshots.\",\"maximum\":100,\"minimum\":1,\"type\":\"integer\"},\"reducedMotion\":{\"default\":true,\"description\":\"Emulate reduced motion to improve capture stability.\",\"type\":\"boolean\"},\"scale\":{\"default\":1,\"description\":\"Device scale factor used for image capture.\",\"maximum\":2,\"minimum\":1,\"type\":\"integer\"},\"scrollPage\":{\"default\":false,\"description\":\"Deterministically scroll before capture to activate lazy content. Requires a fullPage screenshot; bounded to 48 steps, 5 seconds, and a 20,000-pixel document height. Does not click, type, or run caller-supplied actions.\",\"type\":\"boolean\"},\"timeout\":{\"default\":15000,\"description\":\"Navigation timeout in milliseconds. A separate hard process deadline still applies.\",\"maximum\":30000,\"minimum\":3000,\"type\":\"integer\"},\"url\":{\"description\":\"Public HTTP or HTTPS page URL. Private, loopback, link-local, special-use, credential-bearing, and non-web-port targets are rejected.\",\"example\":\"https://example.com\",\"format\":\"uri\",\"maxLength\":2048,\"type\":\"string\"},\"waitUntil\":{\"default\":\"domcontentloaded\",\"description\":\"Browser lifecycle event awaited before the optional delay.\",\"enum\":[\"load\",\"domcontentloaded\",\"networkidle\"],\"type\":\"string\"},\"width\":{\"default\":1440,\"description\":\"Viewport width in CSS pixels.\",\"maximum\":2560,\"minimum\":320,\"type\":\"integer\"}},\"required\":[\"url\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/pdf\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}},\"image/jpeg\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}},\"image/png\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}}},\"description\":\"Rendered image or PDF. Diagnostic, rate-limit, and quota values are returned in headers.\",\"headers\":{\"X-Latchshot-Implementation-Pilot-URL\":{\"description\":\"Optional bounded implementation-pilot contract. Following this URL starts neither payment nor implementation work.\",\"schema\":{\"const\":\"https://latchshot.fly.dev/implementation-pilot.html\",\"format\":\"uri\",\"type\":\"string\"}},\"X-Latchshot-Navigation\":{\"description\":\"Whether navigation completed normally or reached its bounded timeout after a usable page response.\",\"schema\":{\"enum\":[\"complete\",\"timed-out\"],\"type\":\"string\"}},\"X-Latchshot-Paid-Plan-URL\":{\"description\":\"Optional owner-managed paid-plan request form. Following this URL does not take payment or change a plan.\",\"schema\":{\"const\":\"https://latchshot.fly.dev/#upgrade\",\"format\":\"uri\",\"type\":\"string\"}},\"X-Latchshot-Render-Ms\":{\"description\":\"End-to-end render duration in milliseconds.\",\"schema\":{\"minimum\":0,\"type\":\"integer\"}},\"X-Latchshot-Scroll\":{\"description\":\"Whether bounded lazy-content scrolling completed or the option was off.\",\"schema\":{\"enum\":[\"complete\",\"off\"],\"type\":\"string\"}},\"X-Latchshot-Usage-URL\":{\"description\":\"Authenticated read-only plan, quota, request-state, and continuation endpoint. Following this URL does not consume render quota or change a plan.\",\"schema\":{\"const\":\"https://latchshot.fly.dev/v1/usage\",\"format\":\"uri\",\"type\":\"string\"}},\"X-Quota-Remaining\":{\"description\":\"Successful renders remaining in the current UTC calendar month after this response.\",\"schema\":{\"minimum\":0,\"type\":\"integer\"}},\"X-Quota-Reset\":{\"description\":\"UTC date-time when the monthly successful-render allowance replenishes.\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}}}},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"413\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"502\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"504\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/render",
@@ -702,6 +790,12 @@
                         "type": "`$INTEGER`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /v1/screenshot",
+                    "json": "{\"operationId\":\"renderScreenshot\",\"parameters\":[{\"description\":\"Public HTTP or HTTPS page URL to capture.\",\"example\":\"https://example.com\",\"in\":\"query\",\"name\":\"url\",\"required\":true,\"schema\":{\"format\":\"uri\",\"maxLength\":2048,\"type\":\"string\"}},{\"description\":\"Viewport width in CSS pixels.\",\"in\":\"query\",\"name\":\"width\",\"schema\":{\"default\":1440,\"maximum\":2560,\"minimum\":320,\"type\":\"integer\"}},{\"description\":\"Viewport height in CSS pixels. Ignored for the final artifact when fullPage is true.\",\"in\":\"query\",\"name\":\"height\",\"schema\":{\"default\":900,\"maximum\":1440,\"minimum\":240,\"type\":\"integer\"}},{\"description\":\"Binary image format returned in the response body.\",\"in\":\"query\",\"name\":\"format\",\"schema\":{\"default\":\"png\",\"enum\":[\"png\",\"jpeg\"],\"type\":\"string\"}},{\"description\":\"JPEG encoding quality from 1 to 100. Valid only when format is jpeg.\",\"in\":\"query\",\"name\":\"quality\",\"schema\":{\"default\":85,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"When true, capture the bounded full document height instead of only the viewport.\",\"in\":\"query\",\"name\":\"fullPage\",\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"For a fullPage screenshot, perform a bounded deterministic scroll before capture to activate lazy content. Does not click, type, or run caller-supplied actions.\",\"in\":\"query\",\"name\":\"scrollPage\",\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"Emulate a dark color-scheme preference for the page.\",\"in\":\"query\",\"name\":\"darkMode\",\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"Best-effort blocking of requests to known third-party ad hosts.\",\"in\":\"query\",\"name\":\"blockAds\",\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"Best-effort blocking of requests to known third-party analytics and tracker hosts.\",\"in\":\"query\",\"name\":\"blockTrackers\",\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"Best-effort blocking and hiding of known third-party chat widgets.\",\"in\":\"query\",\"name\":\"blockChats\",\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"Hide common cookie-consent overlays after loading. This does not click consent or set consent cookies.\",\"in\":\"query\",\"name\":\"hideCookieBanners\",\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"Hide common newsletter, signup, and discount popups without clicking or submitting them.\",\"in\":\"query\",\"name\":\"hidePopups\",\"schema\":{\"default\":false,\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"image/jpeg\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}},\"image/png\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}}},\"description\":\"Rendered image. Diagnostic, rate-limit, and quota values are returned in headers.\",\"headers\":{\"X-Latchshot-Implementation-Pilot-URL\":{\"description\":\"Optional bounded implementation-pilot contract. Following this URL starts neither payment nor implementation work.\",\"schema\":{\"const\":\"https://latchshot.fly.dev/implementation-pilot.html\",\"format\":\"uri\",\"type\":\"string\"}},\"X-Latchshot-Navigation\":{\"description\":\"Whether navigation completed normally or reached its bounded timeout after a usable page response.\",\"schema\":{\"enum\":[\"complete\",\"timed-out\"],\"type\":\"string\"}},\"X-Latchshot-Paid-Plan-URL\":{\"description\":\"Optional owner-managed paid-plan request form. Following this URL does not take payment or change a plan.\",\"schema\":{\"const\":\"https://latchshot.fly.dev/#upgrade\",\"format\":\"uri\",\"type\":\"string\"}},\"X-Latchshot-Render-Ms\":{\"description\":\"End-to-end render duration in milliseconds.\",\"schema\":{\"minimum\":0,\"type\":\"integer\"}},\"X-Latchshot-Scroll\":{\"description\":\"Whether bounded lazy-content scrolling completed or the option was off.\",\"schema\":{\"enum\":[\"complete\",\"off\"],\"type\":\"string\"}},\"X-Latchshot-Usage-URL\":{\"description\":\"Authenticated read-only plan, quota, request-state, and continuation endpoint. Following this URL does not consume render quota or change a plan.\",\"schema\":{\"const\":\"https://latchshot.fly.dev/v1/usage\",\"format\":\"uri\",\"type\":\"string\"}},\"X-Quota-Remaining\":{\"description\":\"Successful renders remaining in the current UTC calendar month after this response.\",\"schema\":{\"minimum\":0,\"type\":\"integer\"}},\"X-Quota-Reset\":{\"description\":\"UTC date-time when the monthly successful-render allowance replenishes.\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}}}},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"502\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"504\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -879,6 +973,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /api/safety-review-requests",
+                    "json": "{\"operationId\":\"requestScreenshotSafetyReview\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"currentControls\":{\"description\":\"Non-secret current URL, network, browser, resource, and caller controls.\",\"maxLength\":1500,\"type\":\"string\"},\"desiredOutcome\":{\"description\":\"Requested risk report, focused patch, regression tests, and handoff outcome.\",\"maxLength\":1000,\"type\":\"string\"},\"email\":{\"description\":\"Address the owner may use only to reply about this safety-review request.\",\"format\":\"email\",\"maxLength\":254,\"type\":\"string\"},\"language\":{\"enum\":[\"JavaScript\",\"TypeScript\",\"Python\"],\"type\":\"string\"},\"primaryConcern\":{\"enum\":[\"SSRF and internal network access\",\"DNS rebinding\",\"Redirects and subresources\",\"Authorization and secrets\",\"Full endpoint review\"],\"type\":\"string\"},\"replyConsent\":{\"const\":true,\"description\":\"Allows the owner to email only about this safety-review request.\",\"type\":\"boolean\"},\"repositoryAuthority\":{\"const\":true,\"description\":\"Confirms authority to review, merge, deploy, and roll back the public repository change.\",\"type\":\"boolean\"},\"repositoryUrl\":{\"description\":\"Exact public GitHub repository under the requester's control.\",\"format\":\"uri\",\"maxLength\":500,\"pattern\":\"^https://github\\\\.com/[^/]+/[^/]+(?:\\\\.git)?$\",\"type\":\"string\"},\"routePath\":{\"description\":\"One relative repository file path for the existing screenshot endpoint or worker.\",\"maxLength\":500,\"type\":\"string\"},\"runtime\":{\"enum\":[\"Local Playwright\",\"Local Puppeteer\",\"Browserless or remote CDP\",\"HTTP screenshot provider\",\"Other\"],\"type\":\"string\"},\"safetyAcknowledged\":{\"const\":true,\"description\":\"Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts.\",\"type\":\"boolean\"},\"startBoundaryAcknowledged\":{\"const\":true,\"description\":\"Confirms that no payment or work starts before separate owner confirmation.\",\"type\":\"boolean\"},\"testEvidence\":{\"description\":\"Non-sensitive description of current happy-path and rejection tests, or none.\",\"maxLength\":1000,\"type\":\"string\"}},\"required\":[\"email\",\"repositoryUrl\",\"routePath\",\"language\",\"runtime\",\"primaryConcern\",\"currentControls\",\"testEvidence\",\"desiredOutcome\",\"repositoryAuthority\",\"safetyAcknowledged\",\"startBoundaryAcknowledged\",\"replyConsent\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-work-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"repositoryUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"routePath\":{\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"repositoryUrl\",\"routePath\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"Existing request for this email and repository updated for owner review\"},\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"description\":\"Confirms owner review and the no-payment/no-work-start boundary.\",\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"repositoryUrl\":{\"format\":\"uri\",\"type\":\"string\"},\"routePath\":{\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fit_confirmed\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"repositoryUrl\",\"routePath\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"New safety review request recorded for owner review\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"413\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/safety-review-requests",
@@ -954,6 +1054,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /api/trials",
+                    "json": "{\"operationId\":\"createTrial\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"consent\":{\"default\":false,\"description\":\"Optional permission for the owner to send product-fit guidance.\",\"type\":\"boolean\"},\"email\":{\"description\":\"Email used to enforce one lifetime Free-plan key. It does not grant contact permission.\",\"format\":\"email\",\"maxLength\":254,\"type\":\"string\"},\"expectedRenders\":{\"default\":\"not sure\",\"enum\":[\"under 1,000\",\"1,000–10,000\",\"10,000–50,000\",\"over 50,000\",\"not sure\"],\"type\":\"string\"},\"name\":{\"description\":\"Optional display name for owner review.\",\"maxLength\":120,\"type\":\"string\"},\"useCase\":{\"description\":\"Optional public-page capture use case.\",\"maxLength\":1000,\"type\":\"string\"}},\"required\":[\"email\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"apiKey\":{\"pattern\":\"^ls_live_\",\"type\":\"string\"},\"notice\":{\"type\":\"string\"},\"quickstart\":{\"format\":\"uri\",\"type\":\"string\"},\"trial\":{\"properties\":{\"displayName\":{\"const\":\"Free\",\"type\":\"string\"},\"plan\":{\"const\":\"trial\",\"type\":\"string\"},\"quotaPeriod\":{\"const\":\"calendar_month\",\"type\":\"string\"},\"rateLimitPerMinute\":{\"minimum\":1,\"type\":\"integer\"},\"resetAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"successfulRenderLimit\":{\"const\":100,\"type\":\"integer\"}},\"required\":[\"plan\",\"displayName\",\"successfulRenderLimit\",\"rateLimitPerMinute\",\"quotaPeriod\",\"resetAt\"],\"type\":\"object\"}},\"required\":[\"apiKey\",\"trial\",\"notice\",\"quickstart\"],\"type\":\"object\"}}},\"description\":\"Free-plan key created; the plaintext key is returned only in this response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/trials",
@@ -1048,6 +1154,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /v1/upgrade-requests",
+                    "json": "{\"operationId\":\"requestUpgrade\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"consent\":{\"const\":true,\"type\":\"boolean\"},\"note\":{\"maxLength\":1000,\"type\":\"string\"},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"}},\"required\":[\"requestedPlan\",\"consent\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"currentPlan\":{\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fulfilled\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"currentPlan\",\"requestedPlan\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"Existing open request updated\"},\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"notice\":{\"type\":\"string\"},\"request\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"currentPlan\":{\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fulfilled\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"currentPlan\",\"requestedPlan\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"request\",\"notice\"],\"type\":\"object\"}}},\"description\":\"New paid-plan request recorded\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/upgrade-requests",
@@ -1114,6 +1226,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /v1/usage",
+                    "json": "{\"operationId\":\"getUsage\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"customer\":{\"properties\":{\"name\":{\"description\":\"Display name attached to the key.\",\"type\":\"string\"},\"plan\":{\"description\":\"Current internal plan identifier. The trial identifier is displayed publicly as Free.\",\"enum\":[\"trial\",\"launch\",\"build\",\"scale\"],\"type\":\"string\"}},\"required\":[\"name\",\"plan\"],\"type\":\"object\"},\"links\":{\"description\":\"Stable self-serve continuation links. They are informational and do not take payment, initiate an upgrade, or start implementation work.\",\"properties\":{\"implementationPilot\":{\"const\":\"https://latchshot.fly.dev/implementation-pilot.html\",\"description\":\"Describes the optional bounded $99 implementation service. The link itself starts neither work nor payment.\",\"format\":\"uri\",\"type\":\"string\"},\"plans\":{\"const\":\"https://latchshot.fly.dev/#pricing\",\"format\":\"uri\",\"type\":\"string\"},\"requestPaidPlan\":{\"const\":\"https://latchshot.fly.dev/#upgrade\",\"format\":\"uri\",\"type\":\"string\"},\"requestPaidPlanDocs\":{\"const\":\"https://latchshot.fly.dev/docs.md#request-a-paid-plan\",\"format\":\"uri\",\"type\":\"string\"}},\"required\":[\"plans\",\"requestPaidPlan\",\"requestPaidPlanDocs\",\"implementationPilot\"],\"type\":\"object\"},\"upgradeRequest\":{\"anyOf\":[{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"minimum\":1,\"type\":\"integer\"},\"keyId\":{\"minimum\":1,\"type\":\"integer\"},\"note\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}]},\"requestedPlan\":{\"enum\":[\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"status\":{\"enum\":[\"new\",\"contacted\",\"fulfilled\",\"declined\"],\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"id\",\"keyId\",\"requestedPlan\",\"note\",\"status\",\"createdAt\",\"updatedAt\"],\"type\":\"object\"},{\"type\":\"null\"}],\"description\":\"Latest paid-plan request attached to this key, or null when none exists.\"},\"usage\":{\"properties\":{\"failed\":{\"description\":\"Failed reserved renders; these do not consume successful-render quota.\",\"minimum\":0,\"type\":\"integer\"},\"limit\":{\"description\":\"Successful renders included in the current plan each calendar month.\",\"minimum\":1,\"type\":\"integer\"},\"outputBytes\":{\"minimum\":0,\"type\":\"integer\"},\"period\":{\"description\":\"Current UTC calendar month.\",\"pattern\":\"^[0-9]{4}-[0-9]{2}$\",\"type\":\"string\"},\"plan\":{\"enum\":[\"trial\",\"launch\",\"build\",\"scale\"],\"type\":\"string\"},\"remaining\":{\"description\":\"Successful renders still available in the current month.\",\"minimum\":0,\"type\":\"integer\"},\"renderMs\":{\"description\":\"Aggregate successful render time in milliseconds for the current month.\",\"minimum\":0,\"type\":\"integer\"},\"reserved\":{\"description\":\"Currently reserved render slots for this key.\",\"minimum\":0,\"type\":\"integer\"},\"resetAt\":{\"description\":\"Start of the next UTC calendar month, when the allowance replenishes.\",\"format\":\"date-time\",\"type\":\"string\"},\"successful\":{\"minimum\":0,\"type\":\"integer\"},\"updatedAt\":{\"anyOf\":[{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}]}},\"required\":[\"period\",\"plan\",\"limit\",\"remaining\",\"resetAt\",\"successful\",\"failed\",\"reserved\",\"outputBytes\",\"renderMs\",\"updatedAt\"],\"type\":\"object\"}},\"required\":[\"customer\",\"usage\",\"upgradeRequest\",\"links\"],\"type\":\"object\"}}},\"description\":\"Current plan, quota usage, optional paid-plan request, and informational continuation links\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"string\"},\"message\":{\"type\":\"string\"}},\"required\":[\"code\",\"message\"],\"type\":\"object\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Error response\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API key\",\"description\":\"Send the one-time Latchshot key in the Authorization header as Bearer YOUR_KEY. Keys are stored only as hashes.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/usage",
@@ -1140,13 +1258,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1236,6 +1564,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -1482,6 +1906,48 @@
         "website": "https://latchshot.fly.dev/docs.md"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -2036,6 +2502,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -2077,7 +2544,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }
