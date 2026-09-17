@@ -105,12 +105,12 @@ local result, err = client:Health():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/latchshot-screenshot-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
-| Python | `voxgig-sdk-latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
-| PHP | `voxgig-sdk/latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
+| TypeScript | `@voxgig-sdk/latchshot-screenshot-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/tags) |
+| Python | `voxgig-sdk-latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/tags) |
+| PHP | `voxgig-sdk/latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/latchshot-screenshot-sdk/go` | `go get github.com/voxgig-sdk/latchshot-screenshot-sdk/go@latest` |
-| Ruby | `voxgig-sdk-latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
-| Lua | `voxgig-sdk-latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/releases) |
+| Ruby | `voxgig-sdk-latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/tags) |
+| Lua | `voxgig-sdk-latchshot-screenshot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/latchshot-screenshot-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/latchshot-screenshot-sdk/go-cli` | `go install github.com/voxgig-sdk/latchshot-screenshot-sdk/go-cli/cmd/latchshot-screenshot@latest` |
 | Go MCP server | `github.com/voxgig-sdk/latchshot-screenshot-sdk/go-mcp` | `go get github.com/voxgig-sdk/latchshot-screenshot-sdk/go-mcp@latest` |
 

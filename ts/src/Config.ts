@@ -131,33 +131,33 @@ class Config {
 
     entity: {
       
-      health: {
-      },
-
-      monitoring_request: {
-      },
-
-      pilot_request: {
-      },
-
-      render: {
-      },
-
-      rendering: {
-      },
-
-      safety_review_request: {
-      },
-
-      trial: {
-      },
-
-      upgrade: {
-      },
-
-      usage: {
-      },
-
+        health: {
+        },
+  
+        monitoring_request: {
+        },
+  
+        pilot_request: {
+        },
+  
+        render: {
+        },
+  
+        rendering: {
+        },
+  
+        safety_review_request: {
+        },
+  
+        trial: {
+        },
+  
+        upgrade: {
+        },
+  
+        usage: {
+        },
+  
     }
   }
 
