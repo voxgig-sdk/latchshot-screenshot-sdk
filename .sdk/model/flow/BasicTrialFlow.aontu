@@ -1,0 +1,18 @@
+# BasicTrialFlow
+
+main: kit: flow: BasicTrialFlow:
+{
+  entity: "trial",
+  kind: "basic",
+  name: "BasicTrialFlow",
+  step: [
+    {
+      i: {
+        ref: "trial_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicTrialFlow"
+}

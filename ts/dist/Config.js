@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -125,18 +118,21 @@ class Config {
             "fields": [
                 {
                     "name": "active",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Active",
+                    "type": "`$INTEGER`",
+                    "req": true
                 },
                 {
                     "name": "concurrency",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Concurrency",
+                    "type": "`$INTEGER`",
+                    "req": true
                 },
                 {
                     "name": "pending",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Pending",
+                    "type": "`$INTEGER`",
+                    "req": true
                 }
             ],
             "name": "health",
@@ -146,7 +142,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/healthz",
@@ -155,14 +150,16 @@ class Config {
                                     "lit": "healthz"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "healthz"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.render`"
                             },
-                            "parts": [
-                                "healthz"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -175,78 +172,91 @@ class Config {
             "fields": [
                 {
                     "name": "changeContext",
-                    "short": "Optional non-sensitive description of what the weekly owner-written note should call out.",
-                    "type": "`$STRING`"
+                    "title": "Change Context",
+                    "type": "`$STRING`",
+                    "short": "Optional non-sensitive description of what the weekly owner-written note should call out."
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
-                    "format": "email",
                     "name": "email",
+                    "title": "Email",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Address the owner may use only to reply about this monitoring request.",
-                    "type": "`$STRING`"
+                    "format": "email"
                 },
                 {
                     "name": "id",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Id",
+                    "type": "`$INTEGER`",
+                    "req": true
                 },
                 {
                     "name": "monitoringGoal",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Monitoring Goal",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "pageCount",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Page Count",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "format": "uri",
                     "name": "pageUrl",
+                    "title": "Page Url",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment.",
-                    "type": "`$STRING`"
+                    "format": "uri"
                 },
                 {
                     "name": "publicPageAuthority",
+                    "title": "Public Page Authority",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms authority to request recurring captures of every proposed public page.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms authority to request recurring captures of every proposed public page."
                 },
                 {
                     "name": "replyConsent",
+                    "title": "Reply Consent",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Allows the owner to email only about this monitoring-pilot request.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Allows the owner to email only about this monitoring-pilot request."
                 },
                 {
                     "name": "safetyAcknowledged",
+                    "title": "Safety Acknowledged",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information."
                 },
                 {
                     "name": "startBoundaryAcknowledged",
+                    "title": "Start Boundary Acknowledged",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation."
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "format": "date-time",
                     "name": "updatedAt",
+                    "title": "Updated At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 }
             ],
             "id": {
@@ -260,7 +270,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/api/monitoring-requests",
@@ -272,15 +281,17 @@ class Config {
                                     "lit": "monitoring-requests"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "monitoring-requests"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.request`"
                             },
-                            "parts": [
-                                "api",
-                                "monitoring-requests"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -293,101 +304,118 @@ class Config {
             "fields": [
                 {
                     "name": "acceptanceSample",
-                    "short": "Optional safe description of one maintainer-approved public page and required artifact shape.",
-                    "type": "`$STRING`"
+                    "title": "Acceptance Sample",
+                    "type": "`$STRING`",
+                    "short": "Optional safe description of one maintainer-approved public page and required artifact shape."
                 },
                 {
                     "name": "callSite",
+                    "title": "Call Site",
+                    "type": "`$STRING`",
+                    "req": true,
                     "op": {
                         "create": {
                             "type": "`$STRING`"
                         }
                     },
-                    "req": true,
-                    "short": "Optional relative repository file path for the existing backend provider call.",
-                    "type": "`$STRING`"
+                    "short": "Optional relative repository file path for the existing backend provider call."
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "currentContract",
-                    "short": "Optional non-secret current request, synchronous output, and application-owned byte handling.",
-                    "type": "`$STRING`"
+                    "title": "Current Contract",
+                    "type": "`$STRING`",
+                    "short": "Optional non-secret current request, synchronous output, and application-owned byte handling."
                 },
                 {
-                    "format": "email",
                     "name": "email",
+                    "title": "Email",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Address the owner may use only to reply about this pilot request.",
-                    "type": "`$STRING`"
+                    "format": "email"
                 },
                 {
                     "name": "expectedRenders",
+                    "title": "Expected Renders",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Id",
+                    "type": "`$INTEGER`",
+                    "req": true
                 },
                 {
                     "name": "language",
+                    "title": "Language",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "provider",
+                    "title": "Provider",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "replyConsent",
+                    "title": "Reply Consent",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Allows the owner to email only about this pilot request.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Allows the owner to email only about this pilot request."
                 },
                 {
                     "name": "repositoryAuthority",
+                    "title": "Repository Authority",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms authority to review, merge, deploy, and roll back the public repository change.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms authority to review, merge, deploy, and roll back the public repository change."
                 },
                 {
-                    "format": "uri",
                     "name": "repositoryUrl",
+                    "title": "Repository Url",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Exact public GitHub repository under the requester's control.",
-                    "type": "`$STRING`"
+                    "format": "uri"
                 },
                 {
                     "name": "requiredBehavior",
-                    "short": "Optional provider behavior that must be preserved.",
-                    "type": "`$STRING`"
+                    "title": "Required Behavior",
+                    "type": "`$STRING`",
+                    "short": "Optional provider behavior that must be preserved."
                 },
                 {
                     "name": "safetyAcknowledged",
+                    "title": "Safety Acknowledged",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms removal of credentials, private or signed URLs, customer data, payment details, and sensitive artifacts."
                 },
                 {
                     "name": "startBoundaryAcknowledged",
+                    "title": "Start Boundary Acknowledged",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms that no payment or work starts before separate owner confirmation.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms that no payment or work starts before separate owner confirmation."
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "format": "date-time",
                     "name": "updatedAt",
+                    "title": "Updated At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 }
             ],
             "id": {
@@ -401,7 +429,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/api/pilot-requests",
@@ -413,15 +440,17 @@ class Config {
                                     "lit": "pilot-requests"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "pilot-requests"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.request`"
                             },
-                            "parts": [
-                                "api",
-                                "pilot-requests"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -434,110 +463,131 @@ class Config {
             "fields": [
                 {
                     "name": "blockAds",
-                    "short": "Best-effort blocking of requests to known third-party ad hosts.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Block Ads",
+                    "type": "`$BOOLEAN`",
+                    "short": "Best-effort blocking of requests to known third-party ad hosts."
                 },
                 {
                     "name": "blockChats",
-                    "short": "Best-effort blocking and hiding of known third-party chat widgets.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Block Chats",
+                    "type": "`$BOOLEAN`",
+                    "short": "Best-effort blocking and hiding of known third-party chat widgets."
                 },
                 {
                     "name": "blockTrackers",
-                    "short": "Best-effort blocking of requests to known third-party analytics and tracker hosts.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Block Trackers",
+                    "type": "`$BOOLEAN`",
+                    "short": "Best-effort blocking of requests to known third-party analytics and tracker hosts."
                 },
                 {
                     "name": "darkMode",
-                    "short": "Emulate a dark color-scheme preference.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Dark Mode",
+                    "type": "`$BOOLEAN`",
+                    "short": "Emulate a dark color-scheme preference."
                 },
                 {
                     "name": "delay",
-                    "short": "Additional bounded wait in milliseconds after the lifecycle event.",
-                    "type": "`$INTEGER`"
+                    "title": "Delay",
+                    "type": "`$INTEGER`",
+                    "short": "Additional bounded wait in milliseconds after the lifecycle event."
                 },
                 {
                     "name": "format",
-                    "short": "Exact artifact format.",
-                    "type": "`$STRING`"
+                    "title": "Format",
+                    "type": "`$STRING`",
+                    "short": "Exact artifact format."
                 },
                 {
                     "name": "fullPage",
-                    "short": "Capture the bounded full document height for screenshots.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Full Page",
+                    "type": "`$BOOLEAN`",
+                    "short": "Capture the bounded full document height for screenshots."
                 },
                 {
                     "name": "height",
-                    "short": "Viewport height in CSS pixels.",
-                    "type": "`$INTEGER`"
+                    "title": "Height",
+                    "type": "`$INTEGER`",
+                    "short": "Viewport height in CSS pixels."
                 },
                 {
                     "name": "hideCookieBanners",
-                    "short": "Hide common cookie-consent overlays after loading.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Hide Cookie Banners",
+                    "type": "`$BOOLEAN`",
+                    "short": "Hide common cookie-consent overlays after loading."
                 },
                 {
                     "name": "hidePopups",
-                    "short": "Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Hide Popups",
+                    "type": "`$BOOLEAN`",
+                    "short": "Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state."
                 },
                 {
                     "name": "kind",
-                    "short": "Artifact family to return.",
-                    "type": "`$STRING`"
+                    "title": "Kind",
+                    "type": "`$STRING`",
+                    "short": "Artifact family to return."
                 },
                 {
                     "name": "landscape",
-                    "short": "Use landscape orientation for PDF rendering.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Landscape",
+                    "type": "`$BOOLEAN`",
+                    "short": "Use landscape orientation for PDF rendering."
                 },
                 {
                     "name": "paper",
-                    "short": "Paper size used for PDF rendering.",
-                    "type": "`$STRING`"
+                    "title": "Paper",
+                    "type": "`$STRING`",
+                    "short": "Paper size used for PDF rendering."
                 },
                 {
                     "name": "quality",
-                    "short": "JPEG encoding quality.",
-                    "type": "`$INTEGER`"
+                    "title": "Quality",
+                    "type": "`$INTEGER`",
+                    "short": "JPEG encoding quality."
                 },
                 {
                     "name": "reducedMotion",
-                    "short": "Emulate reduced motion to improve capture stability.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Reduced Motion",
+                    "type": "`$BOOLEAN`",
+                    "short": "Emulate reduced motion to improve capture stability."
                 },
                 {
                     "name": "scale",
-                    "short": "Device scale factor used for image capture.",
-                    "type": "`$INTEGER`"
+                    "title": "Scale",
+                    "type": "`$INTEGER`",
+                    "short": "Device scale factor used for image capture."
                 },
                 {
                     "name": "scrollPage",
-                    "short": "Deterministically scroll before capture to activate lazy content.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Scroll Page",
+                    "type": "`$BOOLEAN`",
+                    "short": "Deterministically scroll before capture to activate lazy content."
                 },
                 {
                     "name": "timeout",
-                    "short": "Navigation timeout in milliseconds.",
-                    "type": "`$INTEGER`"
+                    "title": "Timeout",
+                    "type": "`$INTEGER`",
+                    "short": "Navigation timeout in milliseconds."
                 },
                 {
-                    "format": "uri",
                     "name": "url",
+                    "title": "Url",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Public HTTP or HTTPS page URL.",
-                    "type": "`$STRING`"
+                    "format": "uri"
                 },
                 {
                     "name": "waitUntil",
-                    "short": "Browser lifecycle event awaited before the optional delay.",
-                    "type": "`$STRING`"
+                    "title": "Wait Until",
+                    "type": "`$STRING`",
+                    "short": "Browser lifecycle event awaited before the optional delay."
                 },
                 {
                     "name": "width",
-                    "short": "Viewport width in CSS pixels.",
-                    "type": "`$INTEGER`"
+                    "title": "Width",
+                    "type": "`$INTEGER`",
+                    "short": "Viewport width in CSS pixels."
                 }
             ],
             "name": "render",
@@ -547,7 +597,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/v1/render",
@@ -559,15 +608,17 @@ class Config {
                                     "lit": "render"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "v1",
+                                "render"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "v1",
-                                "render"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -585,102 +636,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "block_ad",
-                                        "orig": "block_ad",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "block_chat",
-                                        "orig": "block_chat",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "block_tracker",
-                                        "orig": "block_tracker",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "dark_mode",
-                                        "orig": "dark_mode",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": "png",
-                                        "kind": "query",
-                                        "name": "format",
-                                        "orig": "format",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "full_page",
-                                        "orig": "full_page",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": 900,
-                                        "kind": "query",
-                                        "name": "height",
-                                        "orig": "height",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "hide_cookie_banner",
-                                        "orig": "hide_cookie_banner",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "hide_popup",
-                                        "orig": "hide_popup",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": 85,
-                                        "kind": "query",
-                                        "name": "quality",
-                                        "orig": "quality",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": false,
-                                        "kind": "query",
-                                        "name": "scroll_page",
-                                        "orig": "scroll_page",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": "https://example.com",
-                                        "kind": "query",
-                                        "name": "url",
-                                        "orig": "url",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": 1440,
-                                        "kind": "query",
-                                        "name": "width",
-                                        "orig": "width",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/v1/screenshot",
@@ -692,6 +647,111 @@ class Config {
                                     "lit": "screenshot"
                                 }
                             ],
+                            "parts": [
+                                "v1",
+                                "screenshot"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "block_ad",
+                                        "orig": "block_ad",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "block_chat",
+                                        "orig": "block_chat",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "block_tracker",
+                                        "orig": "block_tracker",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "dark_mode",
+                                        "orig": "dark_mode",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "format",
+                                        "orig": "format",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "png"
+                                    },
+                                    {
+                                        "name": "full_page",
+                                        "orig": "full_page",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "height",
+                                        "orig": "height",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 900
+                                    },
+                                    {
+                                        "name": "hide_cookie_banner",
+                                        "orig": "hide_cookie_banner",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "hide_popup",
+                                        "orig": "hide_popup",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "quality",
+                                        "orig": "quality",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 85
+                                    },
+                                    {
+                                        "name": "scroll_page",
+                                        "orig": "scroll_page",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query",
+                                        "example": false
+                                    },
+                                    {
+                                        "name": "url",
+                                        "orig": "url",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "https://example.com"
+                                    },
+                                    {
+                                        "name": "width",
+                                        "orig": "width",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 1440
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "block_ad",
@@ -708,15 +768,7 @@ class Config {
                                     "url",
                                     "width"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "v1",
-                                "screenshot"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -728,103 +780,120 @@ class Config {
         "safety_review_request": {
             "fields": [
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "currentControls",
+                    "title": "Current Controls",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Non-secret current URL, network, browser, resource, and caller controls.",
-                    "type": "`$STRING`"
+                    "short": "Non-secret current URL, network, browser, resource, and caller controls."
                 },
                 {
                     "name": "desiredOutcome",
+                    "title": "Desired Outcome",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Requested risk report, focused patch, regression tests, and handoff outcome.",
-                    "type": "`$STRING`"
+                    "short": "Requested risk report, focused patch, regression tests, and handoff outcome."
                 },
                 {
-                    "format": "email",
                     "name": "email",
+                    "title": "Email",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Address the owner may use only to reply about this safety-review request.",
-                    "type": "`$STRING`"
+                    "format": "email"
                 },
                 {
                     "name": "id",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Id",
+                    "type": "`$INTEGER`",
+                    "req": true
                 },
                 {
                     "name": "language",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Language",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "primaryConcern",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Primary Concern",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "replyConsent",
+                    "title": "Reply Consent",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Allows the owner to email only about this safety-review request.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Allows the owner to email only about this safety-review request."
                 },
                 {
                     "name": "repositoryAuthority",
+                    "title": "Repository Authority",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms authority to review, merge, deploy, and roll back the public repository change.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms authority to review, merge, deploy, and roll back the public repository change."
                 },
                 {
-                    "format": "uri",
                     "name": "repositoryUrl",
+                    "title": "Repository Url",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Exact public GitHub repository under the requester's control.",
-                    "type": "`$STRING`"
+                    "format": "uri"
                 },
                 {
                     "name": "routePath",
+                    "title": "Route Path",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "One relative repository file path for the existing screenshot endpoint or worker.",
-                    "type": "`$STRING`"
+                    "short": "One relative repository file path for the existing screenshot endpoint or worker."
                 },
                 {
                     "name": "runtime",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Runtime",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "safetyAcknowledged",
+                    "title": "Safety Acknowledged",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts."
                 },
                 {
                     "name": "startBoundaryAcknowledged",
+                    "title": "Start Boundary Acknowledged",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Confirms that no payment or work starts before separate owner confirmation.",
-                    "type": "`$BOOLEAN`"
+                    "short": "Confirms that no payment or work starts before separate owner confirmation."
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "testEvidence",
+                    "title": "Test Evidence",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Non-sensitive description of current happy-path and rejection tests, or none.",
-                    "type": "`$STRING`"
+                    "short": "Non-sensitive description of current happy-path and rejection tests, or none."
                 },
                 {
-                    "format": "date-time",
                     "name": "updatedAt",
+                    "title": "Updated At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 }
             ],
             "id": {
@@ -838,7 +907,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/api/safety-review-requests",
@@ -850,15 +918,17 @@ class Config {
                                     "lit": "safety-review-requests"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "safety-review-requests"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.request`"
                             },
-                            "parts": [
-                                "api",
-                                "safety-review-requests"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -871,29 +941,34 @@ class Config {
             "fields": [
                 {
                     "name": "consent",
-                    "short": "Optional permission for the owner to send product-fit guidance.",
-                    "type": "`$BOOLEAN`"
+                    "title": "Consent",
+                    "type": "`$BOOLEAN`",
+                    "short": "Optional permission for the owner to send product-fit guidance."
                 },
                 {
-                    "format": "email",
                     "name": "email",
+                    "title": "Email",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Email used to enforce one lifetime Free-plan key.",
-                    "type": "`$STRING`"
+                    "format": "email"
                 },
                 {
                     "name": "expectedRenders",
+                    "title": "Expected Renders",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name",
-                    "short": "Optional display name for owner review.",
-                    "type": "`$STRING`"
+                    "title": "Name",
+                    "type": "`$STRING`",
+                    "short": "Optional display name for owner review."
                 },
                 {
                     "name": "useCase",
-                    "short": "Optional public-page capture use case.",
-                    "type": "`$STRING`"
+                    "title": "Use Case",
+                    "type": "`$STRING`",
+                    "short": "Optional public-page capture use case."
                 }
             ],
             "name": "trial",
@@ -903,7 +978,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/api/trials",
@@ -915,15 +989,17 @@ class Config {
                                     "lit": "trials"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "trials"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.trial`"
                             },
-                            "parts": [
-                                "api",
-                                "trials"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -936,44 +1012,52 @@ class Config {
             "fields": [
                 {
                     "name": "consent",
-                    "req": true,
-                    "type": "`$BOOLEAN`"
+                    "title": "Consent",
+                    "type": "`$BOOLEAN`",
+                    "req": true
                 },
                 {
-                    "format": "date-time",
                     "name": "createdAt",
+                    "title": "Created At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 },
                 {
                     "name": "currentPlan",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Current Plan",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "id",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Id",
+                    "type": "`$INTEGER`",
+                    "req": true
                 },
                 {
                     "name": "note",
+                    "title": "Note",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "requestedPlan",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Requested Plan",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "status",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
-                    "format": "date-time",
                     "name": "updatedAt",
+                    "title": "Updated At",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "date-time"
                 }
             ],
             "id": {
@@ -987,7 +1071,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/v1/upgrade-requests",
@@ -999,15 +1082,17 @@ class Config {
                                     "lit": "upgrade-requests"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "v1",
+                                "upgrade-requests"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.request`"
                             },
-                            "parts": [
-                                "v1",
-                                "upgrade-requests"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -1020,25 +1105,29 @@ class Config {
             "fields": [
                 {
                     "name": "customer",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Customer",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "links",
+                    "title": "Links",
+                    "type": "`$OBJECT`",
                     "req": true,
-                    "short": "Stable self-serve continuation links.",
-                    "type": "`$OBJECT`"
+                    "short": "Stable self-serve continuation links."
                 },
                 {
                     "name": "upgradeRequest",
+                    "title": "Upgrade Request",
+                    "type": "`$ANY`",
                     "req": true,
-                    "short": "Latest paid-plan request attached to this key, or null when none exists.",
-                    "type": "`$ANY`"
+                    "short": "Latest paid-plan request attached to this key, or null when none exists."
                 },
                 {
                     "name": "usage",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Usage",
+                    "type": "`$OBJECT`",
+                    "req": true
                 }
             ],
             "name": "usage",
@@ -1048,7 +1137,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/v1/usage",
@@ -1060,15 +1148,17 @@ class Config {
                                     "lit": "usage"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "v1",
+                                "usage"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.usage`"
                             },
-                            "parts": [
-                                "v1",
-                                "usage"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }

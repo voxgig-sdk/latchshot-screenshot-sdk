@@ -1,0 +1,190 @@
+# Entity: render
+
+main: kit: entity: render: {
+
+  alias: field: {}
+
+  fields: {
+    blockAds: {
+      h: "Block Ads"
+      n: "blockAds"
+      r: false
+      sh: "Best-effort blocking of requests to known third-party ad hosts."
+      t: "`$BOOLEAN`"
+    }
+    blockChats: {
+      h: "Block Chats"
+      n: "blockChats"
+      r: false
+      sh: "Best-effort blocking and hiding of known third-party chat widgets."
+      t: "`$BOOLEAN`"
+    }
+    blockTrackers: {
+      h: "Block Trackers"
+      n: "blockTrackers"
+      r: false
+      sh: "Best-effort blocking of requests to known third-party analytics and tracker hosts."
+      t: "`$BOOLEAN`"
+    }
+    darkMode: {
+      h: "Dark Mode"
+      n: "darkMode"
+      r: false
+      sh: "Emulate a dark color-scheme preference."
+      t: "`$BOOLEAN`"
+    }
+    delay: {
+      h: "Delay"
+      n: "delay"
+      r: false
+      sh: "Additional bounded wait in milliseconds after the lifecycle event."
+      t: "`$INTEGER`"
+    }
+    format: {
+      h: "Format"
+      n: "format"
+      r: false
+      sh: "Exact artifact format."
+      t: "`$STRING`"
+    }
+    fullPage: {
+      h: "Full Page"
+      n: "fullPage"
+      r: false
+      sh: "Capture the bounded full document height for screenshots."
+      t: "`$BOOLEAN`"
+    }
+    height: {
+      h: "Height"
+      n: "height"
+      r: false
+      sh: "Viewport height in CSS pixels."
+      t: "`$INTEGER`"
+    }
+    hideCookieBanners: {
+      h: "Hide Cookie Banners"
+      n: "hideCookieBanners"
+      r: false
+      sh: "Hide common cookie-consent overlays after loading."
+      t: "`$BOOLEAN`"
+    }
+    hidePopups: {
+      h: "Hide Popups"
+      n: "hidePopups"
+      r: false
+      sh: "Hide common newsletter, signup, and discount popups without clicking, submitting, or setting state."
+      t: "`$BOOLEAN`"
+    }
+    kind: {
+      h: "Kind"
+      n: "kind"
+      r: false
+      sh: "Artifact family to return."
+      t: "`$STRING`"
+    }
+    landscape: {
+      h: "Landscape"
+      n: "landscape"
+      r: false
+      sh: "Use landscape orientation for PDF rendering."
+      t: "`$BOOLEAN`"
+    }
+    paper: {
+      h: "Paper"
+      n: "paper"
+      r: false
+      sh: "Paper size used for PDF rendering."
+      t: "`$STRING`"
+    }
+    quality: {
+      h: "Quality"
+      n: "quality"
+      r: false
+      sh: "JPEG encoding quality."
+      t: "`$INTEGER`"
+    }
+    reducedMotion: {
+      h: "Reduced Motion"
+      n: "reducedMotion"
+      r: false
+      sh: "Emulate reduced motion to improve capture stability."
+      t: "`$BOOLEAN`"
+    }
+    scale: {
+      h: "Scale"
+      n: "scale"
+      r: false
+      sh: "Device scale factor used for image capture."
+      t: "`$INTEGER`"
+    }
+    scrollPage: {
+      h: "Scroll Page"
+      n: "scrollPage"
+      r: false
+      sh: "Deterministically scroll before capture to activate lazy content."
+      t: "`$BOOLEAN`"
+    }
+    timeout: {
+      h: "Timeout"
+      n: "timeout"
+      r: false
+      sh: "Navigation timeout in milliseconds."
+      t: "`$INTEGER`"
+    }
+    url: {
+      fo: "uri"
+      h: "Url"
+      n: "url"
+      r: true
+      sh: "Public HTTP or HTTPS page URL."
+      t: "`$STRING`"
+    }
+    waitUntil: {
+      h: "Wait Until"
+      n: "waitUntil"
+      r: false
+      sh: "Browser lifecycle event awaited before the optional delay."
+      t: "`$STRING`"
+    }
+    width: {
+      h: "Width"
+      n: "width"
+      r: false
+      sh: "Viewport width in CSS pixels."
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "render"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/render"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/v1/render"
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "render"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

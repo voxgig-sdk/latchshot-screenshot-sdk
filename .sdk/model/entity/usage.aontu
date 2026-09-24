@@ -1,0 +1,68 @@
+# Entity: usage
+
+main: kit: entity: usage: {
+
+  alias: field: {}
+
+  fields: {
+    customer: {
+      h: "Customer"
+      n: "customer"
+      r: true
+      t: "`$OBJECT`"
+    }
+    links: {
+      h: "Links"
+      n: "links"
+      r: true
+      sh: "Stable self-serve continuation links."
+      t: "`$OBJECT`"
+    }
+    upgradeRequest: {
+      h: "Upgrade Request"
+      n: "upgradeRequest"
+      r: true
+      sh: "Latest paid-plan request attached to this key, or null when none exists."
+      t: "`$ANY`"
+    }
+    usage: {
+      h: "Usage"
+      n: "usage"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "usage"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/usage"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/v1/usage"
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "usage"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.usage`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

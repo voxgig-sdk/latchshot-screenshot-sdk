@@ -1,0 +1,18 @@
+# BasicUpgradeFlow
+
+main: kit: flow: BasicUpgradeFlow:
+{
+  entity: "upgrade",
+  kind: "basic",
+  name: "BasicUpgradeFlow",
+  step: [
+    {
+      i: {
+        ref: "upgrade_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicUpgradeFlow"
+}

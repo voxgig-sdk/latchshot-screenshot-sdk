@@ -1,0 +1,18 @@
+# BasicPilotRequestFlow
+
+main: kit: flow: BasicPilotRequestFlow:
+{
+  entity: "pilot_request",
+  kind: "basic",
+  name: "BasicPilotRequestFlow",
+  step: [
+    {
+      i: {
+        ref: "pilot_request_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicPilotRequestFlow"
+}

@@ -1,0 +1,97 @@
+# Entity: upgrade
+
+main: kit: entity: upgrade: {
+
+  alias: field: {}
+
+  fields: {
+    consent: {
+      h: "Consent"
+      n: "consent"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    currentPlan: {
+      h: "Current Plan"
+      n: "currentPlan"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$INTEGER`"
+    }
+    note: {
+      h: "Note"
+      n: "note"
+      r: false
+      t: "`$STRING`"
+    }
+    requestedPlan: {
+      h: "Requested Plan"
+      n: "requestedPlan"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "upgrade"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/upgrade-requests"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/v1/upgrade-requests"
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "upgrade-requests"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.request`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,7 +1,7 @@
 // Typed models for the LatchshotScreenshot SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,9 +14,6 @@ import (
 
 // Health is the typed data model for the health entity.
 type Health struct {
-	Active int `json:"active"`
-	Concurrency int `json:"concurrency"`
-	Pending int `json:"pending"`
 }
 
 // HealthLoadMatch is the typed request payload for Health.LoadTyped.
@@ -28,19 +25,6 @@ type HealthLoadMatch struct {
 
 // MonitoringRequest is the typed data model for the monitoring_request entity.
 type MonitoringRequest struct {
-	ChangeContext *string `json:"changeContext,omitempty"`
-	CreatedAt string `json:"createdAt"`
-	Email string `json:"email"`
-	Id int `json:"id"`
-	MonitoringGoal string `json:"monitoringGoal"`
-	PageCount string `json:"pageCount"`
-	PageUrl string `json:"pageUrl"`
-	PublicPageAuthority bool `json:"publicPageAuthority"`
-	ReplyConsent bool `json:"replyConsent"`
-	SafetyAcknowledged bool `json:"safetyAcknowledged"`
-	StartBoundaryAcknowledged bool `json:"startBoundaryAcknowledged"`
-	Status string `json:"status"`
-	UpdatedAt string `json:"updatedAt"`
 }
 
 // MonitoringRequestCreateData is the typed request payload for MonitoringRequest.CreateTyped.
@@ -62,23 +46,6 @@ type MonitoringRequestCreateData struct {
 
 // PilotRequest is the typed data model for the pilot_request entity.
 type PilotRequest struct {
-	AcceptanceSample *string `json:"acceptanceSample,omitempty"`
-	CallSite string `json:"callSite"`
-	CreatedAt string `json:"createdAt"`
-	CurrentContract *string `json:"currentContract,omitempty"`
-	Email string `json:"email"`
-	ExpectedRenders *string `json:"expectedRenders,omitempty"`
-	Id int `json:"id"`
-	Language *string `json:"language,omitempty"`
-	Provider *string `json:"provider,omitempty"`
-	ReplyConsent bool `json:"replyConsent"`
-	RepositoryAuthority bool `json:"repositoryAuthority"`
-	RepositoryUrl string `json:"repositoryUrl"`
-	RequiredBehavior *string `json:"requiredBehavior,omitempty"`
-	SafetyAcknowledged bool `json:"safetyAcknowledged"`
-	StartBoundaryAcknowledged bool `json:"startBoundaryAcknowledged"`
-	Status string `json:"status"`
-	UpdatedAt string `json:"updatedAt"`
 }
 
 // PilotRequestCreateData is the typed request payload for PilotRequest.CreateTyped.
@@ -104,27 +71,6 @@ type PilotRequestCreateData struct {
 
 // Render is the typed data model for the render entity.
 type Render struct {
-	BlockAds *bool `json:"blockAds,omitempty"`
-	BlockChats *bool `json:"blockChats,omitempty"`
-	BlockTrackers *bool `json:"blockTrackers,omitempty"`
-	DarkMode *bool `json:"darkMode,omitempty"`
-	Delay *int `json:"delay,omitempty"`
-	Format *string `json:"format,omitempty"`
-	FullPage *bool `json:"fullPage,omitempty"`
-	Height *int `json:"height,omitempty"`
-	HideCookieBanners *bool `json:"hideCookieBanners,omitempty"`
-	HidePopups *bool `json:"hidePopups,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Landscape *bool `json:"landscape,omitempty"`
-	Paper *string `json:"paper,omitempty"`
-	Quality *int `json:"quality,omitempty"`
-	ReducedMotion *bool `json:"reducedMotion,omitempty"`
-	Scale *int `json:"scale,omitempty"`
-	ScrollPage *bool `json:"scrollPage,omitempty"`
-	Timeout *int `json:"timeout,omitempty"`
-	Url string `json:"url"`
-	WaitUntil *string `json:"waitUntil,omitempty"`
-	Width *int `json:"width,omitempty"`
 }
 
 // RenderCreateData is the typed request payload for Render.CreateTyped.
@@ -175,23 +121,6 @@ type RenderingLoadMatch struct {
 
 // SafetyReviewRequest is the typed data model for the safety_review_request entity.
 type SafetyReviewRequest struct {
-	CreatedAt string `json:"createdAt"`
-	CurrentControls string `json:"currentControls"`
-	DesiredOutcome string `json:"desiredOutcome"`
-	Email string `json:"email"`
-	Id int `json:"id"`
-	Language string `json:"language"`
-	PrimaryConcern string `json:"primaryConcern"`
-	ReplyConsent bool `json:"replyConsent"`
-	RepositoryAuthority bool `json:"repositoryAuthority"`
-	RepositoryUrl string `json:"repositoryUrl"`
-	RoutePath string `json:"routePath"`
-	Runtime string `json:"runtime"`
-	SafetyAcknowledged bool `json:"safetyAcknowledged"`
-	StartBoundaryAcknowledged bool `json:"startBoundaryAcknowledged"`
-	Status string `json:"status"`
-	TestEvidence string `json:"testEvidence"`
-	UpdatedAt string `json:"updatedAt"`
 }
 
 // SafetyReviewRequestCreateData is the typed request payload for SafetyReviewRequest.CreateTyped.
@@ -217,11 +146,6 @@ type SafetyReviewRequestCreateData struct {
 
 // Trial is the typed data model for the trial entity.
 type Trial struct {
-	Consent *bool `json:"consent,omitempty"`
-	Email string `json:"email"`
-	ExpectedRenders *string `json:"expectedRenders,omitempty"`
-	Name *string `json:"name,omitempty"`
-	UseCase *string `json:"useCase,omitempty"`
 }
 
 // TrialCreateData is the typed request payload for Trial.CreateTyped.
@@ -235,14 +159,6 @@ type TrialCreateData struct {
 
 // Upgrade is the typed data model for the upgrade entity.
 type Upgrade struct {
-	Consent bool `json:"consent"`
-	CreatedAt string `json:"createdAt"`
-	CurrentPlan string `json:"currentPlan"`
-	Id int `json:"id"`
-	Note *string `json:"note,omitempty"`
-	RequestedPlan string `json:"requestedPlan"`
-	Status string `json:"status"`
-	UpdatedAt string `json:"updatedAt"`
 }
 
 // UpgradeCreateData is the typed request payload for Upgrade.CreateTyped.
@@ -259,10 +175,6 @@ type UpgradeCreateData struct {
 
 // Usage is the typed data model for the usage entity.
 type Usage struct {
-	Customer map[string]any `json:"customer"`
-	Links map[string]any `json:"links"`
-	UpgradeRequest any `json:"upgradeRequest"`
-	Usage map[string]any `json:"usage"`
 }
 
 // UsageLoadMatch is the typed request payload for Usage.LoadTyped.

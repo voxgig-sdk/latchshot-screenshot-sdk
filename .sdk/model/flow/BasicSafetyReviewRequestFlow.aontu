@@ -1,0 +1,18 @@
+# BasicSafetyReviewRequestFlow
+
+main: kit: flow: BasicSafetyReviewRequestFlow:
+{
+  entity: "safety_review_request",
+  kind: "basic",
+  name: "BasicSafetyReviewRequestFlow",
+  step: [
+    {
+      i: {
+        ref: "safety_review_request_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicSafetyReviewRequestFlow"
+}

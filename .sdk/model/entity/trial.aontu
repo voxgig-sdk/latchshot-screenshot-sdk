@@ -1,0 +1,77 @@
+# Entity: trial
+
+main: kit: entity: trial: {
+
+  alias: field: {}
+
+  fields: {
+    consent: {
+      h: "Consent"
+      n: "consent"
+      r: false
+      sh: "Optional permission for the owner to send product-fit guidance."
+      t: "`$BOOLEAN`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      sh: "Email used to enforce one lifetime Free-plan key."
+      t: "`$STRING`"
+    }
+    expectedRenders: {
+      h: "Expected Renders"
+      n: "expectedRenders"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Optional display name for owner review."
+      t: "`$STRING`"
+    }
+    useCase: {
+      h: "Use Case"
+      n: "useCase"
+      r: false
+      sh: "Optional public-page capture use case."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "trial"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/trials"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/trials"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "trials"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.trial`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,136 @@
+# Entity: monitoring_request
+
+main: kit: entity: monitoring_request: {
+
+  alias: field: {}
+
+  fields: {
+    changeContext: {
+      h: "Change Context"
+      n: "changeContext"
+      r: false
+      sh: "Optional non-sensitive description of what the weekly owner-written note should call out."
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      sh: "Address the owner may use only to reply about this monitoring request."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$INTEGER`"
+    }
+    monitoringGoal: {
+      h: "Monitoring Goal"
+      n: "monitoringGoal"
+      r: true
+      t: "`$STRING`"
+    }
+    pageCount: {
+      h: "Page Count"
+      n: "pageCount"
+      r: true
+      t: "`$STRING`"
+    }
+    pageUrl: {
+      fo: "uri"
+      h: "Page Url"
+      n: "pageUrl"
+      r: true
+      sh: "One exact public HTTP or HTTPS example page on port 80 or 443, without credentials, query data, or a fragment."
+      t: "`$STRING`"
+    }
+    publicPageAuthority: {
+      h: "Public Page Authority"
+      n: "publicPageAuthority"
+      r: true
+      sh: "Confirms authority to request recurring captures of every proposed public page."
+      t: "`$BOOLEAN`"
+    }
+    replyConsent: {
+      h: "Reply Consent"
+      n: "replyConsent"
+      r: true
+      sh: "Allows the owner to email only about this monitoring-pilot request."
+      t: "`$BOOLEAN`"
+    }
+    safetyAcknowledged: {
+      h: "Safety Acknowledged"
+      n: "safetyAcknowledged"
+      r: true
+      sh: "Confirms removal of credentials, query secrets, customer data, signed links, and sensitive information."
+      t: "`$BOOLEAN`"
+    }
+    startBoundaryAcknowledged: {
+      h: "Start Boundary Acknowledged"
+      n: "startBoundaryAcknowledged"
+      r: true
+      sh: "Confirms that scope, delivery, retention, payment, and monitoring start require separate owner confirmation."
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "monitoring_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/monitoring-requests"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/monitoring-requests"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "monitoring-requests"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.request`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

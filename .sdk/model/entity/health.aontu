@@ -1,0 +1,57 @@
+# Entity: health
+
+main: kit: entity: health: {
+
+  alias: field: {}
+
+  fields: {
+    active: {
+      h: "Active"
+      n: "active"
+      r: true
+      t: "`$INTEGER`"
+    }
+    concurrency: {
+      h: "Concurrency"
+      n: "concurrency"
+      r: true
+      t: "`$INTEGER`"
+    }
+    pending: {
+      h: "Pending"
+      n: "pending"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "health"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /healthz"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/healthz"
+          s: [
+            {
+              lit: "healthz"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.render`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

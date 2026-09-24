@@ -1,0 +1,163 @@
+# Entity: safety_review_request
+
+main: kit: entity: safety_review_request: {
+
+  alias: field: {}
+
+  fields: {
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    currentControls: {
+      h: "Current Controls"
+      n: "currentControls"
+      r: true
+      sh: "Non-secret current URL, network, browser, resource, and caller controls."
+      t: "`$STRING`"
+    }
+    desiredOutcome: {
+      h: "Desired Outcome"
+      n: "desiredOutcome"
+      r: true
+      sh: "Requested risk report, focused patch, regression tests, and handoff outcome."
+      t: "`$STRING`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      sh: "Address the owner may use only to reply about this safety-review request."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$INTEGER`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: true
+      t: "`$STRING`"
+    }
+    primaryConcern: {
+      h: "Primary Concern"
+      n: "primaryConcern"
+      r: true
+      t: "`$STRING`"
+    }
+    replyConsent: {
+      h: "Reply Consent"
+      n: "replyConsent"
+      r: true
+      sh: "Allows the owner to email only about this safety-review request."
+      t: "`$BOOLEAN`"
+    }
+    repositoryAuthority: {
+      h: "Repository Authority"
+      n: "repositoryAuthority"
+      r: true
+      sh: "Confirms authority to review, merge, deploy, and roll back the public repository change."
+      t: "`$BOOLEAN`"
+    }
+    repositoryUrl: {
+      fo: "uri"
+      h: "Repository Url"
+      n: "repositoryUrl"
+      r: true
+      sh: "Exact public GitHub repository under the requester's control."
+      t: "`$STRING`"
+    }
+    routePath: {
+      h: "Route Path"
+      n: "routePath"
+      r: true
+      sh: "One relative repository file path for the existing screenshot endpoint or worker."
+      t: "`$STRING`"
+    }
+    runtime: {
+      h: "Runtime"
+      n: "runtime"
+      r: true
+      t: "`$STRING`"
+    }
+    safetyAcknowledged: {
+      h: "Safety Acknowledged"
+      n: "safetyAcknowledged"
+      r: true
+      sh: "Confirms removal of credentials, private or signed URLs, customer data, production details, payment information, and sensitive artifacts."
+      t: "`$BOOLEAN`"
+    }
+    startBoundaryAcknowledged: {
+      h: "Start Boundary Acknowledged"
+      n: "startBoundaryAcknowledged"
+      r: true
+      sh: "Confirms that no payment or work starts before separate owner confirmation."
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    testEvidence: {
+      h: "Test Evidence"
+      n: "testEvidence"
+      r: true
+      sh: "Non-sensitive description of current happy-path and rejection tests, or none."
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "safety_review_request"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/safety-review-requests"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/safety-review-requests"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "safety-review-requests"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.request`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
